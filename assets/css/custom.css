@@ -1,0 +1,37 @@
+th, td {
+	vertical-align: middle !important;
+}
+
+td img {
+	width: 2.5rem !important;
+	height: 2.5rem !important;
+	border-radius: 50% !important;
+}
+
+.dt-buttons {
+	float: left;
+}
+
+.dataTables_info {
+	float: left;
+}
+
+.contact-list{
+	height: 417px;
+	overflow-y: auto;
+}
+
+.direct-chat-messages {
+	height: 350px;
+	display:flex;
+	flex-direction:column;
+}
+
+.direct-chat-msg{
+	width:80% !important;
+}
+
+.direct-chat-msg.right{
+	align-self:flex-end;
+}
+
