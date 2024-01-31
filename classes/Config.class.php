@@ -183,13 +183,13 @@
     public function getItemName($item_id)
     {
       // Retrieve item name from the database based on item ID
-      $sql    = "SELECT item_name FROM inventory WHERE item_id = ?";
+      $sql    = "SELECT product_name FROM products WHERE product_id = ?";
       $params = [$item_id];
       $result = $this->selectQuery($sql, $params);
       
       $row = $result->fetch_assoc();
       
-      return ($row) ? $row['item_name'] : '';
+      return ($row) ? $row['product_name'] : '';
     }
     
     public function getClientName($client_id)
@@ -269,14 +269,14 @@
     public function getItemComboOptions($selectedId = null)
     {
       // Fetch item data from the database
-      $sql    = "SELECT item_id, item_name, manufacturer FROM inventory";
+      $sql    = "SELECT product_id, product_name FROM products";
       $result = $this->selectQuery($sql);
       
       // Generate HTML options
       $options = '';
       while ($row = $result->fetch_assoc()) {
-        $selected = ($row['item_id'] == $selectedId) ? 'selected' : '';
-        $options  .= '<option value="' . $row['item_id'] . '" ' . $selected . '>' . $row['item_name'] . ' - ' . $row['manufacturer'] . '</option>';
+        $selected = ($row['product_id'] == $selectedId) ? 'selected' : '';
+        $options  .= '<option value="' . $row['product_id'] . '" ' . $selected . '>' . $row['product_name'] . '</option>';
       }
       
       return $options;

@@ -1,8 +1,11 @@
 <?php
   
   include_once "../includes/header.inc.php";
+  
+  $data = new Dashboard();
 
 ?>
+	
 	
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
@@ -11,12 +14,11 @@
 			<div class="container-fluid">
 				<div class="row mb-2">
 					<div class="col-sm-6">
-						<h1 class="m-0">Starter Page</h1>
+						<h1 class="m-0">Dashboard</h1>
 					</div><!-- /.col -->
 					<div class="col-sm-6">
 						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a href="#">Home</a></li>
-							<li class="breadcrumb-item active">Starter Page</li>
+							<li class="breadcrumb-item active">Dashboard</li>
 						</ol>
 					</div><!-- /.col -->
 				</div><!-- /.row -->
@@ -25,30 +27,97 @@
 		<!-- /.content-header -->
 		
 		<!-- Main content -->
-		<div class="content">
+		<section class="content">
 			<div class="container-fluid">
+				<!-- Info boxes -->
 				<div class="row">
-					<div class="col-12">
-						<div class="card card-primary card-outline">
-							<div class="card-header">
-								<h3 class="card-title m-0">Featured</h3>
-								<div class="card-tools">
-									<button class="btn btn-sm btn-primary m-0">New Product</button>
-								</div>
+					<div class="col-12 col-sm-3 col-lg-4">
+						<div class="info-box">
+							<span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+							
+							<div class="info-box-content">
+								<a href="sales.php">
+									<span class="info-box-text">Today's Sales</span>
+								</a>
+								<span class="info-box-number">
+									<small>UGX</small>
+                  <?= number_format($data->totalSales($_SESSION['user_id'])) ?>
+                </span>
 							</div>
-							<div class="card-body">
-								<h6 class="card-title">Special title treatment</h6>
-								
-								<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
-							</div>
+							<!-- /.info-box-content -->
 						</div>
+						<!-- /.info-box -->
 					</div>
-					<!-- /.col-12 -->
+					<!-- /.col -->
+					<div class="col-12 col-sm-3 col-lg-4">
+						<div class="info-box">
+							<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-money-bill"></i></span>
+							
+							<div class="info-box-content">
+								<a href="expenses.php">
+									<span class="info-box-text">Today's Expenses</span>
+								</a>
+								<span class="info-box-number">
+                  <small>UGX</small>
+									<?= number_format($data->totalExpenses($_SESSION['user_id'])) ?>
+                </span>
+							</div>
+							<!-- /.info-box-content -->
+						</div>
+						<!-- /.info-box -->
+					</div>
+					<!-- /.col -->
+					<div class="col-12 col-sm-3 col-lg-4">
+						<div class="info-box">
+							<span class="info-box-icon bg-danger elevation-1"><i class="fas fa-dollar-sign"></i></span>
+							
+							<div class="info-box-content">
+								<a href="profit_management.php">
+								<span class="info-box-text">Today's Net Earnings</span>
+								</a>
+								<span class="info-box-number">
+                  <small>UGX</small>
+									<?= number_format($data->totalSales($_SESSION['user_id']) - $data->totalExpenses($_SESSION['user_id'])) ?>
+                </span>
+							</div>
+							<!-- /.info-box-content -->
+						</div>
+						<!-- /.info-box -->
+					</div>
+					<!-- /.col -->
 				</div>
 				<!-- /.row -->
-			</div><!-- /.container-fluid -->
-		</div>
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title">Monthly Sales Recap Report</h5>
+							</div>
+							<!-- /.card-header -->
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="chart">
+											<!-- Sales Chart Canvas -->
+											<canvas id="realTimeSalesChart" height="350" style="height: 350px;"></canvas>
+										</div>
+										<!-- /.chart-responsive -->
+									</div>
+									<!-- /.col -->
+								</div>
+								<!-- /.row -->
+							</div>
+							<!-- ./card-body -->
+						</div>
+						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->

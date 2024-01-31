@@ -54,7 +54,6 @@
 			      <i class="nav-icon fas fa-calendar-alt"></i>
 			      <p>
 				      Appointments
-				      <span class="right badge badge-info">20</span>
 			      </p>
 		      </a>
 	      </li>
@@ -70,7 +69,7 @@
 		      <a href="inventory.php" class="nav-link">
 			      <i class="nav-icon fas fa-box"></i>
 			      <p>
-				      Inventory
+				      Inventory & Stock
 			      </p>
 		      </a>
 	      </li>
@@ -83,10 +82,10 @@
 		      </a>
 	      </li>
 	      <li class="nav-item">
-		      <a href="sales.php" class="nav-link">
+		      <a href="sales_orders.php" class="nav-link">
 			      <i class="nav-icon fas fa-shopping-cart"></i>
 			      <p>
-				      Sales
+				      Sales Orders
 			      </p>
 		      </a>
 	      </li>
@@ -99,19 +98,18 @@
 		      </a>
 	      </li>
 	      <li class="nav-item">
+		      <a href="products.php" class="nav-link">
+			      <i class="nav-icon fas fa-box-open"></i>
+			      <p>
+				      Products & Items
+			      </p>
+		      </a>
+	      </li>
+	      <li class="nav-item" data-toggle="tooltip" title="Earnings and Expenses Plus Money at the end of the Day.">
 		      <a href="profit_management.php" class="nav-link">
 			      <i class="nav-icon fas fa-chart-line"></i>
 			      <p>
 				      Profit Management
-			      </p>
-		      </a>
-	      </li>
-	      <li class="nav-item">
-		      <a href="messages.php" class="nav-link">
-			      <i class="nav-icon fas fa-comments"></i>
-			      <p>
-				      Messages
-				      <span class="right badge badge-info messageCount">3</span>
 			      </p>
 		      </a>
 	      </li>

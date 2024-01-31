@@ -33,15 +33,15 @@
               <div class="card-header">
                 <h3 class="card-title m-0"><?= PAGE ?></h3>
                 <div class="card-tools">
-                  <button class="newSales btn btn-sm btn-primary m-0">New Sales Record</button>
+                  <button class="newProfitRecord btn btn-sm btn-primary m-0">New Profit Record</button>
                 </div>
               </div>
               <div class="card-body">
                 
                 <?php
                   
-                  $data = new Sales();
-                  echo $data->displaySalesTable();
+                  $data = new ProfitManagement();
+                  echo $data->displayProfitRecordsTable();
                 
                 ?>
               

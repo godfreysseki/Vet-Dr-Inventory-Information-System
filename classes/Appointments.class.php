@@ -22,12 +22,13 @@
     
     private function insertAppointment($data, $user_id)
     {
-      $sql = "INSERT INTO appointments (client_id, animal_id, date_time, location, user_id) VALUES (?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO appointments (client_id, animal_id, date_time, location, status, user_id) VALUES (?, ?, ?, ?, ?, ?)";
       $params = [
         $data['client_id'],
         $data['animal_id'],
         $data['date_time'],
         $data['location'],
+        $data['status'],
         $user_id
       ];
       
@@ -43,12 +44,13 @@
     
     private function updateAppointment($data, $user_id)
     {
-      $sql = "UPDATE appointments SET client_id = ?, animal_id = ?, date_time = ?, location = ?, user_id = ? WHERE appointment_id = ?";
+      $sql = "UPDATE appointments SET client_id = ?, animal_id = ?, date_time = ?, location = ?, status=?, user_id = ? WHERE appointment_id = ?";
       $params = [
         $data['client_id'],
         $data['animal_id'],
         $data['date_time'],
         $data['location'],
+        $data['status'],
         $user_id,
         $data['appointment_id']
       ];
@@ -102,7 +104,7 @@
       $appointmentsData = $this->getAllAppointments(); // Assume you have a method to fetch all animals data
     
       // DataTables HTML
-      $tableHtml = '
+      $tableHtml = '<div class="table-responsive">
             <table class="table table-sm table-hover table-striped dataTable">
                 <thead>
                     <tr>
@@ -111,6 +113,7 @@
                         <th>Animal</th>
                         <th>Date</th>
                         <th>Location</th>
+                        <th>Status</th>
                         <!-- Add more columns as needed -->
                         <th>Actions</th>
                     </tr>
@@ -126,6 +129,7 @@
                     <td>' . $this->getAnimalName($appointment['animal_id']) . '</td>
                     <td>' . datel($appointment['date_time']) . '</td>
                     <td>' . $appointment['location'] . '</td>
+                    <td>' . $appointment['status'] . '</td>
                     <!-- Add more columns as needed -->
                     <td>
                         <button class="btn btn-info btn-sm editAppointment" data-id="' . $appointment['appointment_id'] . '">Edit</button>
@@ -137,7 +141,7 @@
       // Close table HTML
       $tableHtml .= '
                 </tbody>
-            </table>';
+            </table></div>';
     
       return $tableHtml;
     }
@@ -162,7 +166,8 @@
           'client_id' => '',
           'animal_id' => '',
           'date_time' => '',
-          'location' => ''
+          'location' => '',
+          'status' => ''
           // Add more fields as needed
         ];
       }
@@ -197,6 +202,15 @@
                     <label for="location">Location:</label>
                     <input type="text" class="form-control" id="location" name="location" value="' . $data['location'] . '" required>
                     <div class="invalid-feedback">Please enter the location.</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select class="custom-select select2" id="status" name="status" required>
+                      <option value="Pending" ' . (($data['status'] === 'Pending') ? 'selected' : '') . '>Pending</option>
+                      <option value="Fulfilled" ' . (($data['status'] === 'Fulfilled') ? 'selected' : '') . '>Fulfilled</option>
+                    </select>
+                    <div class="invalid-feedback">Please select the status.</div>
                 </div>
                 
                 <!-- Add more form fields as needed -->

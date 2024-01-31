@@ -1124,6 +1124,7 @@
         $('#system-modal .modal-dialog').removeClass('modal-lg');
         $('#system-modal .modal-title').html('New Animal');
         $('#system-modal .modal-body').html(response);
+        activateSelect();
         $('#system-modal').modal('show');
         // Initialize validation for the dynamically loaded form
         var forms = $('.needs-validation');
@@ -1152,6 +1153,7 @@
         $('#system-modal .modal-dialog').removeClass('modal-lg');
         $('#system-modal .modal-title').html('Update Animal');
         $('#system-modal .modal-body').html(response);
+        activateSelect();
         $('#system-modal').modal('show');
         // Initialize validation for the dynamically loaded form
         var forms = $('.needs-validation');
@@ -1213,7 +1215,8 @@
       success: function(response){
         $('#system-modal .modal-dialog').removeClass('modal-lg');
         $('#system-modal .modal-title').html('New Appointment');
-        $('#system-modal .modal-body').html(response);
+        $('#system-modal .modal-body').html(response)
+        activateSelect();
         $('#system-modal').modal('show');
         // Initialize validation for the dynamically loaded form
         var forms = $('.needs-validation');
@@ -1242,6 +1245,7 @@
         $('#system-modal .modal-dialog').removeClass('modal-lg');
         $('#system-modal .modal-title').html('Update Appointment');
         $('#system-modal .modal-body').html(response);
+        activateSelect();
         $('#system-modal').modal('show');
         // Initialize validation for the dynamically loaded form
         var forms = $('.needs-validation');
@@ -1283,7 +1287,6 @@
       type: 'post',
       data: formData,
       success: function (response) {
-        console.log(response);
         if (response.status === 'success') {
           $('#system-modal').modal('hide');
           toastr.success(response.message);
@@ -1487,6 +1490,7 @@
         $('#system-modal .modal-dialog').removeClass('modal-lg');
         $('#system-modal .modal-title').html('New Inventory');
         $('#system-modal .modal-body').html(response);
+        activateSelect();
         $('#system-modal').modal('show');
         // Initialize validation for the dynamically loaded form
         var forms = $('.needs-validation');
@@ -1515,6 +1519,7 @@
         $('#system-modal .modal-dialog').removeClass('modal-lg');
         $('#system-modal .modal-title').html('Update Inventory');
         $('#system-modal .modal-body').html(response);
+        activateSelect();
         $('#system-modal').modal('show');
         // Initialize validation for the dynamically loaded form
         var forms = $('.needs-validation');
@@ -1578,6 +1583,7 @@
         $('#system-modal .modal-dialog').removeClass('modal-lg');
         $('#system-modal .modal-title').html('New Medical Record');
         $('#system-modal .modal-body').html(response);
+        activateSelect();
         $('#system-modal').modal('show');
         // Initialize validation for the dynamically loaded form
         var forms = $('.needs-validation');
@@ -1606,6 +1612,7 @@
         $('#system-modal .modal-dialog').removeClass('modal-lg');
         $('#system-modal .modal-title').html('Update Medical Record');
         $('#system-modal .modal-body').html(response);
+        activateSelect();
         $('#system-modal').modal('show');
         // Initialize validation for the dynamically loaded form
         var forms = $('.needs-validation');
@@ -1620,6 +1627,21 @@
             submitMedicalRecordsForm();
           }
         });
+      }
+    });
+  });
+  
+  $(document).on('click', '.viewMedicalRecord', function(){
+    var dataId = $(this).data('id');
+    $.ajax({
+      url: '../forms/medical_records_view.php',
+      type: 'POST',
+      data: {dataId: dataId},
+      success: function(response){
+        $('#system-modal .modal-dialog').removeClass('modal-lg').addClass('modal-dialog-scrollable');
+        $('#system-modal .modal-title').html('Animal Medical Record');
+        $('#system-modal .modal-body').html(response);
+        $('#system-modal').modal('show');
       }
     });
   });
@@ -1772,7 +1794,7 @@
       url: '../forms/sales_form.php',
       type: 'post',
       success: function(response){
-        $('#system-modal .modal-dialog').removeClass('modal-lg');
+        $('#system-modal .modal-dialog').addClass('modal-lg');
         $('#system-modal .modal-title').html('New Sales Record');
         $('#system-modal .modal-body').html(response);
         $('#system-modal').modal('show');
@@ -1800,7 +1822,7 @@
       type: 'POST',
       data: {dataId: dataId},
       success: function(response){
-        $('#system-modal .modal-dialog').removeClass('modal-lg');
+        $('#system-modal .modal-dialog').addClass('modal-lg');
         $('#system-modal .modal-title').html('Update Sales Record');
         $('#system-modal .modal-body').html(response);
         $('#system-modal').modal('show');
@@ -1854,6 +1876,114 @@
       }
     });
   }
+  
+  
+  /**************************
+   * Products
+   */
+  // Add Product
+  $(document).on('click', '.addProductBtn', function () {
+    $.ajax({
+      url: '../forms/products_form.php', type: 'post', success: function (response) {
+        $('#system-modal .modal-dialog').addClass('modal-lg').removeClass('modal-xl modal-dialog-scrollable');
+        $('#system-modal .modal-title').html('New Product');
+        $('#system-modal .modal-body').html(response);
+        activateSelect();
+        addSMControls();
+        $('#system-modal').modal('show');
+      }
+    });
+  });
+  // Edit Product
+  $(document).on('click', '.editProductBtn', function () {
+    var dataId = $(this).data('id');
+    $.ajax({
+      url: '../forms/products_form.php', type: 'post', data: {dataId: dataId}, success: function (response) {
+        $('#system-modal .modal-dialog').addClass('modal-lg').removeClass('modal-xl modal-dialog-scrollable');
+        $('#system-modal .modal-title').html('Edit Product');
+        $('#system-modal .modal-body').html(response);
+        activateSelect();
+        addSMControls();
+        $('#system-modal').modal('show');
+      }
+    });
+  });
+  // View Product Details and sales
+  $(document).on('click', '.viewProductBtn', function () {
+    var dataId = $(this).data('id');
+    $.ajax({
+      url: '../forms/products_view.php', type: 'post', data: {dataId: dataId}, success: function (response) {
+        $('#system-modal .modal-dialog').removeClass('modal-lg').addClass('modal-xl modal-dialog-scrollable');
+        $('#system-modal .modal-title').html('Product Details');
+        $('#system-modal .modal-body').html(response);
+        activateSelect();
+        addSMControls();
+        activateDataTable();
+        $('#system-modal').modal('show');
+      }
+    });
+  });
+  // Delete Product
+  $(document).on('click', '.deleteProductBtn', function () {
+    var dataId = $(this).data('id');
+    $.ajax({
+      url: '../forms/products_delete.php', type: 'post', data: {dataId: dataId}, success: function (response) {
+        if (response.status === 'success') {
+          toastr.success(response.message);
+        } else {
+          toastr.warning(response.message);
+        }
+      }
+    });
+  });
+  
+  
+  /**************************
+   * Sales Orders
+   */
+  // Add Sales Order
+  $(document).on('click', '.addSalesOrderBtn', function () {
+    $.ajax({
+      url: '../forms/sales_orders_form.php', type: 'post', success: function (response) {
+        $('#system-modal .modal-dialog').removeClass('modal-lg').addClass('modal-xl');
+        $('#system-modal .modal-title').html('New Sales Order');
+        $('#system-modal .modal-body').html(response);
+        salesOrderItems();
+        fetchAndAddEmptySalesOrderItem();
+        activateSelect();
+        addSMControls();
+        $('#system-modal').modal('show');
+      }
+    });
+  });
+  // View Sales Order Items
+  $(document).on('click', '.viewSalesOrderBtn', function(){
+    var dataId = $(this).data('id');
+    $.ajax({
+      url : '../forms/sales_orders_view.php',
+      type : 'POST',
+      data : {dataId: dataId},
+      success : function (response) {
+        $('#system-modal .modal-dialog').removeClass('modal-lg').addClass('modal-xl');
+        $('#system-modal .modal-title').html('Sales Order Items');
+        $('#system-modal .modal-body').html(response);
+        activateDataTable();
+        $('#system-modal').modal('show');
+      }
+    });
+  });
+  // Cancel Sales Order
+  $(document).on('click', '.cancelSalesOrderBtn', function(){
+    var dataId = $(this).data('id');
+    $.ajax({
+      url : '../forms/sales_orders_cancel_order.php',
+      type : 'POST',
+      data : {dataId: dataId},
+      success : function (response) {
+        $('.systemMsg').html(response);
+      }
+    });
+  });
   
   /**********************************************************************
    * Profit Management Records
@@ -2016,6 +2146,117 @@
         }
       }
     });
+  });
+  
+  
+  
+  /**************************
+   * SALES ORDER THINGS
+   */
+  function salesOrderItems() {
+    const addItemBtn = document.getElementById('addItemBtn');
+    const itemForm = document.getElementById('salesOrderForm');
+    
+    // Add event listener to the Add Item button
+    addItemBtn.addEventListener('click', function (event) {
+      event.preventDefault();
+      fetchAndAddEmptySalesOrderItem();
+    });
+    
+    // Add event listener for calculating totals
+    itemForm.addEventListener('input', function (event) {
+      calculateSalesOrderItemTotal(event.target);
+      calculateSalesOrderGrandTotal();
+    });
+  }
+  
+  async function fetchProducts() {
+    try {
+      const response = await fetch('../forms/sales_order_get_products.php');
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      return []; // Return an empty array on error
+    }
+  }
+  
+  function fetchAndAddEmptySalesOrderItem() {
+    fetchProducts()
+      .then(products => {
+        addEmptySalesOrderItem(products);
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+      });
+  }
+  
+  function addEmptySalesOrderItem(products) {
+    const itemsDiv = $('.salesOrderItems');
+    const newRow = $('<div class="itemRow row"></div>');
+    const newProductCombo = $('<div class="col-sm-3"><div class="form-group"><select name="product[]" class="form-control productCombo"></select></div></div>');
+    populateProductCombo(newProductCombo, products);
+    newRow.append(newProductCombo);
+    newRow.append('<div class="col-sm-2"><div class="form-group"><input type="number" name="quantity[]" placeholder="Quantity" class="quantity form-control form-control-sm"></div></div>');
+    newRow.append('<div class="col-sm-3"><div class="form-group"><input type="number" name="selling_price[]" placeholder="Selling Price" readonly class="selling_price form-control form-control-sm"></div></div>');
+    newRow.append('<div class="col-sm-3"><div class="form-group"><input type="number" name="total_amount[]" placeholder="Total Amount" readonly class="total_amount form-control form-control-sm"></div></div>');
+    newRow.append('<div class="col-sm-1"><button type="button" class="removeItemBtn btn btn-link text-danger btn-xs"><span class="fa fa-trash-alt"></span></button></div>');
+    itemsDiv.append(newRow);
+    
+    // Initialize select2 for the cloned combo box
+    newProductCombo.find('select').select2({
+      width: '100%'
+    });
+  }
+  
+  function calculateSalesOrderItemTotal(inputElement) {
+    const row = inputElement.closest('.itemRow');
+    if (row.length > 0) {
+      const quantity = parseFloat(row.find('.quantity').val()) || 0;
+      const unitCost = parseFloat(row.find('.selling_price').val()) || 0;
+      const totalAmount = quantity * unitCost;
+      row.find('.total_amount').val(totalAmount.toFixed(2)); // Optional: Update the input field
+      calculateSalesOrderGrandTotal();
+    }
+  }
+  
+  function calculateSalesOrderGrandTotal() {
+    let grandTotal = 0;
+    $('.total_amount').each(function () {
+      grandTotal += parseFloat($(this).val()) || 0;
+    });
+    $('#grandTotal span').text(grandTotal.toFixed(2)); // Update the span element inside #grandTotal
+  }
+  
+  function populateProductCombo(productCombo, products) {
+    productCombo.find('select').append('<option value="">Select a product</option>');
+    $.each(products, function (key, product) {
+      productCombo.find('select').append(`<option value="${product.product_id}" data-selling-price="${product.selling_price}">${product.product_name}</option>`);
+    });
+  }
+  
+  $(document).on('change', '.productCombo', function () {
+    const productCombo = $(this);
+    const row = productCombo.closest('.itemRow');
+    const selectedProduct = productCombo.val();
+    const sellingPrice = productCombo.find(`option:selected`).data('selling-price');
+    row.find('.selling_price').val(sellingPrice);
+    calculateSalesOrderItemTotal(productCombo);
+  });
+  
+  $(document).on('input', '.quantity, .unit_price', function () {
+    calculateSalesOrderItemTotal($(this));
+  });
+  
+  $(document).on('click', '.removeSalesOrderItemBtn', function () {
+    $(this).closest('.itemRow').remove();
+    calculateSalesOrderGrandTotal();
+  });
+  
+  // Add event listener to the Remove button for dynamically added rows
+  $(document).on('click', '.removeItemBtn', function () {
+    $(this).closest('.itemRow').remove();
+    calculateSalesOrderGrandTotal();
   });
   
   

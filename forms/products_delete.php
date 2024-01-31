@@ -4,5 +4,5 @@
   
   include_once "../includes/config.inc.php";
   
-  $data = new Sales();
-  echo $data->deleteSale($_POST['dataId'], $_SESSION['user_id']);
+  $data = new Products();
+  echo $data->deleteProduct($_POST['dataId']);

@@ -110,7 +110,7 @@
       $inventoryData = $this->getAllInventory(); // Assume you have a method to fetch all animals data
     
       // DataTables HTML
-      $tableHtml = '
+      $tableHtml = '<div class="table-responsive">
             <table class="table table-sm table-hover table-striped dataTable">
                 <thead>
                     <tr>
@@ -134,7 +134,7 @@
         $tableHtml .= '
                 <tr>
                     <td>' . $inventory['item_id'] . '</td>
-                    <td>' . $inventory['item_name'] . '</td>
+                    <td>' . $this->getItemName($inventory['item_name']) . '</td>
                     <td>' . number_format($inventory['quantity']) . '</td>
                     <td>' . number_format($inventory['cost_price']) . '</td>
                     <td>' . number_format($inventory['selling_price']) . '</td>
@@ -153,7 +153,7 @@
       // Close table HTML
       $tableHtml .= '
                 </tbody>
-            </table>';
+            </table></div>';
     
       return $tableHtml;
     }
@@ -193,7 +193,9 @@
             
             <div class="form-group">
                 <label for="item_name">Item Name:</label>
-                <input type="text" class="form-control" id="item_name" name="item_name" value="' . $data['item_name'] . '" required>
+                <select class="custom-select select2" id="item_name" name="item_name" required>
+                  '.$this->getItemComboOptions($data['item_name']).'
+                </select>
                 <div class="invalid-feedback">Please enter the item name.</div>
             </div>
             

@@ -34,7 +34,7 @@
       $result = $this->selectQuery($sql, $params);
       $row    = $result->fetch_assoc();
       if ($row) {
-        $data = 'with an amount of <b>' . number_format($row['amounts']) . '</b>';
+        $data = 'with an amount of <b>' . CURRENCY .' '. number_format($row['amounts'], 2) . '</b>';
       }
       return $data;
     }
@@ -100,7 +100,7 @@
       foreach ($data as $datum) {
         $months .= '<tr>
                       <td>' . date('M, Y', strtotime($datum['dates'])) . '</td>
-                      <td>' . $datum['amounts'] . '</td>
+                      <td>' . number_format($datum['amounts'], 2) . '</td>
                     </tr>';
       }
       
@@ -113,7 +113,7 @@
       $report .= '<table class="table table-sm table-striped table-bordered">
                   <tr>
                     <th>MONTH</th>
-                    <th>AMOUNT</th>
+                    <th>AMOUNT('. CURRENCY .')</th>
                   </tr>
                   ' . $months . '
                  </table>';
@@ -165,7 +165,7 @@
       
       // Prepare the report
       $report = '<p>Inventory Report for the period from <b>' . dates($start_date) . '</b> to <b>' . dates($end_date) . ':</b></p>';
-      $report .= '<p>Total Items Purchased: <b>' . $totalItems . '</b></p>';
+      $report .= '<p>Total Item Quantities Purchased: <b>' . $totalItems . '</b></p>';
       $report .= '<p>Total Cost Price: <b>' . CURRENCY . ' ' . number_format($totalCostPrice, 2) . '</b></p>';
       
       // Display the table for all inventory records
@@ -176,10 +176,10 @@
                                     <th>ID</th>
                                     <th>Product Name</th>
                                     <th>Quantity</th>
-                                    <th>Cost Price</th>
-                                    <th>Selling Price</th>
-                                    <th>Total Cost</th>
-                                    <th>Total Profit</th>
+                                    <th>Cost Price(' . CURRENCY . ')</th>
+                                    <th>Selling Price(' . CURRENCY . ')</th>
+                                    <th>Total Cost(' . CURRENCY . ')</th>
+                                    <th>Total Profit(' . CURRENCY . ')</th>
                                     <th>Inventory Date</th>
                                     <!-- Add more columns as needed -->
                                 </tr>
@@ -191,12 +191,12 @@
           
           $report .= '<tr>
                                 <td>' . $row['item_id'] . '</td>
-                                <td>' . $row['item_name'] . '</td>
+                                <td>' . $this->getItemName($row['item_name']) . '</td>
                                 <td>' . $row['quantity'] . '</td>
-                                <td>' . CURRENCY . ' ' . number_format($row['cost_price'], 2) . '</td>
-                                <td>' . CURRENCY . ' ' . number_format($row['selling_price'], 2) . '</td>
-                                <td>' . CURRENCY . ' ' . number_format($totalCost, 2) . '</td>
-                                <td>' . CURRENCY . ' ' . number_format(((($row['selling_price'] - $row['cost_price']) * $row['quantity']) - $totalCost), 2) . '</td>
+                                <td>' . number_format($row['cost_price'], 2) . '</td>
+                                <td>' . number_format($row['selling_price'], 2) . '</td>
+                                <td>' . number_format($totalCost, 2) . '</td>
+                                <td>' . number_format(((($row['selling_price'] - $row['cost_price']) * $row['quantity']) - $totalCost), 2) . '</td>
                                 <td>' . datel($row['created_at']) . '</td>
                                 <!-- Add more columns as needed -->
                             </tr>';
@@ -251,12 +251,12 @@
                                 <th>Employee</th>
                                 <th>Month</th>
                                 <th>Year</th>
-                                <th>Salary</th>
-                                <th>Deductions</th>
-                                <th>Bonuses</th>
-                                <th>Advanced Payment</th>
-                                <th>Total Payment</th>
-                                <th>Balance</th>
+                                <th>Salary(' . CURRENCY . ')</th>
+                                <th>Deductions(' . CURRENCY . ')</th>
+                                <th>Bonuses(' . CURRENCY . ')</th>
+                                <th>Advanced Payment(' . CURRENCY . ')</th>
+                                <th>Total Payment(' . CURRENCY . ')</th>
+                                <th>Balance(' . CURRENCY . ')</th>
                                 <th>Payment Status</th>
                             </tr>
                         </thead>
@@ -267,12 +267,12 @@
                             <td>' . $this->getUserName($row['user_id']) . '</td>
                             <td>' . date('M', strtotime($row['month'])) . '</td>
                             <td>' . $row['year'] . '</td>
-                            <td>' . CURRENCY . ' ' . number_format($row['salary'], 2) . '</td>
-                            <td>' . CURRENCY . ' ' . number_format($row['deductions'], 2) . '</td>
-                            <td>' . CURRENCY . ' ' . number_format($row['bonuses'], 2) . '</td>
-                            <td>' . CURRENCY . ' ' . number_format($row['advanced_payment'], 2) . '</td>
-                            <td>' . CURRENCY . ' ' . number_format($row['total_payment'], 2) . '</td>
-                            <td>' . CURRENCY . ' ' . number_format($row['balance'], 2) . '</td>
+                            <td>' . number_format($row['salary'], 2) . '</td>
+                            <td>' . number_format($row['deductions'], 2) . '</td>
+                            <td>' . number_format($row['bonuses'], 2) . '</td>
+                            <td>' . number_format($row['advanced_payment'], 2) . '</td>
+                            <td>' . number_format($row['total_payment'], 2) . '</td>
+                            <td>' . number_format($row['balance'], 2) . '</td>
                             <td>' . $row['payment_status'] . '</td>
                         </tr>';
         }
@@ -349,7 +349,7 @@
       // Second column - detailed table
       $report .= '<div class="col-md-6">';
       $report .= '<table class="table table-sm table-striped table-bordered">';
-      $report .= '<tr><th>Date</th><th>Revenue</th><th>Expenses</th><th>Profit</th></tr>';
+      $report .= '<tr><th>Date</th><th>Revenue(' . CURRENCY . ')</th><th>Expenses(' . CURRENCY . ')</th><th>Profit(' . CURRENCY . ')</th></tr>';
     
       // Fetch detailed data from profit_management table
       $sql = "SELECT date, revenue, expenses, profit FROM profit_management WHERE date BETWEEN ? AND ?";
@@ -359,9 +359,9 @@
       while ($row = $result->fetch_assoc()) {
         $report .= '<tr>';
         $report .= '<td>' . $row['date'] . '</td>';
-        $report .= '<td>' . CURRENCY . ' ' . number_format($row['revenue'], 2) . '</td>';
-        $report .= '<td>' . CURRENCY . ' ' . number_format($row['expenses'], 2) . '</td>';
-        $report .= '<td>' . CURRENCY . ' ' . number_format($row['profit'], 2) . '</td>';
+        $report .= '<td>' . number_format($row['revenue'], 2) . '</td>';
+        $report .= '<td>' . number_format($row['expenses'], 2) . '</td>';
+        $report .= '<td>' . number_format($row['profit'], 2) . '</td>';
         $report .= '</tr>';
       }
     
@@ -443,13 +443,13 @@
         $report .= '<table class="table table-sm table-striped table-bordered">
                         <tr>
                             <th>Month</th>
-                            <th>Sales Amount</th>
+                            <th>Sales Amount('. CURRENCY .')</th>
                         </tr>';
         
         foreach ($monthlySales as $monthlySale) {
           $report .= '<tr>
                             <td>' . date('M, Y', strtotime($monthlySale['dates'])) . '</td>
-                            <td>' . CURRENCY . ' ' . number_format($monthlySale['amounts'], 2) . '</td>
+                            <td>' . number_format($monthlySale['amounts'], 2) . '</td>
                         </tr>';
         }
         

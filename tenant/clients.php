@@ -33,15 +33,15 @@
               <div class="card-header">
                 <h3 class="card-title m-0"><?= PAGE ?></h3>
                 <div class="card-tools">
-                  <button class="newInventory btn btn-sm btn-primary m-0">New Stock</button>
+                  <button class="newClient btn btn-sm btn-primary m-0">New Client</button>
                 </div>
               </div>
               <div class="card-body">
                 
                 <?php
                   
-                  $data = new Inventory();
-                  echo $data->displayInventoryTable();
+                  $data = new Clients();
+                  echo $data->displayClientsTable();
                 
                 ?>
               

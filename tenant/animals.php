@@ -33,17 +33,17 @@
               <div class="card-header">
                 <h3 class="card-title m-0"><?= PAGE ?></h3>
                 <div class="card-tools">
-                  <button class="newInventory btn btn-sm btn-primary m-0">New Stock</button>
+                  <button class="newAnimal btn btn-sm btn-primary m-0">New Animal</button>
                 </div>
               </div>
               <div class="card-body">
-                
-                <?php
-                  
-                  $data = new Inventory();
-                  echo $data->displayInventoryTable();
-                
-                ?>
+	              
+	              <?php
+    
+                  $data = new Animals();
+                  echo $data->displayAnimalsTable();
+		              
+	              ?>
               
               </div>
             </div>

@@ -109,7 +109,7 @@
       $sql    = "SELECT user_id, SUM(total_payment) AS total_payment, SUM(balance) AS total_balance FROM payroll GROUP BY user_id";
       $result = $this->selectQuery($sql);
       
-      $htmlTable = '<table class="table table-sm table-hover table-striped dataTable">';
+      $htmlTable = '<div class="table-responsive"><table class="table table-sm table-hover table-striped dataTable">';
       $htmlTable .= '<thead><tr><th>User</th><th>Total Payment</th><th>Total Balance</th><th>Action</th></tr></thead><tbody>';
       
       while ($row = $result->fetch_assoc()) {
@@ -123,7 +123,7 @@
         $htmlTable .= '</tr>';
       }
       
-      $htmlTable .= '</tbody></table>';
+      $htmlTable .= '</tbody></table></div>';
       
       return $htmlTable;
     }
@@ -134,7 +134,7 @@
       $params = [$user_id];
       $result = $this->selectQuery($sql, $params);
       
-      $htmlTable = '<table class="table table-sm table-hover table-striped dataTable">';
+      $htmlTable = '<div class="table-responsive"><table class="table table-sm table-hover table-striped dataTable">';
       $htmlTable .= '<thead><tr><th>Payroll ID</th><th>Month</th><th>Year</th><th>Basic Salary</th><th>Deductions</th><th>Bonus</th><th>Net Salary</th><th>Total Payment</th><th>Balance</th><th>Payment Status</th></tr></thead><tbody>';
       
       while ($row = $result->fetch_assoc()) {
@@ -152,7 +152,7 @@
         $htmlTable .= '</tr>';
       }
       
-      $htmlTable .= '</tbody></table>';
+      $htmlTable .= '</tbody></table></div>';
       
       return $htmlTable;
     }

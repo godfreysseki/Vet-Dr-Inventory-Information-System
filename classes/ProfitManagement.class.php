@@ -102,7 +102,7 @@
       $medicalRecordsData = $this->getAllProfitRecords(); // Assume you have a method to fetch all animals data
     
       // DataTables HTML
-      $tableHtml = '
+      $tableHtml = '<div class="table-responsive">
             <table class="table table-sm table-hover table-striped dataTable">
                 <thead>
                     <tr>
@@ -137,7 +137,7 @@
       // Close table HTML
       $tableHtml .= '
                 </tbody>
-            </table>';
+            </table></div>';
     
       return $tableHtml;
     }

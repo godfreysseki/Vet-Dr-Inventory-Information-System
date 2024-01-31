@@ -175,9 +175,16 @@
     {
       // Perform database query to fetch real-time sales data
       // Ensure you format the data as an array, e.g., ['timestamp' => '2023-08-01 12:00:00', 'sales' => 100]
-      $sql    = "SELECT sum(sale_amount) as sale_amounts, MONTHNAME(sale_date) as months, MONTH(sale_date) as monthss, sum(amount) as amounts FROM expenses, sales WHERE sale_date LIKE '" . date('Y',
-          $_SERVER['REQUEST_TIME']) . "%' && expense_date LIKE '" . date('Y', $_SERVER['REQUEST_TIME']) . "%' && sale_date <= (NOW() - INTERVAL 1 HOUR) GROUP BY months ORDER BY monthss ASC";
-      $result = $this->selectQuery($sql);
+      if ($_SESSION['role'] === 'tenant') {
+        $sql = "SELECT sum(sale_amount) as sale_amounts, MONTHNAME(sale_date) as months, MONTH(sale_date) as monthss, sum(amount) as amounts FROM expenses, sales WHERE sale_date LIKE '" . date('Y',
+            $_SERVER['REQUEST_TIME']) . "%' && (sales.user_id=? || expenses.user_id=?) && expense_date LIKE '" . date('Y', $_SERVER['REQUEST_TIME']) . "%' && sale_date <= (NOW() - INTERVAL 1 HOUR) GROUP BY months ORDER BY monthss ASC";
+        $params = [$_SESSION['user_id'], $_SESSION['user_id']];
+        $result = $this->selectQuery($sql, $params);
+      } else {
+        $sql = "SELECT sum(sale_amount) as sale_amounts, MONTHNAME(sale_date) as months, MONTH(sale_date) as monthss, sum(amount) as amounts FROM expenses, sales WHERE sale_date LIKE '" . date('Y',
+            $_SERVER['REQUEST_TIME']) . "%' && expense_date LIKE '" . date('Y', $_SERVER['REQUEST_TIME']) . "%' && sale_date <= (NOW() - INTERVAL 1 HOUR) GROUP BY months ORDER BY monthss ASC";
+        $result = $this->selectQuery($sql);
+      }
       
       $salesData = [];
       while ($row = $result->fetch_assoc()) {

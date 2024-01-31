@@ -83,7 +83,7 @@
     public function getAllMedicalRecords()
     {
       // Sample SQL query to select all animals
-      $sql = "SELECT * FROM medical_records";
+      $sql = "SELECT * FROM medical_records GROUP BY animal_id";
     
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
@@ -104,16 +104,13 @@
       $medicalRecordsData = $this->getAllMedicalRecords(); // Assume you have a method to fetch all animals data
     
       // DataTables HTML
-      $tableHtml = '
+      $tableHtml = '<div class="table-responsive">
             <table class="table table-sm table-hover table-striped dataTable">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Animal</th>
                         <th>Date Visited</th>
-                        <th>Vaccination Status</th>
-                        <th>Treatments</th>
-                        <th>Prescriptions</th>
                         <!-- Add more columns as needed -->
                         <th>Actions</th>
                     </tr>
@@ -121,29 +118,52 @@
                 <tbody>';
     
       // Populate table rows with data
+      $no = 1;
       foreach ($medicalRecordsData as $medicalRecord) {
         $tableHtml .= '
                 <tr>
-                    <td>' . $medicalRecord['record_id'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . $this->getAnimalName($medicalRecord['animal_id']) . '</td>
                     <td>' . $medicalRecord['date_visited'] . '</td>
-                    <td>' . $medicalRecord['vaccination_status'] . '</td>
-                    <td>' . $medicalRecord['treatments'] . '</td>
-                    <td>' . $medicalRecord['prescriptions'] . '</td>
                     <!-- Add more columns as needed -->
                     <td>
-                        <button class="btn btn-info btn-sm editMedicalRecord" data-id="' . $medicalRecord['record_id'] . '">Edit</button>
-                        <button class="btn btn-danger btn-sm deleteMedicalRecord" data-id="' . $medicalRecord['record_id'] . '">Delete</button>
+                        <button class="btn btn-success btn-xs viewMedicalRecord" data-id="' . $medicalRecord['animal_id'] . '">View</button>
+                        <button class="btn btn-info btn-xs editMedicalRecord" data-id="' . $medicalRecord['record_id'] . '">Edit</button>
+                        <button class="btn btn-danger btn-xs deleteMedicalRecord" data-id="' . $medicalRecord['record_id'] . '">Delete</button>
                     </td>
                 </tr>';
+        $no++;
       }
     
       // Close table HTML
       $tableHtml .= '
                 </tbody>
-            </table>';
+            </table></div>';
     
       return $tableHtml;
+    }
+  
+    public function animalMedicalRecords($animal_id)
+    {
+      $data = '<p>No previous Medical Records found for the Selected Animal.</p>';
+      $sql = "SELECT * FROM medical_records WHERE animal_id=?";
+      $params = [$animal_id];
+      $result = $this->selectQuery($sql, $params);
+  
+      if ($result->num_rows > 0) {
+        $data = '';
+        while ($row = $result->fetch_assoc()) {
+          $data .= '<div class="card shadow-none">
+                      <div class="card-body border-bottom px-1">
+                        <p><b>Vaccination Status: </b><br>' . $row['vaccination_status'] . '</p>
+                        <p><b>Treatment: </b><br>' . $row['treatments'] . '</p>
+                        <p><b>Prescription: </b><br>' . $row['prescriptions'] . '</p>
+                      </div>
+                    </div>';
+        }
+      }
+      
+      return $data;
     }
     
     public function getMedicalRecordById($record_id)

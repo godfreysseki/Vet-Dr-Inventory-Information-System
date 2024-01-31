@@ -65,7 +65,7 @@
     <?php
       
       $data = new SalesOrder();
-      $data->completeOrder($_GET['id']);
+      $data->invoiceOrder($_GET['id']);
       $details = $data->orderDetails($_GET['id']);
     
     ?>
@@ -92,7 +92,7 @@
 												<td class='text-right'>" . number_format($item['quantity'], 2) . "</td>
 												<td class='text-right'>" . number_format($item['price'], 2) . "</td>
 												<td class='text-right'>" . number_format($item['quantity'] * $item['price'], 2) . "</td>
-												</tr>";
+											</tr>";
         $subtotal += ($item['quantity'] * $item['price']);
         $no++;
       }
@@ -123,5 +123,10 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	window.alert('Reload the sales order page after finishing with tasks here.');
+	window.print();
+</script>
 </body>
 </html>

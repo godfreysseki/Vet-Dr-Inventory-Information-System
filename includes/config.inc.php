@@ -32,8 +32,8 @@
   const DB_USER           = 'root';
   const DB_PASS           = '';
   const DB_NAME           = 'aaaavet';
-  const FAVICON           = URL.'assets/img/logo.png';
-  const FAVICONBACKGROUND = URL.'assets/img/faviconBackground.png';
+  const FAVICON           = URL . 'assets/img/logo.png';
+  const FAVICONBACKGROUND = URL . 'assets/img/faviconBackground.png';
   
   const COLOR             = 'primary';
   const SECONDCOLOR       = "info";
@@ -60,23 +60,21 @@
    * No more Changes allowed
    */
   
-  spl_autoload_register(
-    static function ($classname) {
-      $path    = 'classes/';
-      $subPath = '../classes/';
-      
-      $extension = '.class.php';
-      
-      $fullPath    = $path.$classname.$extension;
-      $subFullPath = $subPath.$classname.$extension;
-      
-      if (file_exists($fullPath)) {
-        include_once $fullPath;
-      } else {
-        include_once $subFullPath;
-      }
+  spl_autoload_register(static function ($classname) {
+    $path    = 'classes/';
+    $subPath = '../classes/';
+    
+    $extension = '.class.php';
+    
+    $fullPath    = $path . $classname . $extension;
+    $subFullPath = $subPath . $classname . $extension;
+    
+    if (file_exists($fullPath)) {
+      include_once $fullPath;
+    } else {
+      include_once $subFullPath;
     }
-  );
+  });
   
   // Get user role by directory name
   $list = explode('/', $_SERVER['SCRIPT_NAME']);
@@ -96,12 +94,12 @@
                 <select name="years" id="years" class="select2 custom-select">';
     if ($startYear < $endYear) {
       while ($startYear <= $endYear) {
-        $combo .= '<option value="'.$startYear.'">'.$startYear.'</option>';
+        $combo .= '<option value="' . $startYear . '">' . $startYear . '</option>';
         $startYear++;
       }
     } else {
       while ($startYear >= $endYear) {
-        $combo .= '<option value="'.$startYear.'">'.$startYear.'</option>';
+        $combo .= '<option value="' . $startYear . '">' . $startYear . '</option>';
         $startYear--;
       }
     }
@@ -113,16 +111,16 @@
   function yearsComboWithLabel($startYear, $endYear, $labelText)
   {
     $combo = '<div class="form-group">
-                <label for="years">'.$labelText.'</label>
+                <label for="years">' . $labelText . '</label>
                 <select name="years" id="years" class="select2 custom-select">';
     if ($startYear < $endYear) {
       while ($startYear <= $endYear) {
-        $combo .= '<option value="'.$startYear.'">'.$startYear.'</option>';
+        $combo .= '<option value="' . $startYear . '">' . $startYear . '</option>';
         $startYear++;
       }
     } else {
       while ($startYear >= $endYear) {
-        $combo .= '<option value="'.$startYear.'">'.$startYear.'</option>';
+        $combo .= '<option value="' . $startYear . '">' . $startYear . '</option>';
         $startYear--;
       }
     }
@@ -133,7 +131,10 @@
   
   function esc($data = null)
   {
-    return trim(addslashes(htmlspecialchars($data)));
+    if ($data !== null) {
+      return trim(addslashes(htmlspecialchars($data)));
+    }
+    return null;
   }
   
   $nWords = [
@@ -170,7 +171,7 @@
   function number_to_words($x)
   {
     global $nWords;
-    if ( ! is_numeric($x)) {
+    if (!is_numeric($x)) {
       $w = 'Enter numbers please';
     } elseif (fmod($x, 1) != 0) {
       $w = 'Enter numbers please';
@@ -187,16 +188,16 @@
         $w .= $nWords[10 * floor($x / 10)];
         $r = fmod($x, 10);
         if ($r > 0) {
-          $w .= ' '.$nWords[$r];
+          $w .= ' ' . $nWords[$r];
         }
       } elseif ($x < 1000) {
-        $w .= $nWords[floor($x / 100)].' hundred';
+        $w .= $nWords[floor($x / 100)] . ' hundred';
         $r = fmod($x, 100);
         if ($r > 0) {
-          $w .= ' '.number_to_words($r);
+          $w .= ' ' . number_to_words($r);
         }
       } elseif ($x < 1000000) {
-        $w .= number_to_words(floor($x / 1000)).' thousand';
+        $w .= number_to_words(floor($x / 1000)) . ' thousand';
         $r = fmod($x, 1000);
         if ($r > 0) {
           $w .= ' ';
@@ -206,7 +207,7 @@
           $w .= number_to_words($r);
         }
       } elseif ($x < 1000000000) {
-        $w .= number_to_words(floor($x / 1000000)).' million';
+        $w .= number_to_words(floor($x / 1000000)) . ' million';
         $r = fmod($x, 1000000);
         if ($r > 0) {
           $w .= ' ';
@@ -216,7 +217,7 @@
           $w .= number_to_words($r);
         }
       } elseif ($x < 1000000000000) {
-        $w .= number_to_words(floor($x / 1000000000)).' billion';
+        $w .= number_to_words(floor($x / 1000000000)) . ' billion';
         $r = fmod($x, 1000000000);
         if ($r > 0) {
           $w .= ' ';
@@ -226,7 +227,7 @@
           $w .= number_to_words($r);
         }
       } elseif ($x < 1000000000000000) {
-        $w .= number_to_words(floor($x / 1000000000000)).' trillion';
+        $w .= number_to_words(floor($x / 1000000000000)) . ' trillion';
         $r = fmod($x, 1000000000000);
         if ($r > 0) {
           $w .= ' ';
@@ -236,7 +237,7 @@
           $w .= number_to_words($r);
         }
       } elseif ($x < 1000000000000000000) {
-        $w .= number_to_words(floor($x / 1000000000000000)).' quadrillion';
+        $w .= number_to_words(floor($x / 1000000000000000)) . ' quadrillion';
         $r = fmod($x, 1000000000000000);
         if ($r > 0) {
           $w .= ' ';
@@ -246,7 +247,7 @@
           $w .= number_to_words($r);
         }
       } else {
-        $w .= number_to_words(floor($x / 1000000000000000000)).' quintillion';
+        $w .= number_to_words(floor($x / 1000000000000000000)) . ' quintillion';
         $r = fmod($x, 1000000000000000000);
         if ($r > 0) {
           $w .= ' ';
@@ -291,17 +292,17 @@
   function nozeros($value)
   {
     if ($value >= 1000000000000) {
-      $no = round(($value / 1000000000000000000), 3)." Qt";
+      $no = round(($value / 1000000000000000000), 3) . " Qt";
     } elseif ($value >= 1000000000000) {
-      $no = round(($value / 1000000000000000), 3)." Qd";
+      $no = round(($value / 1000000000000000), 3) . " Qd";
     } elseif ($value >= 1000000000000) {
-      $no = round(($value / 1000000000000), 3)." T";
+      $no = round(($value / 1000000000000), 3) . " T";
     } elseif ($value >= 1000000000) {
-      $no = round(($value / 1000000000), 3)." B";
+      $no = round(($value / 1000000000), 3) . " B";
     } elseif ($value >= 1000000) {
-      $no = round(($value / 1000000), 3)." M";
+      $no = round(($value / 1000000), 3) . " M";
     } elseif ($value >= 1000) {
-      $no = round(($value / 1000), 3)." Th";
+      $no = round(($value / 1000), 3) . " Th";
     } else {
       $no = $value;
     }
@@ -314,9 +315,9 @@
   {
     $ends = ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'];
     if ((($number % 100) >= 11) && (($number % 100) <= 13)) {
-      return $number.'th';
+      return $number . 'th';
     } else {
-      return $number.$ends[$number % 10];
+      return $number . $ends[$number % 10];
     }
   }
   
@@ -334,9 +335,9 @@
   
   function alert($type, $text)
   {
-    echo '<div class="alert alert-'.strtolower($type).' alert-dismissible">
+    echo '<div class="alert alert-' . strtolower($type) . ' alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" onclick="window.location.href=(window.location)">&times;</button>
-            <strong>'.ucwords($type).'!</strong> '.$text.'
+            <strong>' . ucwords($type) . '!</strong> ' . $text . '
           </div>';
   }
   
@@ -352,15 +353,15 @@
     if (is_dir($dirname)) {
       $dir_handle = opendir($dirname);
     }
-    if ( ! $dir_handle) {
+    if (!$dir_handle) {
       return false;
     }
     while ($file = readdir($dir_handle)) {
       if ($file != "." && $file != "..") {
-        if ( ! is_dir($dirname."/".$file)) {
-          unlink($dirname."/".$file);
+        if (!is_dir($dirname . "/" . $file)) {
+          unlink($dirname . "/" . $file);
         } else {
-          delete_directory($dirname.'/'.$file);
+          delete_directory($dirname . '/' . $file);
         }
       }
     }
@@ -380,17 +381,17 @@
       if ($dh = opendir($dir)) {
         while (($file = readdir($dh)) !== false) {
           // If file
-          if (is_file($dir.$file)) {
+          if (is_file($dir . $file)) {
             if ($file !== '' && $file !== '.' && $file !== '..') {
-              $zip->addFile($dir.$file);
+              $zip->addFile($dir . $file);
             }
           } else {
             // If directory
-            if (is_dir($dir.$file)) {
+            if (is_dir($dir . $file)) {
               if ($file !== '' && $file !== '.' && $file !== '..') {
                 // Add empty directory
-                $zip->addEmptyDir($dir.$file);
-                $folder = $dir.$file.'/';
+                $zip->addEmptyDir($dir . $file);
+                $folder = $dir . $file . '/';
                 // Read data of the folder
                 createZip($zip, $folder);
               }
@@ -414,19 +415,25 @@
     return date('h:i A d M, Y', strtotime($date));
   }
   
-  function phone($phone)
+  function phone($phone = null)
   {
-    return '<a href="tel:'.str_replace(' ', '', esc($phone)).'">'.esc($phone).'</a>';
+    if ($phone !== null) {
+      return '<a href="tel:' . str_replace(' ', '', esc($phone)) . '">' . esc($phone) . '</a>';
+    }
+    return null;
   }
   
-  function email($email)
+  function email($email = null)
   {
-    return '<a href="mailto:'.str_replace(' ', '', esc($email)).'">'.esc($email).'</a>';
+    if ($email !== null) {
+      return '<a href="mailto:' . str_replace(' ', '', esc($email)) . '">' . esc($email) . '</a>';
+    }
+    return null;
   }
   
   function website($website)
   {
-    return '<a href="'.str_replace(' ', '', esc($website)).'" target="_blank">'.esc($website).'</a>';
+    return '<a href="' . str_replace(' ', '', esc($website)) . '" target="_blank">' . esc($website) . '</a>';
   }
   
   function dnd($expression)
@@ -438,7 +445,7 @@
   }
   
   // OTHER WEBSITE/SYSTEM VITALS
-  $config   = new Config();
+  $config = new Config();
   define('COMPANY', $config->get('COMPANY'));
   define('MOTTO', $config->get('MOTTO'));
   define('LOCATION', $config->get('LOCATION'));
