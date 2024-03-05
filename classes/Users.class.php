@@ -311,7 +311,7 @@
     {
       session_unset();
       session_destroy();
-      header('location: ./');
+      header('location: ./login.php');
     }
     
     public function checkRole($requiredRole)
