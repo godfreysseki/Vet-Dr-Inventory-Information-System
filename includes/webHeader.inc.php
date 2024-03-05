@@ -13,23 +13,24 @@
   <title><?= PAGE .' | '. COMPANY ?></title>
 	
 	<!-- SEO META Tags -->
-	<meta name="description" content="Your website description goes here.">
-	<meta name="keywords" content="keyword1, keyword2, keyword3">
-	<meta name="author" content="Your Name">
+	<title>Veterinary Supplies and Products | Your Website Name</title>
+	<meta name="description" content="Explore a wide range of veterinary supplies, drugs, equipment, vaccines, hormones, and anesthetics at our one-stop shopping center.">
+	<meta name="keywords" content="veterinary supplies, veterinary drugs, equipment, vaccines, hormones, anesthetics">
+	<meta name="author" content="Gramaxic">
 	<meta name="robots" content="index, follow">
 	
 	<!-- Open Graph Protocol (OGP) for Social Media -->
-	<meta property="og:title" content="Your Website Title">
-	<meta property="og:description" content="Your website description goes here.">
+	<meta property="og:title" content="Veterinary Supplies and Products | Your Website Name">
+	<meta property="og:description" content="Explore a wide range of veterinary supplies, drugs, equipment, vaccines, hormones, and anesthetics at our one-stop shopping center.">
 	<meta property="og:image" content="https://example.com/image.jpg">
 	<meta property="og:url" content="https://example.com">
 	<meta property="og:type" content="website">
-	<meta property="og:site_name" content="Your Website Name">
+	<meta property="og:site_name" content="<?= COMPANY ?>">
 	
 	<!-- Twitter Card for Twitter Sharing -->
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content="Your Website Title">
-	<meta name="twitter:description" content="Your website description goes here.">
+	<meta name="twitter:title" content="Veterinary Supplies and Products | Your Website Name">
+	<meta name="twitter:description" content="Explore a wide range of veterinary supplies, drugs, equipment, vaccines, hormones, and anesthetics at our one-stop shopping center.">
 	<meta name="twitter:image" content="https://example.com/image.jpg">
 	
 	<!-- Website Icon -->
@@ -47,8 +48,9 @@
 	
 	<!-- Google Site Verification -->
 	<meta name="google-site-verification" content="your-google-verification-code">
-  
-  <!-- Google Fonts -->
+	
+	
+	<!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
   
   <!-- Vendor CSS Files -->
