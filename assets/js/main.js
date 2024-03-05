@@ -2198,7 +2198,7 @@
     populateProductCombo(newProductCombo, products);
     newRow.append(newProductCombo);
     newRow.append('<div class="col-sm-2"><div class="form-group"><input type="number" name="quantity[]" placeholder="Quantity" class="quantity form-control form-control-sm"></div></div>');
-    newRow.append('<div class="col-sm-3"><div class="form-group"><input type="number" name="selling_price[]" placeholder="Selling Price" readonly class="selling_price form-control form-control-sm"></div></div>');
+    newRow.append('<div class="col-sm-3"><div class="form-group"><input type="number" name="selling_price[]" placeholder="Selling Price" class="selling_price form-control form-control-sm"></div></div>');
     newRow.append('<div class="col-sm-3"><div class="form-group"><input type="number" name="total_amount[]" placeholder="Total Amount" readonly class="total_amount form-control form-control-sm"></div></div>');
     newRow.append('<div class="col-sm-1"><button type="button" class="removeItemBtn btn btn-link text-danger btn-xs"><span class="fa fa-trash-alt"></span></button></div>');
     itemsDiv.append(newRow);
@@ -2244,7 +2244,7 @@
     calculateSalesOrderItemTotal(productCombo);
   });
   
-  $(document).on('input', '.quantity, .unit_price', function () {
+  $(document).on('input', '.quantity, .unit_price, .selling_price', function () {
     calculateSalesOrderItemTotal($(this));
   });
   

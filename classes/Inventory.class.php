@@ -22,17 +22,15 @@
   
     private function insertItem($data, $user_id)
     {
-      $sql    = "INSERT INTO inventory (item_name, quantity, cost_price, selling_price, expiry_date, manufacturer, batch_number, user_id, threshold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      $sql    = "INSERT INTO inventory (item_name, quantity, cost_price, selling_price, expiry_date, batch_number, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
       $params = [
         $data['item_name'],
         $data['quantity'],
         $data['cost_price'],
         $data['selling_price'],
         $data['expiry_date'],
-        $data['manufacturer'],
         $data['batch_number'],
-        $user_id,
-        $data['threshold']
+        $user_id
       ];
     
       $insertedId = $this->insertQuery($sql, $params);
@@ -47,17 +45,15 @@
   
     private function updateItem($data, $user_id)
     {
-      $sql    = "UPDATE inventory SET item_name = ?, quantity = ?, cost_price = ?, selling_price = ?, expiry_date = ?, manufacturer = ?, batch_number = ?, user_id = ?, threshold = ? WHERE item_id = ?";
+      $sql    = "UPDATE inventory SET item_name = ?, quantity = ?, cost_price = ?, selling_price = ?, expiry_date = ?, batch_number = ?, user_id = ? WHERE item_id = ?";
       $params = [
         $data['item_name'],
         $data['quantity'],
         $data['cost_price'],
         $data['selling_price'],
         $data['expiry_date'],
-        $data['manufacturer'],
         $data['batch_number'],
         $user_id,
-        $data['threshold'],
         $data['item_id']
       ];
     
@@ -89,7 +85,7 @@
     public function getAllInventory()
     {
       // Sample SQL query to select all animals
-      $sql = "SELECT * FROM inventory";
+      $sql = "SELECT * FROM inventory ORDER BY item_id DESC";
     
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
@@ -120,9 +116,7 @@
                         <th>Cost Price</th>
                         <th>Selling Price</th>
                         <th>Expiry Date</th>
-                        <th>Manufacturer</th>
                         <th>Batch No.</th>
-                        <th>Threshold</th>
                         <!-- Add more columns as needed -->
                         <th>Actions</th>
                     </tr>
@@ -139,9 +133,7 @@
                     <td>' . number_format($inventory['cost_price']) . '</td>
                     <td>' . number_format($inventory['selling_price']) . '</td>
                     <td>' . $inventory['expiry_date'] . '</td>
-                    <td>' . $inventory['manufacturer'] . '</td>
                     <td>' . $inventory['batch_number'] . '</td>
-                    <td>' . $inventory['threshold'] . '</td>
                     <!-- Add more columns as needed -->
                     <td>
                         <button class="btn btn-info btn-sm editInventory" data-id="' . $inventory['item_id'] . '">Edit</button>
@@ -180,9 +172,7 @@
           'cost_price' => '',
           'selling_price' => '',
           'expiry_date' => '',
-          'manufacturer' => '',
-          'batch_number' => '',
-          'threshold' => ''
+          'batch_number' => ''
           // Add more fields as needed
         ];
       }
@@ -224,21 +214,9 @@
             </div>
             
             <div class="form-group">
-                <label for="manufacturer">Manufacturer:</label>
-                <input type="text" class="form-control" id="manufacturer" name="manufacturer" value="' . $data['manufacturer'] . '" required>
-                <div class="invalid-feedback">Please enter the manufacturer.</div>
-            </div>
-            
-            <div class="form-group">
                 <label for="batch_number">Batch Number:</label>
                 <input type="text" class="form-control" id="batch_number" name="batch_number" value="' . $data['batch_number'] . '" required>
                 <div class="invalid-feedback">Please enter the batch number or receipt number.</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="threshold">Threshold:</label>
-                <input type="text" class="form-control" id="threshold" name="threshold" value="' . $data['threshold'] . '" required>
-                <div class="invalid-feedback">Please enter the threshold.</div>
             </div>
             
             <!-- Add more form fields as needed -->

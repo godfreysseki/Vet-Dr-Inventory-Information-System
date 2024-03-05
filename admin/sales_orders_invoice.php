@@ -12,7 +12,7 @@
 	<link href="../assets/css/adminlte.min.css" rel="stylesheet">
 	<style>
 		body {
-			font-size: 10px;
+			font-size: 40px;
 			margin: 0;
 			padding: 0;
 			color: #000 !important;
@@ -54,7 +54,7 @@
 		}
 	</style>
 </head>
-<body>
+<body onload="print()">
 <div class="container-fluid">
 	<div class="receipt">
 		<div class="receipt-header">

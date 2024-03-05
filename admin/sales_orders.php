@@ -59,10 +59,8 @@
 			            <th>#</th>
 			            <th>Order Id</th>
 			            <th>Order Date</th>
-			            <th>User</th>
 			            <th>Customer</th>
 			            <th>Phone</th>
-			            <th>Location</th>
 			            <th>Total Amounts</th>
 			            <th>Status</th>
 			            <th>Action</th>
@@ -75,10 +73,8 @@
 				            <td><?= $no ?></td>
 				            <td><?= orderNumbering($order['order_id']) ?></td>
 				            <td><?= datel($order['order_date']) ?></td>
-				            <td><?= esc($order['full_name']); ?></td>
 				            <td><?= esc($order['customer_name']) ?></td>
 				            <td><?= phone($order['customer_phone']) ?></td>
-				            <td><?= $order['customer_email'] ?></td>
 				            <td><?= number_format($order['total_amount'], 2) ?></td>
 				            <td><?= ucwords(esc($order['status'])) ?></td>
 				            <td>
@@ -88,7 +84,7 @@
 						            fa-print"></span></a>
                       <?php endif; ?>
 					            
-					            <?php if (esc($order['status']) === "receipted"):?>
+					            <?php if (esc($order['status']) !== "completed" && esc($order['status']) !== "canceled"):?>
 						            <a href="sales_orders_complete.php?id=<?= esc($order['order_id']); ?>" class="btn btn-xs btn-link text-success" data-toggle="tooltip" title="Complete Order"><span class="fa
 						            fa-check"></span></a>
                       <?php endif; ?>
