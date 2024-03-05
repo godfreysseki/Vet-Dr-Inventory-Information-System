@@ -11,12 +11,42 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   
   <title><?= PAGE .' | '. COMPANY ?></title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-  
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+	
+	<!-- SEO META Tags -->
+	<meta name="description" content="Your website description goes here.">
+	<meta name="keywords" content="keyword1, keyword2, keyword3">
+	<meta name="author" content="Your Name">
+	<meta name="robots" content="index, follow">
+	
+	<!-- Open Graph Protocol (OGP) for Social Media -->
+	<meta property="og:title" content="Your Website Title">
+	<meta property="og:description" content="Your website description goes here.">
+	<meta property="og:image" content="https://example.com/image.jpg">
+	<meta property="og:url" content="https://example.com">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Your Website Name">
+	
+	<!-- Twitter Card for Twitter Sharing -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Your Website Title">
+	<meta name="twitter:description" content="Your website description goes here.">
+	<meta name="twitter:image" content="https://example.com/image.jpg">
+	
+	<!-- Website Icon -->
+	<link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+	<!-- Apple Touch Icon (iOS, Android) -->
+	<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+	
+	<!-- Canonical URL -->
+	<link rel="canonical" href="https://example.com">
+	
+	<!-- Microsoft Tile for Windows 8 / Windows 10 -->
+	<meta name="msapplication-TileImage" content="assets/img/apple-touch-icon.png">
+	<meta name="msapplication-TileColor" content="#00ff00">
+	
+	<!-- Google Site Verification -->
+	<meta name="google-site-verification" content="your-google-verification-code">
   
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -40,7 +70,7 @@
   <div class="container d-flex justify-content-between align-items-center">
     
     <div class="logo">
-      <h1><a href="index.html">SoftLand</a></h1>
+      <h1><a href="./"><?= COMPANY ?></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
     </div>
@@ -48,27 +78,16 @@
     <nav id="navbar" class="navbar">
       <ul>
         <li><a class="active " href="./">Home</a></li>
-        <li><a href="features.html">Features</a></li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-          <ul>
-            <li><a href="#">Drop Down 1</a></li>
-            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-              <ul>
-                <li><a href="#">Deep Drop Down 1</a></li>
-                <li><a href="#">Deep Drop Down 2</a></li>
-                <li><a href="#">Deep Drop Down 3</a></li>
-                <li><a href="#">Deep Drop Down 4</a></li>
-                <li><a href="#">Deep Drop Down 5</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Drop Down 2</a></li>
-            <li><a href="#">Drop Down 3</a></li>
-            <li><a href="#">Drop Down 4</a></li>
-          </ul>
-        </li>
-        <li><a href="contact.php">Contact Us</a></li>
+        <li><a href="about.php">About Us</a></li>
+        <li><a href=".html">Events & Workshops</a></li>
+        <li class="dropdown"><a href="#"><span>Blogs & Articles</span> <i class="bi bi-chevron-down"></i></a>
+	      <ul>
+		      <li><a href="blogs.php">Animal Science</a></li>
+		      <li><a href="blogs.php">Crop Science</a></li>
+	      </ul>
+	      </li>
+	      <li><a href="shop.php">Shop</a></li>
+	      <li><a href="contact.php">Contact Us</a></li>
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->

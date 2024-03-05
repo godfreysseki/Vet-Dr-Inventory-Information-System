@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4 mb-4 mb-md-0">
-        <h3>About SoftLand</h3>
+        <img src="<?= FAVICON ?>" class="img-fluid" style="width: 80px; float: left; margin-right: 10px;">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam aperiam
           dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi.</p>
         <p class="social">
@@ -11,6 +11,7 @@
           <a href="#"><span class="bi bi-facebook"></span></a>
           <a href="#"><span class="bi bi-instagram"></span></a>
           <a href="#"><span class="bi bi-linkedin"></span></a>
+          <a href="#"><span class="bi bi-youtube"></span></a>
         </p>
       </div>
       <div class="col-md-7 ms-auto">
@@ -18,10 +19,11 @@
           <div class="col-md-4 mb-4 mb-md-0">
             <h3>Navigation</h3>
             <ul class="list-unstyled">
-              <li><a href="#">Pricing</a></li>
-              <li><a href="#">Features</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="about.php">About Us</a></li>
+              <li><a href="events.php">Events & Workshops</a></li>
+              <li><a href="resources.php">Resources</a></li>
+              <li><a href="contact.php">Contact Us</a></li>
+              <li><a href="login.php">Admin Login</a></li>
             </ul>
           </div>
           <div class="col-md-4 mb-4 mb-md-0">
@@ -46,15 +48,9 @@
     
     <div class="row justify-content-center text-center">
       <div class="col-md-7">
-        <p class="copyright">&copy; Copyright SoftLand. All Rights Reserved</p>
+        <p class="copyright">&copy; 2023 - <?= date('Y', $_SERVER['REQUEST_TIME'])?> Copyright <?= COMPANY ?>. All Rights Reserved</p>
         <div class="credits">
-          <!--
-          All the links in the footer should remain intact.
-          You can delete the links only if you purchased the pro version.
-          Licensing information: https://bootstrapmade.com/license/
-          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=SoftLand
-        -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          Developed by <a href="https://gramaxic.com/" target="_blank">Gramaxic</a>
         </div>
       </div>
     </div>

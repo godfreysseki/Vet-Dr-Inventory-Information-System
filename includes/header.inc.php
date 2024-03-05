@@ -30,7 +30,7 @@
 <div class="wrapper">
 	
 	<!-- Navbar -->
-	<nav class="main-header navbar navbar-expand navbar-primary navbar-dark">
+	<nav class="main-header navbar navbar-expand navbar-success navbar-dark">
 		<!-- Left navbar links -->
 		<ul class="navbar-nav">
 			<li class="nav-item">
@@ -163,7 +163,7 @@
 				</a>
 				<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 					<!-- User image -->
-					<li class="user-header bg-primary">
+					<li class="user-header bg-success">
 						<img src="../assets/img/user.png" class="img-circle elevation-2" alt="User Image">
 						
 						<p>
