@@ -7,6 +7,11 @@
   ini_set('max_execution_time', 0);
   date_default_timezone_set('Africa/Kampala');
   
+  // Set SMTP server settings
+  ini_set("SMTP","ugasolutions.co.ug");
+  ini_set("smtp_port","465");
+  ini_set("sendmail_from","info@ugasolutions.co.ug");
+  
   // Get the file name for the opened page
   $page = explode('/', $_SERVER['PHP_SELF']);
   $page = str_replace("_", " ", $page);
@@ -75,6 +80,20 @@
       include_once $subFullPath;
     }
   });
+  
+  if (!function_exists('str_contains')) {
+    /**
+     * Check if a string contains another string.
+     *
+     * @param string $haystack The string to search within.
+     * @param string $needle   The substring to search for within the $haystack.
+     *
+     * @return bool Returns true if $haystack contains $needle, false otherwise.
+     */
+    function str_contains(string $haystack, string $needle) {
+      return strpos($haystack, $needle) !== false;
+    }
+  }
   
   // Get user role by directory name
   $list = explode('/', $_SERVER['SCRIPT_NAME']);
@@ -333,6 +352,19 @@
     return $string;
   }
   
+  // Reduce Words to a given amount then add ellipsis
+  function reduceWords($words, $letter)
+  {
+    $new = strip_tags($words);
+    if (strlen($new) > $letter) {
+      $news = mb_substr($new, 0, $letter) . "... ";
+    } else {
+      $news = $words;
+    }
+    
+    return $news;
+  }
+  
   function alert($type, $text)
   {
     echo '<div class="alert alert-' . strtolower($type) . ' alert-dismissible">
@@ -418,7 +450,16 @@
   function phone($phone = null)
   {
     if ($phone !== null) {
-      return '<a href="tel:' . str_replace(' ', '', esc($phone)) . '">' . esc($phone) . '</a>';
+      if (str_contains($phone, ", ")) {
+        $phones = '';
+        $nums = explode(", ", $phone);
+        foreach ($nums as $num) {
+          $phones .= '<a href="tel:' . str_replace(' ', '', esc($num)) . '">' . esc($num) . '</a>, ';
+        }
+        return rtrim($phones, ", ");
+      } else {
+        return '<a href="tel:' . str_replace(' ', '', esc($phone)) . '">' . esc($phone) . '</a>';
+      }
     }
     return null;
   }
@@ -426,7 +467,16 @@
   function email($email = null)
   {
     if ($email !== null) {
-      return '<a href="mailto:' . str_replace(' ', '', esc($email)) . '">' . esc($email) . '</a>';
+      if (str_contains($email, ", ")) {
+        $emails = '';
+        $nums = explode(", ", $email);
+        foreach ($nums as $num) {
+          $emails .= '<a href="mailto:' . str_replace(' ', '', esc($num)) . '">' . esc($num) . '</a>, ';
+        }
+        return rtrim($emails, ", ");
+      } else {
+        return '<a href="mailto:' . str_replace(' ', '', esc($email)) . '">' . esc($email) . '</a>';
+      }
     }
     return null;
   }

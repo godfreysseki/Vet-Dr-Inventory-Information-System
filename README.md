@@ -1,8 +1,9 @@
 # VET INFO MANAGEMENT SYSTEM
 
-This is a veterenian Doctor Information system with the inventory part. The system has been ddeveloped in OOP PHP, MySQLi with other web standards.
+This is a veterinarian Doctor Information system with the inventory part. The system has been developed in OOP PHP, MySQLi with other web standards.
 
 ## System Modules
+
 - Animals Module
 - Clients Module
 - Appointment Module
@@ -26,5 +27,4 @@ Username: `jose`
 
 Password: `jose`
 
-For More contact me at:
-`godfreyssekiziyivu@gmail.com` or whatsapp me at `+256777088750`
+For More contact me at: `godfreyssekiziyivu@gmail.com` or WhatsApp me at `+256777088750`

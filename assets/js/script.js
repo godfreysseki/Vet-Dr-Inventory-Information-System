@@ -1,12 +1,5 @@
-/**
-* Template Name: SoftLand
-* Updated: Jan 29 2024 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/softland-bootstrap-app-landing-page-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-(function() {
-  "use strict";
+(function ($) {
+  'use strict'
 
   /**
    * Easy selector helper function
@@ -121,5 +114,43 @@
       mirror: false
     })
   });
-
-})()
+  
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+  
+  // Load More Button
+  $(document).ready(function() {
+    const productsContainer = $('.events');
+    const loadMoreButton = $('<div class="more-container text-center"><button type="button" class="btn btn-sm btn-success btn-more"><span>Load More...</span><i class="icon-long-arrow-right"></i></button></div>');
+    const productsPerPage = 6;
+    let currentPage = 1;
+    
+    // Hide all products initially
+    $('.post-entry').hide();
+    
+    // Initial load of products
+    showProducts(currentPage);
+    
+    // Append "View More Products" button
+    productsContainer.after(loadMoreButton);
+    
+    // Handle click on "View More Products" button
+    loadMoreButton.on('click', function() {
+      currentPage++;
+      showProducts(currentPage);
+    });
+    
+    function showProducts(page) {
+      const start = (page - 1) * productsPerPage;
+      const end = start + productsPerPage;
+      
+      $('.post-entry').slice(start, end).show();
+      
+      // If no more products to show, hide the "View More Products" button
+      if (end >= $('.post-entry').length) {
+        loadMoreButton.hide();
+      }
+    }
+  });
+  
+})(jQuery)

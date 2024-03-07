@@ -42,7 +42,7 @@
 					<div class="col-md-6" data-aos="fade-up">
 						
 						<h2>Contact Form</h2>
-						<p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam necessitatibus incidunt ut officiis explicabo inventore.</p>
+						<p class="mb-0">Feel free to reach out to us using the provided details or send us an email using the form below.</p>
 					</div>
 				
 				</div>
@@ -52,15 +52,15 @@
 						<ul class="list-unstyled">
 							<li class="mb-3">
 								<strong class="d-block mb-1">Address</strong>
-								<span>203 Fake St. Mountain View, San Francisco, California, USA</span>
+								<span>Along Kampala Road, Semuto, Semuto TC, Nakaseke, Uganda</span>
 							</li>
 							<li class="mb-3">
 								<strong class="d-block mb-1">Phone</strong>
-								<span>+1 232 3235 324</span>
+								<span><?= phone(COMPANYPHONE) ?>, <?= phone(COMPANYPHONE2) ?></span>
 							</li>
 							<li class="mb-3">
 								<strong class="d-block mb-1">Email</strong>
-								<span>youremail@domain.com</span>
+								<span><?= email(COMPANYEMAIL) ?></span>
 							</li>
 						</ul>
 					</div>
@@ -104,115 +104,14 @@
 			</div>
 		</section>
 		
-		<!-- ======= Testimonials Section ======= -->
-		<section class="section border-top border-bottom">
-			<div class="container">
-				<div class="row justify-content-center text-center mb-5">
-					<div class="col-md-4">
-						<h2 class="section-heading">Review From Our Users</h2>
-					</div>
-				</div>
-				<div class="row justify-content-center text-center">
-					<div class="col-md-7">
-						
-						<div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-							<div class="swiper-wrapper">
-								
-								<div class="swiper-slide">
-									<div class="review text-center">
-										<p class="stars">
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill muted"></span>
-										</p>
-										<h3>Excellent App!</h3>
-										<blockquote>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam
-												aperiam dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi,
-												provident voluptates consectetur maiores quos.</p>
-										</blockquote>
-										
-										<p class="review-user">
-											<img src="assets/img/person_1.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
-											<span class="d-block">
-                        <span class="text-black">Jean Doe</span>, &mdash; App User
-                      </span>
-										</p>
-									
-									</div>
-								</div><!-- End testimonial item -->
-								
-								<div class="swiper-slide">
-									<div class="review text-center">
-										<p class="stars">
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill muted"></span>
-										</p>
-										<h3>This App is easy to use!</h3>
-										<blockquote>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam
-												aperiam dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi,
-												provident voluptates consectetur maiores quos.</p>
-										</blockquote>
-										
-										<p class="review-user">
-											<img src="assets/img/person_2.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
-											<span class="d-block">
-                        <span class="text-black">Johan Smith</span>, &mdash; App User
-                      </span>
-										</p>
-									
-									</div>
-								</div><!-- End testimonial item -->
-								
-								<div class="swiper-slide">
-									<div class="review text-center">
-										<p class="stars">
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill"></span>
-											<span class="bi bi-star-fill muted"></span>
-										</p>
-										<h3>Awesome functionality!</h3>
-										<blockquote>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ea delectus pariatur, numquam
-												aperiam dolore nam optio dolorem facilis itaque voluptatum recusandae deleniti minus animi,
-												provident voluptates consectetur maiores quos.</p>
-										</blockquote>
-										
-										<p class="review-user">
-											<img src="assets/img/person_3.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
-											<span class="d-block">
-                        <span class="text-black">Jean Thunberg</span>, &mdash; App User
-                      </span>
-										</p>
-									
-									</div>
-								</div><!-- End testimonial item -->
-							
-							</div>
-							<div class="swiper-pagination"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section><!-- End Testimonials Section -->
-		
 		<!-- ======= CTA Section ======= -->
-		<section class="section cta-section">
-			<div class="container">
-				<div class="row align-items-center">
-					<div class="col-md-6 me-auto text-center text-md-start mb-5 mb-md-0">
-						<h2>Starts Publishing Your Apps</h2>
-					</div>
-					<div class="col-md-5 text-center text-md-end">
-						<p><a href="#" class="btn d-inline-flex align-items-center"><i class="bx bxl-apple"></i><span>App store</span></a> <a href="#" class="btn d-inline-flex align-items-center"><i class="bx bxl-play-store"></i><span>Google play</span></a></p>
+		<section class="section cta-section p-0 pt-1">
+			<div class="container p-0">
+				<div class="row align-items-center p-0">
+					<div class="col-md-12 mx-auto text-center text-md-start p-0">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3298.679638810832!2d32.32538207398313!3d0.6205552634879612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13
+						.1!3m3!1m2!1s0x177cf83f55a01e45%3A0x24157830f97a814e!2sJ8CH%2B64C%20retail%20shops%2C%20Semuto!5e1!3m2!1sen!2sug!4v1709823329443!5m2!1sen!2sug" width="100%" height="450" style="border:0; width:100%" allowfullscreen="" loading="lazy"
+						        referrerpolicy="no-referrer-when-downgrade"></iframe>
 					</div>
 				</div>
 			</div>

@@ -229,4 +229,11 @@
       $params = [$orderId];
       return $this->selectQuery($sql, $params)->fetch_assoc();
     }
+    
+    // Client Side
+  
+    public function addToCart($product_id)
+    {
+    }
+    
   }

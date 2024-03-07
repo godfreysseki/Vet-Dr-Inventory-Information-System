@@ -272,5 +272,26 @@
       $data = $this->selectQuery($sql, [$product_id])->fetch_assoc();
       return $data['image'];
     }
+  
+    public function displayProductsToUser()
+    {
+      $items = '';
+      $products = $this->getProducts();
+      foreach ($products as $product) {
+        $items .= '<!-- Product Card -->
+                  <div class="col-lg-2 col-md-4 col-sm-6 mb-4 product">
+                    <div class="card">
+                      <img src="assets/img/uploads/'.(isset($product['image']) ? $product['image'] : 'noimage.png').'" class="card-img-top" alt="Product Image">
+                      <div class="card-body">
+                        <h5 class="card-title">'.$product['product_name'].'</h5>
+                        <p class="card-text">UGX '.number_format($product['selling_price'],).'</p>
+                        <a href="cart_add.php?id='.$product['product_id'].'" class="addToCart btn btn-sm btn-success">Add to Cart</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Product Card -->';
+      }
+      return $items;
+    }
     
   }

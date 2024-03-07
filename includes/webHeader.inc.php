@@ -58,6 +58,7 @@
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/mdi/css/materialdesignicons.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   
   <!-- Template Main CSS File -->
@@ -69,7 +70,7 @@
 
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top d-flex align-items-center">
-  <div class="container d-flex justify-content-between align-items-center">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
     
     <div class="logo">
       <h1><a href="./"><?= COMPANY ?></a></h1>
@@ -85,6 +86,7 @@
 	      <li><a href="events.php">Events & Workshops</a></li>
 	      <li><a href="blogs.php">Blogs & Articles</a></li>
 	      <li><a href="contact.php">Contact Us</a></li>
+	      <li><a href="cart.php" class="cartLink"><i class="d-none d-sm-block d-md-none">Shopping Cart</i><i class="mdi mdi-cart-variant mdi-24px d-sm-none d-md-block" data-bs-toggle="tooltip" title="Shopping Cart"><span>3</span></i></a></li>
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->

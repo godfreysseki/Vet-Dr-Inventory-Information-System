@@ -1,7 +1,11 @@
 <?php
   
   
-  class Search
+  class Search extends Config
   {
+  
+    public function searchProduct($searchData)
+    {
+    }
     
   }

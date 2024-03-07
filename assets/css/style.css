@@ -1033,3 +1033,49 @@ section {
 .social a i {
   line-height: 0;
 }
+
+.cartLink {
+  position: relative;
+}
+
+.cartLink i{
+  position: relative;
+}
+
+.cartLink span{
+  position: absolute;
+  right: -13px;
+  top: -25px;
+  min-width: 20px;
+  width: auto;
+  height: 20px;
+  text-align: center;
+  color: #fff;
+  background: darkgreen;
+  padding: 0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newsletter_subscription .form-control {
+  padding: .3rem .75rem !important;
+  height: 35px !important;
+}
+
+.newsletter_subscription .input-group .btn {
+  padding: .3rem .75rem !important;
+}
+
+.post-entry {
+  border: none;
+  display: none;
+  transition: all 500ms;
+  box-shadow: 0 0 5px lightgrey;
+}
+
+.post-entry:hover {
+  box-shadow: 0 0 5px grey;
+  transform: translate(0px, 5px);
+}
