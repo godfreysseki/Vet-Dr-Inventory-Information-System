@@ -42,6 +42,14 @@
 		      </a>
 	      </li>
 	      <li class="nav-item">
+		      <a href="blogs.php" class="nav-link">
+			      <i class="nav-icon fas fa-clipboard"></i>
+			      <p>
+				      Blogs
+			      </p>
+		      </a>
+	      </li>
+	      <li class="nav-item">
 		      <a href="clients.php" class="nav-link">
 			      <i class="nav-icon fas fa-users"></i>
 			      <p>
@@ -74,6 +82,14 @@
 		      </a>
 	      </li>
 	      <li class="nav-item">
+		      <a href="events.php" class="nav-link">
+			      <i class="nav-icon fas fa-calendar-check"></i>
+			      <p>
+				      Events
+			      </p>
+		      </a>
+	      </li>
+	      <li class="nav-item">
 		      <a href="expenses.php" class="nav-link">
 			      <i class="nav-icon fas fa-money-bill"></i>
 			      <p>
@@ -82,10 +98,26 @@
 		      </a>
 	      </li>
 	      <li class="nav-item">
+		      <a href="online_orders.php" class="nav-link">
+			      <i class="nav-icon fas fa-hand-lizard"></i>
+			      <p>
+				      Online Orders
+			      </p>
+		      </a>
+	      </li>
+	      <li class="nav-item">
 		      <a href="sales_orders.php" class="nav-link">
 			      <i class="nav-icon fas fa-shopping-cart"></i>
 			      <p>
 				      Sales Orders
+			      </p>
+		      </a>
+	      </li>
+	      <li class="nav-item">
+		      <a href="stock_movement.php" class="nav-link">
+			      <i class="nav-icon fas fa-balance-scale"></i>
+			      <p>
+				      Stock Movement
 			      </p>
 		      </a>
 	      </li>

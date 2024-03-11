@@ -269,14 +269,14 @@
     public function getItemComboOptions($selectedId = null)
     {
       // Fetch item data from the database
-      $sql    = "SELECT product_id, product_name FROM products";
+      $sql    = "SELECT product_id, product_name, unit_price, selling_price FROM products";
       $result = $this->selectQuery($sql);
       
       // Generate HTML options
-      $options = '';
+      $options = '<option value="" disabled selected>-- Select Item --</option>';
       while ($row = $result->fetch_assoc()) {
         $selected = ($row['product_id'] == $selectedId) ? 'selected' : '';
-        $options  .= '<option value="' . $row['product_id'] . '" ' . $selected . '>' . $row['product_name'] . '</option>';
+        $options  .= '<option value="' . $row['product_id'] . '" ' . $selected . ' data-cost="'.$row['unit_price'].'" data-selling="'.$row['selling_price'].'">' . $row['product_name'] . '</option>';
       }
       
       return $options;

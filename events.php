@@ -1,6 +1,8 @@
 <?php
   
   include_once "includes/webHeader.inc.php";
+  
+  $data = new Events()
 
 ?>
 	
@@ -28,7 +30,7 @@
 						<div class="row justify-content-center">
 							<div class="col-md-12 text-center hero-text">
 								<h1 data-aos="fade-up" data-aos-delay="">Our Events & Workshops</h1>
-								<p class="mb-5" data-aos="fade-up" data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+								<p class="mb-5" data-aos="fade-up" data-aos-delay="100">Explore our upcoming events and workshops designed to inspire, educate, and engage. From seminars to hands-on sessions, we offer a variety of opportunities for learning and networking.</p>
 							</div>
 						</div>
 					</div>
@@ -40,42 +42,8 @@
 		<section class="section events">
 			<div class="container">
 				<div class="row mb-5">
-					<div class="col-md-6">
-						<div class="card mb-3 post-entry">
-							<div class="row g-0">
-								<div class="col-md-4">
-									<img src="assets/img/img_1.jpg" class="img-fluid rounded-start" alt="...">
-								</div>
-								<div class="col-md-8">
-									<div class="card-body">
-										<a href="#" class="stretched-link">
-											<h5 class="card-title">Card title</h5>
-											<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-											<p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="card mb-3 post-entry">
-							<div class="row g-0">
-								<div class="col-md-4">
-									<img src="assets/img/img_2.jpg" class="img-fluid rounded-start" alt="...">
-								</div>
-								<div class="col-md-8">
-									<div class="card-body">
-										<a href="#" class="stretched-link">
-											<h5 class="card-title">Card title</h5>
-											<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-											<p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					
+					<?= $data->displayEvents() ?>
 				
 				</div>
 				

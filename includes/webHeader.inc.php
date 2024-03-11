@@ -68,6 +68,18 @@
 
 <body>
 
+
+
+<!-- Contacts and Social Media Handles -->
+<div class="contacts d-none">
+	<ul class="social-media">
+		<li><a href="#"><i class="bi bi-facebook"></i></a></li>
+		<li><a href="#"><i class="bi bi-twitter"></i></a></li>
+		<li><a href="#"><i class="bi bi-instagram"></i></a></li>
+		<!-- Add more social media icons and links as needed -->
+	</ul>
+	<p>Contact us: <a href="tel:+123456789">+123456789</a></p>
+</div>
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top d-flex align-items-center">
   <div class="container-fluid d-flex justify-content-between align-items-center">
@@ -86,7 +98,8 @@
 	      <li><a href="events.php">Events & Workshops</a></li>
 	      <li><a href="blogs.php">Blogs & Articles</a></li>
 	      <li><a href="contact.php">Contact Us</a></li>
-	      <li><a href="cart.php" class="cartLink"><i class="d-none d-sm-block d-md-none">Shopping Cart</i><i class="mdi mdi-cart-variant mdi-24px d-sm-none d-md-block" data-bs-toggle="tooltip" title="Shopping Cart"><span>3</span></i></a></li>
+	      <li><a href="cart.php" class="cartLink"><i class="d-none d-sm-block d-md-none">Shopping Cart</i><i class="mdi mdi-cart-variant mdi-24px d-sm-none d-md-block" data-bs-toggle="tooltip" title="Shopping Cart"><span
+						      class="cart_count"></span></i></a></li>
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
     </nav><!-- .navbar -->

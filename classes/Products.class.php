@@ -285,7 +285,7 @@
                       <div class="card-body">
                         <h5 class="card-title">'.$product['product_name'].'</h5>
                         <p class="card-text">UGX '.number_format($product['selling_price'],).'</p>
-                        <a href="cart_add.php?id='.$product['product_id'].'" class="addToCart btn btn-sm btn-success">Add to Cart</a>
+                        <a href="javascript:void(0)" data-id="'.$product['product_id'].'" class="addToCart btn btn-sm btn-success">Add to Cart</a>
                       </div>
                     </div>
                   </div>

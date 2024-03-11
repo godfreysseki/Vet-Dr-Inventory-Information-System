@@ -14,73 +14,142 @@
     
     public function saveBlog($data, $user_id)
     {
-      if (isset($data['client_id']) && !empty($data['client_id'])) {
-        return $this->updateClient($data, $user_id);
+      if (isset($data['bid']) && !empty($data['bid'])) {
+        return $this->updateBlog($data, $user_id);
       } else {
-        return $this->insertClient($data, $user_id);
+        return $this->insertBlog($data, $user_id);
       }
     }
     
     private function insertBlog($data, $user_id)
     {
-      $sql    = "INSERT INTO clients (name, contact_number, address, user_id) VALUES (?, ?, ?, ?)";
+      // Handle file uploads
+      $images = [];
+  
+      if (!empty($_FILES['images']['name'][0])) {
+        $files     = $_FILES['images'];
+        $uploadDir = '../assets/img/blogs/'; // Set the upload directory path
+    
+        foreach ($files['name'] as $key => $fileName) {
+          $tempName    = $files['tmp_name'][$key];
+          $extension   = pathinfo($fileName, PATHINFO_EXTENSION); // Get the file extension
+          $newFileName = 'blog_' . uniqid() . '.' . $extension;  // Create a unique filename with the original extension
+          $destination = $uploadDir . $newFileName;
+      
+          // Move the uploaded file to the desired location
+          if (move_uploaded_file($tempName, $destination)) {
+            $images[] = $newFileName;
+          }
+        }
+    
+      }
+  
+  
+      $sql    = "INSERT INTO blogs (image, title, author, tags, description, regdate) VALUES (?, ?, ?, ?, ?, ?)";
       $params = [
-        $data['name'],
-        $data['contact_number'],
-        $data['address'],
-        $user_id
+        implode(', ', $images), // Convert array of image filenames to a comma-separated string
+        $data['title'],
+        $data['author'],
+        $data['tags'],
+        $data['description'],
+        date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME'])
       ];
-      
+  
       $insertedId = $this->insertQuery($sql, $params);
-      
+  
       if ($insertedId) {
-        $this->auditTrail->logActivity($user_id, 1, $insertedId, 'Added Client', 'Client inserted with ID ' . $insertedId, 'Clients', 'Success');
-        return json_encode(['status' => 'success', 'message' => 'Client record inserted successfully.']);
+        $this->auditTrail->logActivity($user_id, 1, $insertedId, 'Added Blog', 'Blog inserted with ID ' . $insertedId, 'Blogs', 'Success');
+        return json_encode(['status' => 'success', 'message' => 'Blog record inserted successfully.']);
       } else {
-        return json_encode(['status' => 'warning', 'message' => 'Failed to insert client record.']);
+        return json_encode(['status' => 'warning', 'message' => 'Failed to insert blog record.']);
       }
     }
     
     private function updateBlog($data, $user_id)
     {
-      $sql    = "UPDATE clients SET name = ?, contact_number = ?, address = ?, user_id = ? WHERE client_id = ?";
+      // Handle file uploads
+      $images = explode(", ", $this->getBlogById($data['bid'])['image']);
+  
+      if (!empty($_FILES['images']['name'][0])) {
+        $files = $_FILES['images'];
+        $uploadDir = '../assets/img/blogs/';
+    
+        foreach ($files['name'] as $key => $fileName) {
+          $tempName = $files['tmp_name'][$key];
+          $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+          $newFileName = 'blog_' . uniqid() . '.' . $extension;
+          $destination = $uploadDir . $newFileName;
+      
+          if (move_uploaded_file($tempName, $destination)) {
+            $images[] = $newFileName;
+          }
+        }
+      }
+  
+      // Prepare the SQL query for updating event data
+      $sql = "UPDATE blogs SET image = ?, title = ?, description = ?, tags = ?, author = ? WHERE bid = ?";
       $params = [
-        $data['name'],
-        $data['contact_number'],
-        $data['address'],
-        $user_id,
-        $data['client_id']
+        implode(', ', $images), // Convert array of image filenames to a comma-separated string
+        $data['title'],
+        $data['description'],
+        $data['tags'],
+        $data['author'],
+        $data['bid']
       ];
-      
+  
+      // Execute the update query
       $updatedRows = $this->updateQuery($sql, $params);
-      
+  
       if ($updatedRows) {
-        $this->auditTrail->logActivity($user_id, 2, $updatedRows, 'Updated Client', 'Client updated with ID ' . $updatedRows, 'Clients', 'Success');
-        return json_encode(['status' => 'success', 'message' => 'Client record updated successfully.']);
+        $this->auditTrail->logActivity($user_id, 2, $updatedRows, 'Updated Blog', 'Blog updated with ID ' . $updatedRows, 'Blogs', 'Success');
+        return json_encode(['status' => 'success', 'message' => 'Blog record updated successfully.']);
       } else {
-        return json_encode(['status' => 'warning', 'message' => 'Failed to update client record.']);
+        return json_encode(['status' => 'warning', 'message' => 'Failed to update blog record.']);
       }
     }
     
-    public function deleteBlog($client_id, $user_id)
+    public function deleteBlog($blog_id, $user_id)
     {
-      $sql    = "DELETE FROM clients WHERE client_id = ?";
-      $params = [$client_id];
-      
-      $deletedRows = $this->deleteQuery($sql, $params);
-      
-      if ($deletedRows) {
-        $this->auditTrail->logActivity($user_id, 3, $deletedRows, 'Deleted Client', 'Client deleted with ID ' . $deletedRows, 'Clients', 'Success');
-        return json_encode(['status' => 'success', 'message' => 'Client record deleted successfully.']);
+      $uploadDir = '../assets/img/blogs/';
+  
+      // Fetch the images associated with the event
+      $sql = "SELECT image FROM blogs WHERE bid = ?";
+      $params = [$blog_id];
+      $result = $this->selectQuery($sql, $params);
+  
+      if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $images = explode(', ', $row['images']); // Assuming images are stored as comma-separated values in the database
       } else {
-        return json_encode(['status' => 'warning', 'message' => 'Client Record already deleted. Reload page to view effect.']);
+        return json_encode(['status' => 'warning', 'message' => 'No blog found with the provided ID.']);
+      }
+  
+      // Delete the event from the database
+      $sql = "DELETE FROM blogs WHERE bid = ?";
+      $deletedRows = $this->deleteQuery($sql, $params);
+  
+      if ($deletedRows) {
+        // Log the activity
+        $this->auditTrail->logActivity($user_id, 3, $deletedRows, 'Deleted Blog', 'Blog deleted with ID ' . $deletedRows, 'Blogs', 'Success');
+    
+        // Delete associated images
+        foreach ($images as $image) {
+          $filePath = $uploadDir . $image;
+          if (file_exists($filePath)) {
+            unlink($filePath); // Delete the file if it exists
+          }
+        }
+    
+        return json_encode(['status' => 'success', 'message' => 'Blog deleted successfully.']);
+      } else {
+        return json_encode(['status' => 'warning', 'message' => 'Blog could not be deleted.']);
       }
     }
     
     public function getAllBlogs()
     {
       // Sample SQL query to select all animals
-      $sql = "SELECT * FROM blogs";
+      $sql = "SELECT * FROM blogs ORDER BY bid DESC";
       
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
@@ -106,9 +175,9 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Contact</th>
-                        <th>Address</th>
+                        <th>Date</th>
+                        <th>Title</th>
+                        <th>Author</th>
                         <!-- Add more columns as needed -->
                         <th>Actions</th>
                     </tr>
@@ -119,14 +188,15 @@
       foreach ($clientsData as $clientsData) {
         $tableHtml .= '
                 <tr>
-                    <td>' . $clientsData['client_id'] . '</td>
-                    <td>' . $clientsData['name'] . '</td>
-                    <td>' . phone($clientsData['contact_number']) . '</td>
-                    <td>' . $clientsData['address'] . '</td>
+                    <td>' . $clientsData['bid'] . '</td>
+                    <td>' . dates($clientsData['regdate']) . '</td>
+                    <td>' . $clientsData['title'] . '</td>
+                    <td>' . $clientsData['author'] . '</td>
                     <!-- Add more columns as needed -->
                     <td>
-                        <button class="btn btn-info btn-sm editClient" data-id="' . $clientsData['client_id'] . '">Edit</button>
-                        <button class="btn btn-danger btn-sm deleteClient" data-id="' . $clientsData['client_id'] . '">Delete</button>
+                        <button class="btn btn-success btn-sm viewBlog" data-id="' . $clientsData['bid'] . '">View</button>
+                        <button class="btn btn-info btn-sm editBlog" data-id="' . $clientsData['bid'] . '">Edit</button>
+                        <button class="btn btn-danger btn-sm deleteBlog" data-id="' . $clientsData['bid'] . '">Delete</button>
                     </td>
                 </tr>';
       }
@@ -141,7 +211,7 @@
     
     public function getBlogById($client_id)
     {
-      $sql    = "SELECT * FROM clients WHERE client_id = ?";
+      $sql    = "SELECT * FROM blogs WHERE bid = ?";
       $params = [$client_id];
       
       $result = $this->selectQuery($sql, $params);
@@ -152,40 +222,51 @@
     public function displayBlogForm($client_id = null)
     {
       if ($client_id !== null) {
-        $data = $this->getClientById($client_id);
+        $data = $this->getBlogById($client_id);
       } else {
         $data = [
-          'client_id' => '',
-          'name' => '',
-          'contact_number' => '',
-          'address' => ''
-          // Add more fields as needed
+          'bid' => '',
+          'image' => '',
+          'title' => '',
+          'author' => '',
+          'tags' => '',
+          'description' => ''
         ];
       }
       
       $form = '
-            <form class="needs-validation" method="post" id="clientForm" novalidate>
-                <input type="hidden" name="client_id" value="' . $data['client_id'] . '">
+            <form class="needs-validation" method="post" id="blogsForm" enctype="multipart/form-data" novalidate>
+                <input type="hidden" name="bid" value="' . $data['bid'] . '">
                 
                 <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" name="name" value="' . $data['name'] . '" required>
-                    <div class="invalid-feedback">Please enter the name.</div>
+                    <label for="images">Blog Images <small>(' . $data['image'] . ')</small>:</label>
+                    <input type="file" class="form-control" id="images" name="images[]" multiple accept="image/*">
+                    <div class="invalid-feedback">Please enter at least 1 image.</div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="contact_number">Contact Number:</label>
-                    <input type="text" class="form-control" id="contact_number" name="contact_number" value="' . $data['contact_number'] . '" required>
-                    <div class="invalid-feedback">Please enter the contact number.</div>
+                    <label for="title">Blog Title:</label>
+                    <input type="text" class="form-control" id="title" name="title" value="' . $data['title'] . '" required>
+                    <div class="invalid-feedback">Please enter the Author.</div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" class="form-control" id="address" name="address" value="' . $data['address'] . '" required>
-                    <div class="invalid-feedback">Please enter the address.</div>
+                    <label for="author">Author:</label>
+                    <input type="text" class="form-control" id="author" name="author" value="' . $data['author'] . '" required>
+                    <div class="invalid-feedback">Please enter the Author.</div>
                 </div>
                 
-                <!-- Add more form fields as needed -->
+                <div class="form-group">
+                    <label for="tags">Tags <small>(Separate with comma and space)</small>:</label>
+                    <input type="text" class="form-control" id="tags" name="tags" placeholder="Animal Care, Treatment ..." value="' . $data['tags'] . '" required>
+                    <div class="invalid-feedback">Please enter the Tags.</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description/Content:</label>
+                    <textarea class="form-control editor" id="description" name="description" required>' . $data['description'] . '</textarea>
+                    <div class="invalid-feedback">Please enter the Blog Content.</div>
+                </div>
                 
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>';
@@ -202,7 +283,7 @@
         $data .= '<div class="col-sm-6 col-md-3 blog">
                     <div class="post-entry">
                       <a href="blog.php?id='.$blog['bid'].'" class="d-block mb-1">
-                        <img src="'.str_replace("../", "", $blog['image']).'" alt="Image" class="img-fluid">
+                        <img src="assets/img/blogs/'.str_replace("../", "", explode(", ", $blog['image'])[0]).'" alt="Image" class="img-fluid">
                       </a>
                       <div class="post-text px-3 py-1">
                         <span class="post-meta">'.dates($blog['regdate']).' &bullet; By <a href="#">'.$blog['author'].'</a></span>

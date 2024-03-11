@@ -47,6 +47,7 @@
 <script src="../assets/plugins/chart.js/Chart.min.js"></script>
 <script src="../assets/plugins/select2/js/select2.full.min.js"></script>
 <script src="../assets/plugins/datatables/datatables.min.js"></script>
+<script src="../assets/plugins/summernote/summernote.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../assets/js/adminlte.min.js"></script>
 <script src="../assets/js/main.js"></script>

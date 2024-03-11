@@ -226,5 +226,199 @@
     
       return $form;
     }
+    
+    // Stock Movement
+    public function saveStockMovement($data, $user_id)
+    {
+      if (isset($data['movement_id']) && !empty($data['movement_id'])) {
+        return $this->updateStockMovement($data, $user_id);
+      } else {
+        return $this->insertStockMovement($data, $user_id);
+      }
+    }
+  
+    private function insertStockMovement($data, $user_id)
+    {
+      $sql = "INSERT INTO stock_movement (product_id, movement_type, quantity, remarks, user_id) VALUES (?, ?, ?, ?, ?)";
+      $params = [
+        $data['product_id'],
+        $data['movement_type'],
+        $data['quantity'],
+        $data['remarks'],
+        $user_id
+      ];
+    
+      $insertedId = $this->insertQuery($sql, $params);
+    
+      if ($insertedId) {
+        $this->auditTrail->logActivity($user_id, 1, $insertedId, 'Added a stock movement', 'Stock movement inserted with ID ' . $insertedId, 'Stock Movement', 'Success');
+        return json_encode(['status' => 'success', 'message' => 'Stock movement record inserted successfully.']);
+      } else {
+        return json_encode(['status' => 'warning', 'message' => 'Failed to insert stock movement record.']);
+      }
+    }
+  
+    private function updateStockMovement($data, $user_id)
+    {
+      $sql = "UPDATE stock_movement SET product_id = ?, movement_type = ?, quantity = ?, remarks = ?, user_id = ? WHERE movement_id = ?";
+      $params = [
+        $data['product_id'],
+        $data['movement_type'],
+        $data['quantity'],
+        $data['remarks'],
+        $user_id,
+        $data['movement_id']
+      ];
+    
+      $updatedRows = $this->updateQuery($sql, $params);
+    
+      if ($updatedRows) {
+        $this->auditTrail->logActivity($user_id, 2, $data['movement_id'], 'Updated Stock Movement', 'Stock movement updated with ID ' . $data['movement_id'], 'Stock Movement', 'Success');
+        return json_encode(['status' => 'success', 'message' => 'Stock movement record updated successfully.']);
+      } else {
+        return json_encode(['status' => 'warning', 'message' => 'No changes made to the record.']);
+      }
+    }
+    
+    public function deleteStockMovement($movement_id, $user_id)
+    {
+      $sql    = "DELETE FROM stock_movement WHERE movement_id = ?";
+      $params = [$movement_id];
+    
+      $deletedRows = $this->deleteQuery($sql, $params);
+    
+      if ($deletedRows) {
+        $this->auditTrail->logActivity($user_id, 3, $movement_id, 'Deleted Stock Movement', 'Stock Movement deleted with ID ' . $movement_id, 'Stock Movement', 'Success');
+        return json_encode(['status' => 'success', 'message' => 'Stock Movement deleted successfully.']);
+      } else {
+        return json_encode(['status' => 'warning', 'message' => 'Stock Movement already deleted. Reload to see effect']);
+      }
+    }
+  
+    public function getAllStockMovements()
+    {
+      // Sample SQL query to select all animals
+      $sql = "SELECT * FROM stock_movement ORDER BY movement_id DESC";
+    
+      // Execute the query and fetch the results
+      $result = $this->selectQuery($sql);
+    
+      // Initialize an array to store the fetched data
+      $animalsData = [];
+    
+      // Fetch each row as an associative array
+      while ($row = $result->fetch_assoc()) {
+        $animalsData[] = $row;
+      }
+    
+      return $animalsData;
+    }
+  
+    public function displayStockMovementTable()
+    {
+      $inventoryData = $this->getAllStockMovements(); // Assume you have a method to fetch all animals data
+    
+      // DataTables HTML
+      $tableHtml = '<div class="table-responsive">
+            <table class="table table-sm table-hover table-striped dataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Moved</th>
+                        <th>Date</th>
+                        <th>Remark</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>';
+    
+      // Populate table rows with data
+      foreach ($inventoryData as $inventory) {
+        $tableHtml .= '
+                <tr>
+                    <td>' . $inventory['movement_id'] . '</td>
+                    <td>' . $this->getItemName($inventory['product_id']) . '</td>
+                    <td>' . number_format($inventory['quantity']) . '</td>
+                    <td>' . $inventory['movement_type'] . '</td>
+                    <td>' . datel($inventory['movement_date']) . '</td>
+                    <td>' . $inventory['remarks'] . '</td>
+                    <!-- Add more columns as needed -->
+                    <td>
+                        <button class="btn btn-info btn-sm editStockMovement" data-id="' . $inventory['movement_id'] . '">Edit</button>
+                        <button class="btn btn-danger btn-sm deleteStockMovement" data-id="' . $inventory['movement_id'] . '">Delete</button>
+                    </td>
+                </tr>';
+      }
+    
+      // Close table HTML
+      $tableHtml .= '
+                </tbody>
+            </table></div>';
+    
+      return $tableHtml;
+    }
+  
+    public function getStockMovementById($movement_id)
+    {
+      $sql    = "SELECT * FROM stock_movement WHERE movement_id = ?";
+      $params = [$movement_id];
+    
+      $result = $this->selectQuery($sql, $params);
+    
+      return $result->fetch_assoc();
+    }
+  
+    public function displayStockMovementForm($movement_id = null)
+    {
+      if ($movement_id !== null) {
+        $data = $this->getStockMovementById($movement_id);
+      } else {
+        $data = [
+          'movement_id' => '',
+          'product_id' => '',
+          'movement_type' => '',
+          'quantity' => '',
+          'remarks' => ''
+        ];
+      }
+    
+      $form = '
+        <form class="needs-validation" method="post" id="stockMovementForm" novalidate>
+            <input type="hidden" name="movement_id" value="' . $data['movement_id'] . '">
+            
+            <div class="form-group">
+                <label for="product_id">Product ID:</label>
+                <input type="text" class="form-control" id="product_id" name="product_id" value="' . $data['product_id'] . '" required>
+                <div class="invalid-feedback">Please enter the product ID.</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="movement_type">Movement Type:</label>
+                <select class="form-control" id="movement_type" name="movement_type" required>
+                    <option value="IN" ' . (($data['movement_type'] === 'IN') ? "selected" : "") . '>IN</option>
+                    <option value="OUT" ' . (($data['movement_type'] === 'OUT') ? "selected" : "") . '>OUT</option>
+                </select>
+                <div class="invalid-feedback">Please select the movement type.</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="text" class="form-control" id="quantity" name="quantity" value="' . $data['quantity'] . '" required>
+                <div class="invalid-feedback">Please enter the quantity.</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="remarks">Remarks:</label>
+                <textarea class="form-control" id="remarks" name="remarks" required>' . $data['remarks'] . '</textarea>
+                <div class="invalid-feedback">Please enter remarks.</div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>';
+    
+      return $form;
+    }
   
   }

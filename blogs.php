@@ -26,9 +26,9 @@
         <div class="row align-items-center">
           <div class="col-12">
             <div class="row justify-content-center">
-              <div class="col-md-7 text-center hero-text">
-                <h1 data-aos="fade-up" data-aos-delay="">Blog Posts</h1>
-                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <div class="col-md-12 text-center hero-text">
+                <h1 data-aos="fade-up" data-aos-delay="">Blogs & Articles</h1>
+                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Explore our library of insightful blogs and articles dedicated to pet care, health, and well-being. From preventive care tips to informative guides on common pet ailments, our articles are curated to help you become a more knowledgeable and responsible pet owner. Stay informed and connected with the latest trends and developments in veterinary medicine and animal care.</p>
               </div>
             </div>
           </div>
@@ -44,32 +44,9 @@
 	        <?= $data->displayBlogs() ?>
 	        
         </div>
-
-        <div class="row">
-          <div class="col-12 text-center">
-            <span class="p-3 active text-primary">1</span>
-            <a href="#" class="p-3">2</a>
-            <a href="#" class="p-3">3</a>
-            <a href="#" class="p-3">4</a>
-          </div>
-        </div>
       </div>
 
     </section>
-
-    <!-- ======= CTA Section ======= -->
-    <section class="section cta-section">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6 me-auto text-center text-md-start mb-5 mb-md-0">
-            <h2>Starts Publishing Your Apps</h2>
-          </div>
-          <div class="col-md-5 text-center text-md-end">
-            <p><a href="#" class="btn d-inline-flex align-items-center"><i class="bx bxl-apple"></i><span>App store</span></a> <a href="#" class="btn d-inline-flex align-items-center"><i class="bx bxl-play-store"></i><span>Google play</span></a></p>
-          </div>
-        </div>
-      </div>
-    </section><!-- End CTA Section -->
 
   </main><!-- End #main -->
 

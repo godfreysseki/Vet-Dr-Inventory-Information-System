@@ -1,5 +1,8 @@
 <?php
   include_once "includes/webHeader.inc.php";
+  
+  $data = new SalesOrder();
+  
 ?>
 
 <main id="main">
@@ -41,11 +44,15 @@
           <!-- Order Summary -->
           <div class="card">
             <div class="card-body">
-              <h2 class="card-title">Order Completed Successfully.</h2>
-              <h3 class="card-title">Your Order Review.</h3>
+              <h2 class="card-title section-heading">Order Completed Successfully.</h2>
               <!-- Summary details will be displayed here -->
-              <p>Total Items: 1</p>
-              <p>Total Price: UGX 25,000</p>
+              <?php
+    
+                if (isset($_POST['completeOrder']) && $_SERVER['REQUEST_METHOD'] === "POST") {
+                  echo $data->checkout($_POST['fullName'], $_POST['telephone'], $_POST['address'], $_POST['payment_method']);
+                }
+  
+              ?>
             </div>
           </div>
           <!-- End Order Summary -->

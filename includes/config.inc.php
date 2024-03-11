@@ -8,9 +8,10 @@
   date_default_timezone_set('Africa/Kampala');
   
   // Set SMTP server settings
-  ini_set("SMTP","ugasolutions.co.ug");
+  ini_set("smtp_server","gracious.crystalwebhosting.com");
   ini_set("smtp_port","465");
   ini_set("sendmail_from","info@ugasolutions.co.ug");
+  ini_set("smtp_ssl","ssl"); // Enable SSL/TLS encryption
   
   // Get the file name for the opened page
   $page = explode('/', $_SERVER['PHP_SELF']);
@@ -24,13 +25,12 @@
    *
    * You may make any changes here that suite your system configurations
    */
-  /*const URL               = 'http://gprimary.hstn.me/gsecondary';
-  const DB_HOST           = 'sql203.hstn.me';
-  const DB_USER           = 'mseet_31147029';
-  const DB_PASS           = 'Gracecol123';
-  const DB_NAME           = 'mseet_31147029_gsec';
-  const FAVICON           = URL . '/assets/img/favicon.png';
-  const FAVICONBACKGROUND = URL . '/assets/img/faviconBackground.png';*/
+  /*const URL               = 'https://ugasolutions.co.ug';
+  const DB_HOST           = 'localhost';
+  const DB_USER           = 'ugasolutions_admin';
+  const DB_PASS           = '8seU8BZ*Uws32-';
+  const DB_NAME           = 'ugasolutions_db';
+  const FAVICON           = URL . '/assets/img/favicon.png';*/
   
   const URL               = 'http://localhost/vet/';
   const DB_HOST           = 'p:127.0.0.1';
@@ -38,7 +38,6 @@
   const DB_PASS           = '';
   const DB_NAME           = 'aaaavet';
   const FAVICON           = URL . 'assets/img/logo.png';
-  const FAVICONBACKGROUND = URL . 'assets/img/faviconBackground.png';
   
   const COLOR             = 'primary';
   const SECONDCOLOR       = "info";
@@ -491,7 +490,7 @@
     echo '<pre>';
     echo print_r($expression);
     echo '</pre>';
-    //die();
+    die();
   }
   
   // OTHER WEBSITE/SYSTEM VITALS

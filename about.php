@@ -3,239 +3,210 @@
   include_once "includes/webHeader.inc.php";
 
 ?>
-  
-  <main id="main">
-    
-    <!-- ======= Single Blog Section ======= -->
-    <section class="hero-section inner-page">
-      <div class="wave">
-        
-        <svg width="1920px" height="265px" viewBox="0 0 1920 265" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g id="Apple-TV" transform="translate(0.000000, -402.000000)" fill="#FFFFFF">
-              <path d="M0,439.134243 C175.04074,464.89273 327.944386,477.771974 458.710937,477.771974 C654.860765,477.771974 870.645295,442.632362 1205.9828,410.192501 C1429.54114,388.565926 1667.54687,411.092417 1920,477.771974 L1920,667 L1017.15166,667 L0,667 L0,439.134243 Z" id="Path"></path>
-            </g>
-          </g>
-        </svg>
-      
-      </div>
-      
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-12">
-            <div class="row justify-content-center">
-              <div class="col-md-10 text-center hero-text">
-                <h1 data-aos="fade-up" data-aos-delay="">About Us</h1>
-                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">December 13, 2019 &bullet; By <a href="#" class="text-white">Admin</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-    </section>
-    
-    <section class="site-section mb-4">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 blog-content">
-            
-            <p class="lead mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda nihil aspernatur nemo sunt, qui, harum repudiandae quisquam eaque dolore itaque quod tenetur quo quos labore?</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae expedita cumque necessitatibus ducimus debitis totam, quasi praesentium eveniet tempore possimus illo esse, facilis? Corrupti possimus quae ipsa pariatur cumque, accusantium tenetur voluptatibus incidunt reprehenderit, quidem repellat sapiente, id, earum obcaecati.</p>
-            
-            <div class="row mb-5">
-              <div class="col-md-6">
-                <figure><img src="assets/img/img_1.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-                  <figcaption>This is an image caption</figcaption>
-                </figure>
-              </div>
-              <div class="col-md-6">
-                <figure><img src="assets/img/img_2.jpg" alt="Free Website Template by Free-Template.co" class="img-fluid">
-                  <figcaption>This is an image caption</figcaption>
-                </figure>
-              </div>
-            </div>
-            
-            <blockquote>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident vero tempora aliquam excepturi labore, ad soluta voluptate necessitatibus. Nulla error beatae, quam, facilis suscipit quaerat aperiam minima eveniet quis placeat.</p>
-            </blockquote>
-            
-            <p>Eveniet deleniti accusantium nulla natus nobis nam asperiores ipsa minima laudantium vero cumque cupiditate ipsum ratione dicta, expedita quae, officiis provident harum nisi! Esse eligendi ab molestias, quod nostrum hic saepe repudiandae non. Suscipit reiciendis tempora ut, saepe temporibus nemo.</p>
-            <p>Accusamus, temporibus, ullam. Voluptate consectetur laborum totam sunt culpa repellat, dolore voluptas. Quaerat cum ducimus aut distinctio sit, facilis corporis ab vel alias, voluptas aliquam, expedita molestias quisquam sequi eligendi nobis ea error omnis consequatur iste deleniti illum, dolorum odit.</p>
-            <p>In adipisci corporis at delectus! Cupiditate, voluptas, in architecto odit id error reprehenderit quam quibusdam excepturi distinctio dicta laborum deserunt qui labore dignissimos necessitatibus reiciendis tenetur corporis quas explicabo exercitationem suscipit. Nisi quo nulla, nihil harum obcaecati vel atque quos.</p>
-            <p>Amet sint explicabo maxime accusantium qui dicta enim quia, nostrum id libero voluptates quae suscipit dolor quam tenetur dolores inventore illo laborum, corporis non ex, debitis quidem obcaecati! Praesentium maiores illo atque error! Earum, et, fugit. Sint, delectus molestiae. Totam.</p>
-            
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa iste, repudiandae facere aperiam sapiente, officia delectus soluta molestiae nihil corporis animi quos ratione qui labore? Sint eaque perspiciatis minus illum.</p>
-            <p>Consectetur porro odio quod iure quaerat cupiditate similique, dolor reprehenderit molestias provident, esse dolorum omnis architecto magni amet corrupti neque ratione sunt beatae perspiciatis? Iste pariatur omnis sed ut itaque.</p>
-            <p>Id similique, rem ipsam accusantium iusto dolores sit velit ex quas ea atque, molestiae. Sint, sed. Quisquam, suscipit! Quisquam quibusdam maiores fugiat eligendi eius consequuntur, molestiae saepe commodi expedita nemo!</p>
-            <div class="pt-5">
-              <p>Categories: <a href="#">Design</a>, <a href="#">Events</a> Tags: <a href="#">#html</a>, <a href="#">#trends</a></p>
-            </div>
-            
-            <div class="pt-5">
-              <h3 class="mb-5">6 Comments</h3>
-              <ul class="comment-list">
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="assets/img/person_1.jpg" alt="Free Website Template by Free-Template.co">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-                </li>
-                
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="assets/img/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-                  
-                  <ul class="children">
-                    <li class="comment">
-                      <div class="vcard bio">
-                        <img src="assets/img/person_1.jpg" alt="Image placeholder">
-                      </div>
-                      <div class="comment-body">
-                        <h3>Jean Doe</h3>
-                        <div class="meta">January 9, 2018 at 2:21pm</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                        <p><a href="#" class="reply">Reply</a></p>
-                      </div>
-                      
-                      <ul class="children">
-                        <li class="comment">
-                          <div class="vcard bio">
-                            <img src="assets/img/person_1.jpg" alt="Image placeholder">
-                          </div>
-                          <div class="comment-body">
-                            <h3>Jean Doe</h3>
-                            <div class="meta">January 9, 2018 at 2:21pm</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                            <p><a href="#" class="reply">Reply</a></p>
-                          </div>
-                          
-                          <ul class="children">
-                            <li class="comment">
-                              <div class="vcard bio">
-                                <img src="assets/img/person_1.jpg" alt="Image placeholder">
-                              </div>
-                              <div class="comment-body">
-                                <h3>Jean Doe</h3>
-                                <div class="meta">January 9, 2018 at 2:21pm</div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                <p><a href="#" class="reply">Reply</a></p>
-                              </div>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                
-                <li class="comment">
-                  <div class="vcard bio">
-                    <img src="assets/img/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply">Reply</a></p>
-                  </div>
-                </li>
-              </ul>
-              <!-- END comment-list -->
-              
-              <div class="comment-form-wrap pt-5">
-                <h3 class="mb-5">Leave a comment</h3>
-                <form action="#" class="">
-                  <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name">
-                  </div>
-                  <div class="form-group mt-3">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" id="email">
-                  </div>
-                  <div class="form-group mt-3">
-                    <label for="website">Website</label>
-                    <input type="url" class="form-control" id="website">
-                  </div>
-                  
-                  <div class="form-group mt-3">
-                    <label for="message">Message</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                  </div>
-                  <div class="form-group mt-3">
-                    <input type="submit" value="Post Comment" class="btn btn-primary">
-                  </div>
-                
-                </form>
-              </div>
-            </div>
-          
-          </div>
-          <div class="col-md-4 sidebar">
-            <div class="sidebar-box">
-              <form action="#" class="search-form">
-                <div class="form-group">
-                  <span class="icon fa fa-search"></span>
-                  <input type="text" class="form-control" placeholder="Type a keyword and hit enter">
-                </div>
-              </form>
-            </div>
-            <div class="sidebar-box">
-              <div class="categories">
-                <h3>Categories</h3>
-                <li><a href="#">Dog <span>(12)</span></a></li>
-                <li><a href="#">Dog Food <span>(22)</span></a></li>
-                <li><a href="#">Vetenirarian <span>(37)</span></a></li>
-                <li><a href="#">Events<span>(42)</span></a></li>
-              </div>
-            </div>
-            <div class="sidebar-box">
-              <img src="assets/img/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
-              <h3>About The Author</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-              <p><a href="#" class="btn btn-primary btn-sm">Read More</a></p>
-            </div>
-            
-            <div class="sidebar-box">
-              <h3>Paragraph</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- ======= CTA Section ======= -->
-    <section class="section cta-section">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6 me-auto text-center text-md-start mb-5 mb-md-0">
-            <h2>Starts Publishing Your Apps</h2>
-          </div>
-          <div class="col-md-5 text-center text-md-end">
-            <p><a href="#" class="btn d-inline-flex align-items-center"><i class="bx bxl-apple"></i><span>App store</span></a> <a href="#" class="btn d-inline-flex align-items-center"><i class="bx bxl-play-store"></i><span>Google play</span></a></p>
-          </div>
-        </div>
-      </div>
-    </section><!-- End CTA Section -->
-  
-  </main><!-- End #main -->
+	
+	<main id="main">
+		
+		<!-- ======= Single Blog Section ======= -->
+		<section class="hero-section inner-page">
+			<div class="wave">
+				
+				<svg width="1920px" height="265px" viewBox="0 0 1920 265" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+						<g id="Apple-TV" transform="translate(0.000000, -402.000000)" fill="#FFFFFF">
+							<path
+									d="M0,439.134243 C175.04074,464.89273 327.944386,477.771974 458.710937,477.771974 C654.860765,477.771974 870.645295,442.632362 1205.9828,410.192501 C1429.54114,388.565926 1667.54687,411.092417 1920,477.771974 L1920,667 L1017.15166,667 L0,667 L0,439.134243 Z"
+									id="Path"></path>
+						</g>
+					</g>
+				</svg>
+			
+			</div>
+			
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-12">
+						<div class="row justify-content-center">
+							<div class="col-md-10 text-center hero-text">
+								<h1 data-aos="fade-up" data-aos-delay="">About Us</h1>
+								<p class="mb-5" data-aos="fade-up" data-aos-delay="100">Learn more about us</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		</section>
+		
+		<section class="site-section mb-4">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						
+						<img src="assets/img/logo.png" class="img-fluid" alt="company logo">
+					
+					</div>
+					<div class="col-md-8">
+						
+						<h3>Know more</h3>
+						<p>UgaSolutions Pharmaceutical Ltd is a leading provider of veterinary drugs, supplies, equipment, vaccines, hormones, anesthetics and sedatives. We specialize in importing and distributing reliable quality veterinary inputs, serving
+							as a one-stop
+							shopping center for all veterinary needs. With a commitment to excellence and innovation, we ensure the well-being and health of animals through our comprehensive range of products and services. Trust UgaSolutions Pharmaceutical Ltd for
+							premium veterinary solutions tailored to your requirements.</p>
+						
+						<h5>Company Overview</h5>
+						<p><b>Name:</b> UgaSolutions Pharmaceuticals Ltd</p>
+						<p><b>Location:</b> Semuto Town Council Along Matugga Road.</p>
+						<p>We provide veterinary products and services</p>
+					
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section class="section">
+			
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 d-flex align-items-stretch" data-aos="fade-left" data-aos-delay="100">
+						<div class="step">
+							<h3>Mission</h3>
+							<p>To deliver innovative healthcare solutions that enhance the well-being of communities worldwide. We are committed to providing high-quality pharmaceutical products and services that empower individuals to lead healthier, more
+								fulfilling lives. Through continuous research, development, and collaboration, we strive to be a trusted partner in promoting health and wellness for all.</p>
+						</div>
+					</div>
+					<div class="col-md-6 d-flex align-items-stretch" data-aos="fade-right" data-aos-delay="200">
+						<div class="step">
+							<h3>Vision</h3>
+							<p>To be a global leader in healthcare innovation, known for our unwavering commitment to improving lives and advancing the frontiers of medical science. We aspire to be recognized for
+								our exceptional products, groundbreaking research, and transformative contributions to healthcare worldwide. By embracing emerging technologies, fostering partnerships, and prioritizing the well-being of our customers and communities,
+								we aim to shape a healthier, more sustainable future for generations to come.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		</section>
+		
+		<section class="section">
+			
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12" data-aos="fade-left" data-aos-delay="200">
+						<h4 class="section-heading">Core Values</h4>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item"><b>Integrity:</b> We uphold the highest standards of honesty, transparency, and ethical behavior in all our interactions with customers, partners, and employees.</li>
+							<li class="list-group-item"><b>Excellence:</b> We are dedicated to excellence in everything we do, from product development and manufacturing to customer service and community engagement. We continually strive to surpass expectations and
+								deliver exceptional results. </li>
+							<li class="list-group-item"><b>Innovation:</b> We embrace innovation as a driving force behind our success. We foster a culture of creativity, curiosity, and continuous improvement, seeking new solutions to address evolving healthcare
+								needs.</li>
+							
+							<li class="list-group-item"><b>Customer Focus:</b> We prioritize the needs and preferences of our customers, striving to exceed their expectations and deliver value-added solutions that enhance their quality of life.</li>
+							<li class="list-group-item"><b>Collaboration:</b> We believe in the power of collaboration and partnership. We work closely with healthcare professionals, researchers, and organizations to foster knowledge-sharing, drive innovation, and
+								achieve common goals.</li>
+							<li class="list-group-item"><b>Social Responsibility:</b> We are committed to making a positive impact on society and the environment. We take responsibility for our actions, support sustainable practices, and contribute to the well-being
+								of communities worldwide.</li>
+							<li class="list-group-item"><b>Empowerment:</b> We empower our employees to grow, learn, and thrive in a supportive and inclusive work environment. We value diversity, respect individual contributions, and provide opportunities for
+								professional development and advancement.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		
+		</section>
+		
+		<section class="team">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<h2 class="section-heading">Our Team</h2>
+						<p class="sub-title">Our dedicated team comprises talented individuals from diverse backgrounds, each bringing unique expertise and perspectives to our organization. With a shared passion for excellence and innovation, we collaborate
+							seamlessly to deliver exceptional results and exceed expectations.</p>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="card member">
+									<img src="assets/img/team/team-1.jpg" class="card-img-top" alt="Team Member 1">
+									<div class="card-body">
+										<h5 class="card-title">John Doe</h5>
+										<p class="card-text">CEO</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="card member">
+									<img src="assets/img/team/team-4.jpg" class="card-img-top" alt="Team Member 2">
+									<div class="card-body">
+										<h5 class="card-title">Jane Smith</h5>
+										<p class="card-text">COO</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="card member">
+									<img src="assets/img/team/team-3.jpg" class="card-img-top" alt="Team Member 3">
+									<div class="card-body">
+										<h5 class="card-title">Mike Johnson</h5>
+										<p class="card-text">CTO</p>
+									</div>
+								</div>
+							</div>
+							<!-- Add more team members here as needed -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section class="partners-carousel pt-4">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center" data-aos="fade-up" data-aos-delay="200">
+						<h3 class="text-center section-heading">Our Partners</h3>
+						<p>Discover the esteemed partners who collaborate with us to drive innovation, achieve shared goals, and deliver exceptional value to our customers and communities. We are proud to work alongside these trusted organizations to create impactful solutions and foster lasting relationships.</p>
+					
+					</div>
+					<div class="col-md-7 mx-auto" data-aos="fade-up" data-aos-delay="200">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<!-- Add your partner logos here as swiper slides -->
+								<div class="swiper-slide"><img src="assets/img/partnerships/partner1.png" alt="Partner 1 Logo"></div>
+								<div class="swiper-slide"><img src="assets/img/partnerships/partner3.png" alt="Partner 2 Logo"></div>
+								<div class="swiper-slide"><img src="assets/img/partnerships/partner4.png" alt="Partner 3 Logo"></div>
+								<!-- Add more partner logos as needed -->
+							</div>
+							<!-- Add Pagination -->
+							<div class="swiper-pagination"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	
+	
+	
+	
+	
+	</main><!-- End #main -->
 
 <?php
   
   include_once "includes/webFooter.inc.php";
 
 ?>
+
+<script>
+  var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 2,
+    slidesPerGroup: 2,
+    spaceBetween: 10, // Adjust as needed
+    loop: true, // If you want it to loop
+    autoplay: {
+      delay: 5000, // Adjust autoplay delay as needed
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  });
+
+</script>

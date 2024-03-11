@@ -24,9 +24,9 @@
         <div class="row align-items-center">
           <div class="col-12">
             <div class="row justify-content-center">
-              <div class="col-md-7 text-center hero-text">
-                <h1 data-aos="fade-up" data-aos-delay="">Make your Order Now</h1>
-                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <div class="col-md-12 text-center hero-text">
+                <h1 data-aos="fade-up" data-aos-delay="">Resources</h1>
+                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Discover valuable resources to enhance your farming journey. Explore insightful PDFs and informative videos tailored to support your agricultural endeavors. Get ready to enrich your knowledge and optimize your farming practices with our comprehensive collection of resources.</p>
               </div>
             </div>
           </div>
@@ -34,118 +34,39 @@
       </div>
     
     </section>
-    
-    <section class="section">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-md-2 col-sm-4">
-            <div class="post-entry">
-              <a href="blog-single.html" class="d-block mb-4">
-                <img src="assets/img/img_1.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-text">
-                <span class="post-meta">December 13, 2019 &bullet; By <a href="#">Admin</a></span>
-                <h3><a href="#">Chrome now alerts you when someone steals your password</a></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-                <p><a href="#" class="readmore">Read more</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 col-sm-4">
-            <div class="post-entry">
-              <a href="blog-single.html" class="d-block mb-4">
-                <img src="assets/img/img_2.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-text">
-                <span class="post-meta">December 13, 2019 &bullet; By <a href="#">Admin</a></span>
-                <h3><a href="#">Chrome now alerts you when someone steals your password</a></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-                <p><a href="#" class="readmore">Read more</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 col-sm-4">
-            <div class="post-entry">
-              <a href="blog-single.html" class="d-block mb-4">
-                <img src="assets/img/img_3.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-text">
-                <span class="post-meta">December 13, 2019 &bullet; By <a href="#">Admin</a></span>
-                <h3><a href="#">Chrome now alerts you when someone steals your password</a></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-                <p><a href="#" class="readmore">Read more</a></p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-2 col-sm-4">
-            <div class="post-entry">
-              <a href="blog-single.html" class="d-block mb-4">
-                <img src="assets/img/img_4.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-text">
-                <span class="post-meta">December 13, 2019 &bullet; By <a href="#">Admin</a></span>
-                <h3><a href="#">Chrome now alerts you when someone steals your password</a></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-                <p><a href="#" class="readmore">Read more</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 col-sm-4">
-            <div class="post-entry">
-              <a href="blog-single.html" class="d-block mb-4">
-                <img src="assets/img/img_3.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-text">
-                <span class="post-meta">December 13, 2019 &bullet; By <a href="#">Admin</a></span>
-                <h3><a href="#">Chrome now alerts you when someone steals your password</a></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-                <p><a href="#" class="readmore">Read more</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-2 col-sm-4">
-            <div class="post-entry">
-              <a href="blog-single.html" class="d-block mb-4">
-                <img src="assets/img/img_2.jpg" alt="Image" class="img-fluid">
-              </a>
-              <div class="post-text">
-                <span class="post-meta">December 13, 2019 &bullet; By <a href="#">Admin</a></span>
-                <h3><a href="#">Chrome now alerts you when someone steals your password</a></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-                <p><a href="#" class="readmore">Read more</a></p>
-              </div>
-            </div>
-          </div>
-        
-        </div>
-        
-        <div class="row">
-          <div class="col-12 text-center">
-            <span class="p-3 active text-primary">1</span>
-            <a href="#" class="p-3">2</a>
-            <a href="#" class="p-3">3</a>
-            <a href="#" class="p-3">4</a>
-          </div>
-        </div>
-      </div>
-    
-    </section>
-    
-    <!-- ======= CTA Section ======= -->
-    <section class="section cta-section">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6 me-auto text-center text-md-start mb-5 mb-md-0">
-            <h2>Starts Publishing Your Apps</h2>
-          </div>
-          <div class="col-md-5 text-center text-md-end">
-            <p><a href="#" class="btn d-inline-flex align-items-center"><i class="bx bxl-apple"></i><span>App store</span></a> <a href="#" class="btn d-inline-flex align-items-center"><i class="bx bxl-play-store"></i><span>Google play</span></a></p>
-          </div>
-        </div>
-      </div>
-    </section><!-- End CTA Section -->
-  
+	  
+	  <section class="resources-section mb-4">
+		  <div class="container">
+			  <div class="row">
+				  <div class="col-md-6">
+					  <div class="resource-item">
+						  <div class="resource-thumbnail">
+							  <i class="bi bi-file-earmark-pdf"></i>
+						  </div>
+						  <div class="resource-content">
+							  <h3>Informative PDFs</h3>
+							  <p>Explore our collection of informative PDFs covering a wide range of topics in agriculture, livestock, and sustainable farming practices. Access valuable insights and guidance to enhance your farming journey.</p>
+							  <a href="resource_pdf.php" class="btn btn-primary">View PDFs</a>
+						  </div>
+					  </div>
+				  </div>
+				  <div class="col-md-6">
+					  <div class="resource-item">
+						  <div class="resource-thumbnail">
+							  <i class="bi bi-camera-reels"></i>
+						  </div>
+						  <div class="resource-content">
+							  <h3>Informative Videos</h3>
+							  <p>Watch our collection of informative videos designed to provide valuable insights and practical tips for farmers. Learn about the latest trends, innovative techniques, and best practices in agriculture and animal husbandry.</p>
+							  <a href="resource_vid.php" class="btn btn-primary">Watch Videos</a>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
+	  </section>
+
+
   </main><!-- End #main -->
 
 <?php
