@@ -346,6 +346,7 @@
                     <td>' . $inventory['remarks'] . '</td>
                     <!-- Add more columns as needed -->
                     <td>
+                        <button class="btn btn-info btn-sm assessStockMovement" data-id="' . $inventory['movement_id'] . '">Assess</button>
                         <button class="btn btn-info btn-sm editStockMovement" data-id="' . $inventory['movement_id'] . '">Edit</button>
                         <button class="btn btn-danger btn-sm deleteStockMovement" data-id="' . $inventory['movement_id'] . '">Delete</button>
                     </td>
@@ -397,8 +398,8 @@
             <div class="form-group">
                 <label for="movement_type">Movement Type:</label>
                 <select class="form-control" id="movement_type" name="movement_type" required>
-                    <option value="IN" ' . (($data['movement_type'] === 'IN') ? "selected" : "") . '>IN</option>
                     <option value="OUT" ' . (($data['movement_type'] === 'OUT') ? "selected" : "") . '>OUT</option>
+                    <option value="IN" ' . (($data['movement_type'] === 'IN') ? "selected" : "") . '>IN</option>
                 </select>
                 <div class="invalid-feedback">Please select the movement type.</div>
             </div>
