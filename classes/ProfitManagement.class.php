@@ -81,7 +81,7 @@
     public function getAllProfitRecords()
     {
       // Sample SQL query to select all animals
-      $sql = "SELECT * FROM profit_management";
+      $sql = "SELECT * FROM profit_management ORDER BY record_id DESC";
     
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
@@ -100,7 +100,8 @@
     public function displayProfitRecordsTable()
     {
       $medicalRecordsData = $this->getAllProfitRecords(); // Assume you have a method to fetch all animals data
-    
+      $no = 1;
+  
       // DataTables HTML
       $tableHtml = '<div class="table-responsive">
             <table class="table table-sm table-hover table-striped dataTable">
@@ -121,7 +122,7 @@
       foreach ($medicalRecordsData as $medicalRecord) {
         $tableHtml .= '
                 <tr>
-                    <td>' . $medicalRecord['record_id'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . $medicalRecord['date'] . '</td>
                     <td>' . $medicalRecord['revenue'] . '</td>
                     <td>' . $medicalRecord['expenses'] . '</td>
@@ -132,6 +133,7 @@
                         <button class="btn btn-danger btn-sm deleteProfitRecord" data-id="' . $medicalRecord['record_id'] . '">Delete</button>
                     </td>
                 </tr>';
+        $no++;
       }
     
       // Close table HTML

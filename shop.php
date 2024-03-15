@@ -28,7 +28,7 @@
             <div class="row justify-content-center">
               <div class="col-md-7 text-center hero-text">
                 <h1 data-aos="fade-up" data-aos-delay="">Make your Order Now</h1>
-                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Discover a wide range of high-quality products available for purchase. Start browsing now!</p>
               </div>
             </div>
           </div>
@@ -40,6 +40,12 @@
     <section class="section products">
       <div class="container-fluid">
         <div class="row mb-5">
+	        
+	        <div class="col-12">
+		        <div class="search-bar">
+			        <input type="text" id="productSearch" class="form-control mb-4" placeholder="Search products...">
+		        </div>
+	        </div>
 	        
 	        <?= $data->displayProductsToUser() ?>
 	        

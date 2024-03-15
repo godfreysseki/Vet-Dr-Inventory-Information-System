@@ -28,7 +28,7 @@
 						<div class="row justify-content-center">
 							<div class="col-md-10 text-center hero-text">
 								<h1 data-aos="fade-up" data-aos-delay="">About Us</h1>
-								<p class="mb-5" data-aos="fade-up" data-aos-delay="100">Learn more about us</p>
+								<p class="mb-5" data-aos="fade-up" data-aos-delay="100">Learn more about our story, mission, and values.</p>
 							</div>
 						</div>
 					</div>
@@ -122,7 +122,7 @@
 						<p class="sub-title">Our dedicated team comprises talented individuals from diverse backgrounds, each bringing unique expertise and perspectives to our organization. With a shared passion for excellence and innovation, we collaborate
 							seamlessly to deliver exceptional results and exceed expectations.</p>
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-6 col-md-3">
 								<div class="card member">
 									<img src="assets/img/team/team-1.jpg" class="card-img-top" alt="Team Member 1">
 									<div class="card-body">
@@ -131,7 +131,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-6 col-md-3">
 								<div class="card member">
 									<img src="assets/img/team/team-4.jpg" class="card-img-top" alt="Team Member 2">
 									<div class="card-body">
@@ -140,7 +140,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-6 col-md-3">
 								<div class="card member">
 									<img src="assets/img/team/team-3.jpg" class="card-img-top" alt="Team Member 3">
 									<div class="card-body">

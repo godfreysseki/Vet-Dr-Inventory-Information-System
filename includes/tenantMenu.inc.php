@@ -90,6 +90,14 @@
 					</a>
 				</li>
 				<li class="nav-item">
+					<a href="stock_movement.php" class="nav-link">
+						<i class="nav-icon fas fa-balance-scale"></i>
+						<p>
+							Stock Movement
+						</p>
+					</a>
+				</li>
+				<li class="nav-item">
 					<a href="products.php" class="nav-link">
 						<i class="nav-icon fas fa-box-open"></i>
 						<p>

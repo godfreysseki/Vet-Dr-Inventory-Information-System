@@ -83,7 +83,7 @@
     public function getAllAppointments()
     {
       // Sample SQL query to select all animals
-      $sql = "SELECT * FROM appointments";
+      $sql = "SELECT * FROM appointments ORDER BY appointment_id DESC";
     
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
@@ -102,7 +102,7 @@
     public function displayAppointmentsTable()
     {
       $appointmentsData = $this->getAllAppointments(); // Assume you have a method to fetch all animals data
-    
+      $no = 1;
       // DataTables HTML
       $tableHtml = '<div class="table-responsive">
             <table class="table table-sm table-hover table-striped dataTable">
@@ -124,7 +124,7 @@
       foreach ($appointmentsData as $appointment) {
         $tableHtml .= '
                 <tr>
-                    <td>' . $appointment['appointment_id'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . $this->getClientName($appointment['client_id']) . '</td>
                     <td>' . $this->getAnimalName($appointment['animal_id']) . '</td>
                     <td>' . datel($appointment['date_time']) . '</td>
@@ -136,6 +136,7 @@
                         <button class="btn btn-danger btn-sm deleteAppointment" data-id="' . $appointment['appointment_id'] . '">Delete</button>
                     </td>
                 </tr>';
+        $no++;
       }
     
       // Close table HTML

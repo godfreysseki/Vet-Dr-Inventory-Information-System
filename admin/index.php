@@ -106,7 +106,7 @@
 				<!-- /.row -->
 				
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-8">
 						<div class="card">
 							<div class="card-header">
 								<h5 class="card-title">Monthly Sales Recap Report</h5>
@@ -233,6 +233,17 @@
 							<!-- /.card-footer -->
 						</div>
 						<!-- /.card -->
+					</div>
+					<!-- /.col -->
+					<div class="col-md-4">
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title">Require Inventory</h5>
+							</div>
+							<div class="card-body">
+								<?= $data->displayLowStockProducts() ?>
+							</div>
+						</div>
 					</div>
 					<!-- /.col -->
 				</div>

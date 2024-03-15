@@ -409,6 +409,7 @@
     public function displayOnlineOrders()
     {
       $clientsData = $this->getAllOnlineOrders();
+      $no = 1;
   
       // DataTables HTML
       $tableHtml = '
@@ -435,7 +436,7 @@
       foreach ($clientsData as $clientsData) {
         $tableHtml .= '
                 <tr data-order-id="'.$clientsData['ooid'].'">
-                    <td>' . $clientsData['ooid'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . dates($clientsData['order_date']) . '</td>
                     <td>' . $clientsData['order_number'] . '</td>
                     <td>' . $clientsData['full_name'] . '</td>
@@ -459,6 +460,7 @@
                         <button class="btn btn-success btn-sm viewOnlineOrder" data-id="' . $clientsData['order_number'] . '">View</button>
                     </td>
                 </tr>';
+        $no++;
       }
   
       // Close table HTML

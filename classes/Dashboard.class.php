@@ -66,6 +66,44 @@
       return $result['num'] ?? 0;
     }
     
+    // stock levels monitor
+    public function displayLowStockProducts()
+    {
+      // Define the SQL query to select products with quantities equal to or below the reorder level
+      $sql = "SELECT * FROM products WHERE quantity_in_stock <= reorder_level";
+    
+      // Execute the query
+      $result = $this->selectQuery($sql);
+    $no = 1;
+      // Initialize an empty string to store the HTML table markup
+      $tableHtml = '<div class="table-responsive">
+                    <table class="table table-sm table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Product Name</th>
+                                <th>Qty Left</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
+    
+      // Fetch each row from the result and append it to the table HTML
+      while ($row = $result->fetch_assoc()) {
+        $tableHtml .= '<tr>';
+        $tableHtml .= '<td>' . $no . '</td>';
+        $tableHtml .= '<td>' . $row['product_name'] . '</td>';
+        $tableHtml .= '<td>' . $row['quantity_in_stock'] . '</td>';
+        $tableHtml .= '</tr>';
+        $no++;
+      }
+    
+      // Close the table HTML
+      $tableHtml .= '</tbody></table></div>';
+    
+      // Return the HTML table markup
+      return $tableHtml;
+    }
+  
     // Monthly data for caret management and percentage of gain
     public function caretFormer($last, $now)
     {

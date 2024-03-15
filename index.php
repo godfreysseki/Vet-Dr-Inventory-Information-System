@@ -114,7 +114,7 @@
 			</div>
 		</section>
 		
-		<section class="section">
+		<section class="section products">
 			
 			<div class="container">
 				<div class="row">
@@ -123,27 +123,12 @@
 						<p>Discover our customers' favorite products! Explore our selection of frequently bought items to find popular choices loved by our valued customers. From essential supplies to must-have accessories, these top picks are trusted and highly
 							recommended.</p>
 					</div>
-					<div class="col-md-4">
-						<div class="step">
-							<span class="number">01</span>
-							<h3>Sign Up</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="step">
-							<span class="number">02</span>
-							<h3>Create Profile</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="step">
-							<span class="number">03</span>
-							<h3>Enjoy the app</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, optio.</p>
-						</div>
-					</div>
+					<?php
+					
+						$products = new Products();
+						echo $products->displayFrequentlyPurchasedProducts();
+					
+					?>
 				</div>
 			</div>
 		

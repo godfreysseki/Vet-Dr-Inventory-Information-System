@@ -79,7 +79,7 @@
     public function getAllExpenses()
     {
       // Sample SQL query to select all animals
-      $sql = "SELECT * FROM expenses";
+      $sql = "SELECT * FROM expenses ORDER BY expense_id DESC";
     
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
@@ -98,7 +98,8 @@
     public function displayExpensesTable()
     {
       $expensesData = $this->getAllExpenses(); // Assume you have a method to fetch all animals data
-    
+      $no = 1;
+  
       // DataTables HTML
       $tableHtml = '<div class="table-responsive">
             <table class="table table-sm table-hover table-striped dataTable">
@@ -118,7 +119,7 @@
       foreach ($expensesData as $expense) {
         $tableHtml .= '
                 <tr>
-                    <td>' . $expense['expense_id'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . $expense['expense_name'] . '</td>
                     <td>' . number_format($expense['amount']) . '</td>
                     <td>' . $expense['expense_date'] . '</td>
@@ -128,6 +129,7 @@
                         <button class="btn btn-danger btn-sm deleteExpense" data-id="' . $expense['expense_id'] . '">Delete</button>
                     </td>
                 </tr>';
+        $no++;
       }
     
       // Close table HTML

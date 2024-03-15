@@ -222,7 +222,7 @@
     // Get all products from the database
     public function getProducts()
     {
-      $sql    = 'select * from products';
+      $sql    = 'select * from products ORDER BY product_id DESC';
       $result = $this->selectQuery($sql);
       
       $products = [];
@@ -279,7 +279,7 @@
       $products = $this->getProducts();
       foreach ($products as $product) {
         $items .= '<!-- Product Card -->
-                  <div class="col-lg-2 col-md-4 col-sm-6 mb-4 product">
+                  <div class="col-lg-2 col-md-4 col-6 mb-4 product" data-name="' . strtolower($product['product_name']) . '">
                     <div class="card">
                       <img src="assets/img/uploads/'.(isset($product['image']) ? $product['image'] : 'noimage.png').'" class="card-img-top" alt="Product Image">
                       <div class="card-body">
@@ -293,5 +293,52 @@
       }
       return $items;
     }
+  
+    public function displayFrequentlyPurchasedProducts()
+    {
+      $items = '';
+      $frequentlyPurchasedProducts = $this->getFrequentlyPurchasedProducts(); // Assuming you have a method to retrieve frequently purchased products
     
+      foreach ($frequentlyPurchasedProducts as $product) {
+        $items .= '<!-- Product Card -->
+                  <div class="col-lg-2 col-md-4 col-6 mb-4 product" data-name="' . strtolower($product['product_name']) . '">
+                    <div class="card">
+                      <img src="assets/img/uploads/' . (isset($product['image']) ? $product['image'] : 'noimage.png') . '" class="card-img-top" alt="Product Image">
+                      <div class="card-body">
+                        <h5 class="card-title">' . $product['product_name'] . '</h5>
+                        <p class="card-text">UGX ' . number_format($product['selling_price']) . '</p>
+                        <a href="javascript:void(0)" data-id="' . $product['product_id'] . '" class="addToCart btn btn-sm btn-success">Add to Cart</a>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Product Card -->';
+      }
+    
+      return $items;
+    }
+  
+    public function getFrequentlyPurchasedProducts() {
+      // Replace this with your actual database query to retrieve frequently purchased products
+      // For demonstration purposes, let's assume you have a database table named 'orders' that stores orders
+      // You would need to join this with your 'products' table to get the product information
+      $sql = "SELECT product_id, COUNT(*) AS purchase_count FROM onlineorderitems GROUP BY product_id ORDER BY purchase_count DESC LIMIT 6";
+      $result = $this->selectQuery($sql);
+    
+      // Initialize an empty array to store the frequently purchased products
+      $frequentlyPurchasedProducts = [];
+    
+      // Fetch the product IDs and purchase counts from the database
+      while ($row = $result->fetch_assoc()) {
+        $product_id = $row['product_id'];
+        // Fetch product details based on the product ID
+        $productDetails = $this->getProductById($product_id);
+        // Add the product details to the array
+        if ($productDetails) {
+          $frequentlyPurchasedProducts[] = $productDetails;
+        }
+      }
+    
+      return $frequentlyPurchasedProducts;
+    }
+  
   }

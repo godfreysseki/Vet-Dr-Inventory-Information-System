@@ -83,7 +83,7 @@
     public function getAllMedicalRecords()
     {
       // Sample SQL query to select all animals
-      $sql = "SELECT * FROM medical_records GROUP BY animal_id";
+      $sql = "SELECT * FROM medical_records GROUP BY animal_id ORDER BY record_id DESC";
     
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
@@ -102,7 +102,7 @@
     public function displayMedicalRecordsTable()
     {
       $medicalRecordsData = $this->getAllMedicalRecords(); // Assume you have a method to fetch all animals data
-    
+      
       // DataTables HTML
       $tableHtml = '<div class="table-responsive">
             <table class="table table-sm table-hover table-striped dataTable">

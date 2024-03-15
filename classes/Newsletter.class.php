@@ -66,7 +66,8 @@
     public function displayClientsTable()
     {
       $clientsData = $this->getAllSubscribers(); // Assume you have a method to fetch all animals data
-    
+      $no = 1;
+  
       // DataTables HTML
       $tableHtml = '
             <table class="table table-sm table-hover table-striped dataTable">
@@ -86,7 +87,7 @@
       foreach ($clientsData as $clientsData) {
         $tableHtml .= '
                 <tr>
-                    <td>' . $clientsData['client_id'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . $clientsData['name'] . '</td>
                     <td>' . phone($clientsData['contact_number']) . '</td>
                     <td>' . $clientsData['address'] . '</td>
@@ -96,6 +97,7 @@
                         <button class="btn btn-danger btn-sm deleteClient" data-id="' . $clientsData['client_id'] . '">Delete</button>
                     </td>
                 </tr>';
+        $no++;
       }
     
       // Close table HTML

@@ -172,7 +172,8 @@
     public function displayEventsTable()
     {
       $clientsData = $this->getAllEvents(); // Assume you have a method to fetch all animals data
-      
+      $no = 1;
+  
       // DataTables HTML
       $tableHtml = '
             <table class="table table-sm table-hover table-striped dataTable">
@@ -193,7 +194,7 @@
       foreach ($clientsData as $clientsData) {
         $tableHtml .= '
                 <tr>
-                    <td>' . $clientsData['event_id'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . dates($clientsData['event_date']) . '</td>
                     <td>' . $clientsData['title'] . '</td>
                     <td>' . $clientsData['hosts'] . '</td>
@@ -205,6 +206,7 @@
                         <button class="btn btn-danger btn-sm deleteEvent" data-id="' . $clientsData['event_id'] . '">Delete</button>
                     </td>
                 </tr>';
+        $no++;
       }
       
       // Close table HTML

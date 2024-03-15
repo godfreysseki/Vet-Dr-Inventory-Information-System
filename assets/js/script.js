@@ -114,25 +114,6 @@
   const tooltipList = [...tooltipTriggerList].map(
       tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
   
-  window.addEventListener('scroll', function() {
-    var sidebar = document.querySelector('.sidebar');
-    var blogContent = document.querySelector('.blog-content');
-    
-    var blogContentHeight = blogContent.offsetHeight;
-    var sidebarHeight = sidebar.offsetHeight;
-    
-    // Check if the sidebar height is greater than the blog content height
-    if (sidebarHeight < blogContentHeight) {
-      // Add sticky class to the sidebar when scrolling
-      if (window.scrollY > sidebar.offsetTop) {
-        sidebar.classList.add('sticky');
-      }
-      else {
-        sidebar.classList.remove('sticky');
-      }
-    }
-  });
-  
   // Load More Button
   $(document).ready(function() {
     const productsContainer = $('.events');
@@ -189,6 +170,7 @@
   $(document).ready(function() {
     countCart();
     updateSummary();
+    searchProducts();
   });
   
   function countCart()
@@ -287,6 +269,22 @@
     $('.total-products').text('Total Products: ' + totalProducts);
     $('.total-quantity').text('Total Quantity: ' + totalQuantity);
     $('.total-price').text('Total Price: UGX ' + numberWithCommas(totalPrice));
+  }
+  
+  // Search for the products
+  function searchProducts() {
+    $('#productSearch').on('keyup', function() {
+      var searchValue = $(this).val().toLowerCase();
+      $('.product').each(function() {
+        var productName = $(this).data('name');
+        if (productName.includes(searchValue)) {
+          $(this).show();
+        }
+        else {
+          $(this).hide();
+        }
+      });
+    });
   }
   
   // Remove product from Cart

@@ -7,10 +7,10 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  
-  <title><?= PAGE .' | '. COMPANY ?></title>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+	
+	<title><?= PAGE . ' | ' . COMPANY ?></title>
 	
 	<!-- SEO META Tags -->
 	<title>Veterinary Supplies and Products | Your Website Name</title>
@@ -51,23 +51,22 @@
 	
 	
 	<!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-  
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/mdi/css/materialdesignicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	
+	<!-- Vendor CSS Files -->
+	<link href="assets/vendor/aos/aos.css" rel="stylesheet">
+	<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+	<link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+	<link href="assets/vendor/mdi/css/materialdesignicons.min.css" rel="stylesheet">
+	<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	
+	<!-- Template Main CSS File -->
+	<link href="assets/css/style.css" rel="stylesheet">
 
 </head>
 
 <body>
-
 
 
 <!-- Contacts and Social Media Handles -->
@@ -82,27 +81,48 @@
 </div>
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top d-flex align-items-center">
-  <div class="container-fluid d-flex justify-content-between align-items-center">
-    
-    <div class="logo">
-      <h1><a href="./"><?= COMPANY ?></a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-    </div>
-    
-    <nav id="navbar" class="navbar">
-      <ul>
-        <li><a class="active " href="./">Home</a></li>
-        <li><a href="about.php">About Us</a></li>
-	      <li><a href="shop.php">Shop</a></li>
-	      <li><a href="events.php">Events & Workshops</a></li>
-	      <li><a href="blogs.php">Blogs & Articles</a></li>
-	      <li><a href="contact.php">Contact Us</a></li>
-	      <li><a href="cart.php" class="cartLink"><i class="d-none d-sm-block d-md-none">Shopping Cart</i><i class="mdi mdi-cart-variant mdi-24px d-sm-none d-md-block" data-bs-toggle="tooltip" title="Shopping Cart"><span
-						      class="cart_count"></span></i></a></li>
-      </ul>
-      <i class="bi bi-list mobile-nav-toggle"></i>
-    </nav><!-- .navbar -->
-  
-  </div>
+	<div class="container-fluid d-flex justify-content-between align-items-center">
+		
+		<div class="header-top d-none d-lg-block">
+			<!-- Left side: Quick contacts -->
+			<div class="quick-contacts">
+				<p><?= email(COMPANYEMAIL) ?> | <?= phone(COMPANYPHONE) ?> , <?= phone(COMPANYPHONE2) ?></p>
+			</div>
+			
+			<!-- Right side: Social media handles -->
+			<div class="social-media">
+				<!-- Add your social media icons here -->
+				<a href="#"><span class="bi bi-twitter"></span></a>
+				<a href="#"><span class="bi bi-instagram"></span></a>
+				<a href="#"><span class="bi bi-linkedin"></span></a>
+				<a href="#"><span class="bi bi-youtube"></span></a>
+			</div>
+		</div>
+		
+		<!-- Logo -->
+		<div class="logo">
+			<h1><a href="./"><?= COMPANY ?></a></h1>
+		</div>
+		
+		<!--<div class="logo">
+      <h1><a href="./"><? /*= COMPANY */ ?></a></h1>-->
+		<!-- Uncomment below if you prefer to use an image logo -->
+		<!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+		<!--</div>-->
+		
+		<nav id="navbar" class="navbar">
+			<ul>
+				<li><a class="active " href="./">Home</a></li>
+				<li><a href="about.php">About Us</a></li>
+				<li><a href="shop.php">Shop</a></li>
+				<li><a href="events.php">Events & Workshops</a></li>
+				<li><a href="blogs.php">Blogs & Articles</a></li>
+				<li><a href="contact.php">Contact Us</a></li>
+				<li><a href="cart.php" class="cartLink"><i class="d-none d-sm-block d-md-none">Shopping Cart</i><i class="mdi mdi-cart-variant mdi-24px d-sm-none d-md-block" data-bs-toggle="tooltip" title="Shopping Cart"><span
+									class="cart_count"></span></i></a></li>
+			</ul>
+			<i class="bi bi-list mobile-nav-toggle"></i>
+		</nav><!-- .navbar -->
+	
+	</div>
 </header><!-- End Header -->

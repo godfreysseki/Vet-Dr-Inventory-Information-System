@@ -82,7 +82,7 @@
     public function getAllAnimals()
     {
       // Sample SQL query to select all animals
-      $sql = "SELECT * FROM animals";
+      $sql = "SELECT * FROM animals ORDER BY animal_id DESC";
       
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
@@ -101,7 +101,7 @@
     public function displayAnimalsTable()
     {
       $animalsData = $this->getAllAnimals(); // Assume you have a method to fetch all animals data
-      
+      $no = 1;
       // DataTables HTML
       $tableHtml = '<div class="table-responsive">
             <table class="table table-sm table-hover table-striped dataTable">
@@ -123,7 +123,7 @@
       foreach ($animalsData as $animal) {
         $tableHtml .= '
                 <tr>
-                    <td>' . $animal['animal_id'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . $animal['name'] . '</td>
                     <td>' . $animal['species'] . '</td>
                     <td>' . $animal['breed'] . '</td>
@@ -135,6 +135,7 @@
                         <button class="btn btn-danger btn-sm deleteAnimal" data-id="' . $animal['animal_id'] . '">Delete</button>
                     </td>
                 </tr>';
+        $no++;
       }
       
       // Close table HTML

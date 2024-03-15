@@ -168,7 +168,8 @@
     public function displayBlogsTable()
     {
       $clientsData = $this->getAllBlogs(); // Assume you have a method to fetch all animals data
-      
+      $no = 1;
+  
       // DataTables HTML
       $tableHtml = '
             <table class="table table-sm table-hover table-striped dataTable">
@@ -188,7 +189,7 @@
       foreach ($clientsData as $clientsData) {
         $tableHtml .= '
                 <tr>
-                    <td>' . $clientsData['bid'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . dates($clientsData['regdate']) . '</td>
                     <td>' . $clientsData['title'] . '</td>
                     <td>' . $clientsData['author'] . '</td>
@@ -199,6 +200,7 @@
                         <button class="btn btn-danger btn-sm deleteBlog" data-id="' . $clientsData['bid'] . '">Delete</button>
                     </td>
                 </tr>';
+        $no++;
       }
       
       // Close table HTML

@@ -70,7 +70,7 @@
     public function getAllContacts()
     {
       // Sample SQL query to select all animals
-      $sql = "SELECT * FROM contacts";
+      $sql = "SELECT * FROM contacts ORDER BY contact_id DESC";
     
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
@@ -89,7 +89,8 @@
     public function displayContactsTable()
     {
       $clientsData = $this->getAllContacts(); // Assume you have a method to fetch all animals data
-    
+      $no = 1;
+  
       // DataTables HTML
       $tableHtml = '
             <table class="table table-sm table-hover table-striped dataTable">
@@ -110,7 +111,7 @@
       foreach ($clientsData as $clientsData) {
         $tableHtml .= '
                 <tr>
-                    <td>' . $clientsData['contact_id'] . '</td>
+                    <td>' . $no . '</td>
                     <td>' . $clientsData['full_name'] . '</td>
                     <td>' . $clientsData['subject'] . '</td>
                     <td>' . $clientsData['viewed'] . '</td>
@@ -122,6 +123,7 @@
                         <button class="btn btn-danger btn-sm deleteContact" data-id="' . $clientsData['contact_id'] . '">Delete</button>
                     </td>
                 </tr>';
+        $no++;
       }
     
       // Close table HTML

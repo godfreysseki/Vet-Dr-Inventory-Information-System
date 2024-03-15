@@ -2278,12 +2278,59 @@
       },
     });
   });
+  // Assess Returns
+  $(document).on('click', '.assessStockMovement', function() {
+    var dataId = $(this).data('id');
+    $.ajax({
+      url: '../forms/stock_movement_returns.php',
+      type: 'post',
+      data: {dataId: dataId},
+      success: function(response) {
+        $('#system-modal .modal-dialog').addClass('modal-lg');
+        $('#system-modal .modal-title').html('Assessing Stock Movement');
+        $('#system-modal .modal-body').html(response);
+        $('#system-modal').modal('show');
+        // Initialize validation for the dynamically loaded form
+        var forms = $('.needs-validation');
+        forms.on('submit', function(event) {
+          if (this.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          else {
+            $(this).addClass('was-validated');
+            event.preventDefault();
+            // Submit if the form is valid
+            submitStockMovementReturnsForm();
+          }
+        });
+      },
+    });
+  });
   
   function submitStockMovementForm()
   {
     var formData = $('#stockMovementForm').serialize();
     $.ajax({
       url: '../forms/stock_movement_save.php',
+      type: 'post',
+      data: formData,
+      success: function(response) {
+        if (response.status === 'success') {
+          $('#system-modal').modal('hide');
+          toastr.success(response.message);
+        }
+        else {
+          toastr.warning(response.message);
+        }
+      },
+    });
+  }
+  function submitStockMovementReturnsForm()
+  {
+    var formData = $('#stockMovementReturnsForm').serialize();
+    $.ajax({
+      url: '../forms/stock_movement_returns_save.php',
       type: 'post',
       data: formData,
       success: function(response) {
