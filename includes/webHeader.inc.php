@@ -112,7 +112,7 @@
 		
 		<nav id="navbar" class="navbar">
 			<ul>
-				<li><a class="active " href="./">Home</a></li>
+				<li><a href="./">Home</a></li>
 				<li><a href="about.php">About Us</a></li>
 				<li><a href="shop.php">Shop</a></li>
 				<li><a href="events.php">Events & Workshops</a></li>

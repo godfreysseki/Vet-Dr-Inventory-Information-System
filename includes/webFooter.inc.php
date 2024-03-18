@@ -36,7 +36,7 @@
 							<h3 class="mb-2">Newsletter Subscription</h3>
 							<p class="m-0 p-0"><small>Subscribe to our weekly newsletter for updates and more.</small></p>
 							<div class="input-group mb-3">
-								<input type="email" class="form-control" placeholder="Your Email Address" aria-label="Your Email Address" aria-describedby="button-addon2">
+								<input type="email" class="form-control" name="email" id="email" placeholder="Your Email Address" aria-label="Your Email Address" aria-describedby="button-addon2">
 								<button class="btn btn-sm btn-success" type="submit" id="button-addon2">Subscribe</button>
 							</div>
 						</form>

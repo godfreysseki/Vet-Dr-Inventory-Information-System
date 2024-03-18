@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css">
-  <style>
-		body {
-			background-color: #f8f9fa;
-		}
-		
+<?php
+  
+  include_once "includes/webHeader.inc.php";
+
+?>
+	<style>
 		.order-container {
 			max-width: 600px;
 			margin: 50px auto;
@@ -40,39 +35,62 @@
 		.tracking-number {
 			color: #28a745;
 		}
+	</style>
+	<main id="main">
 		
-		.tracking-info {
-			margin-top: 20px;
-		}
+		<!-- ======= Single Blog Section ======= -->
+		<section class="hero-section inner-page">
+			<div class="wave">
+				
+				<svg width="1920px" height="265px" viewBox="0 0 1920 265" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+						<g id="Apple-TV" transform="translate(0.000000, -402.000000)" fill="#FFFFFF">
+							<path
+									d="M0,439.134243 C175.04074,464.89273 327.944386,477.771974 458.710937,477.771974 C654.860765,477.771974 870.645295,442.632362 1205.9828,410.192501 C1429.54114,388.565926 1667.54687,411.092417 1920,477.771974 L1920,667 L1017.15166,667 L0,667 L0,439.134243 Z"
+									id="Path"></path>
+						</g>
+					</g>
+				</svg>
+			
+			</div>
+			
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-12">
+						<div class="row justify-content-center">
+							<div class="col-md-10 text-center hero-text">
+								<h1 data-aos="fade-up" data-aos-delay="">Order Tracking</h1>
+								<p class="mb-5" data-aos="fade-up" data-aos-delay="100">Track your order status and know when your order will be received.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		
-		.tracking-info p {
-			margin: 5px 0;
-		}
-  </style>
-  <title>Order Tracking</title>
-</head>
-<body>
+		</section>
+		
+		<section class="site-section mb-4">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 mx-auto">
+						
+						<div class="order-container">
+							<form method="post" class="onlineOrderStatusFrom mb-3">
+								<input class="form-control online_order_status_number rounded-5" type="text" placeholder="Your Order Number..." aria-label="Order Number">
+							</form>
+							
+							<div class="order-master"></div>
+						
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 
-<div class="order-container">
-  <div class="order-header">
-    <h2>Order Tracking</h2>
-    <p class="order-status">Order Shipped</p>
-  </div>
+<?php
   
-  <div class="order-details">
-    <p><strong>Order Number:</strong> #123456</p>
-    <p><strong>Tracking Number:</strong> <span class="tracking-number">TRK789012345</span></p>
-    <p><strong>Order Date:</strong> January 15, 2024</p>
-    <p><strong>Estimated Delivery:</strong> January 25, 2024</p>
-  </div>
-  
-  <div class="tracking-info">
-    <h4>Tracking Information</h4>
-    <p><strong>Location:</strong> In Transit</p>
-    <p><strong>Last Update:</strong> January 20, 2024</p>
-  </div>
-  
-</div>
+  include_once "includes/webFooter.inc.php";
 
-</body>
-</html>
+?>

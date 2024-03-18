@@ -39,7 +39,7 @@
     
     <section class="section products">
       <div class="container-fluid">
-        <div class="row mb-5">
+        <div class="row">
 	        
 	        <div class="col-12">
 		        <div class="search-bar">

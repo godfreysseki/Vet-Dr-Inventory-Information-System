@@ -4,7 +4,7 @@
   class Contact extends Config
   {
     private $auditTrail;
-  
+    
     public function __construct()
     {
       parent::__construct();
@@ -51,14 +51,14 @@
       
       return "OK";
     }
-  
+    
     public function deleteContact($contact_id, $user_id)
     {
-      $sql = "DELETE FROM contacts WHERE contact_id = ?";
+      $sql    = "DELETE FROM contacts WHERE contact_id = ?";
       $params = [$contact_id];
-    
+      
       $deletedRows = $this->deleteQuery($sql, $params);
-    
+      
       if ($deletedRows) {
         $this->auditTrail->logActivity($user_id, 3, $deletedRows, 'Deleted Contact', 'Contact deleted with ID ' . $deletedRows, 'Contacts', 'Success');
         return json_encode(['status' => 'success', 'message' => 'Contact record deleted successfully.']);
@@ -66,31 +66,31 @@
         return json_encode(['status' => 'warning', 'message' => 'Contacct Record already deleted. Reload page to view effect.']);
       }
     }
-  
+    
     public function getAllContacts()
     {
       // Sample SQL query to select all animals
       $sql = "SELECT * FROM contacts ORDER BY contact_id DESC";
-    
+      
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
-    
+      
       // Initialize an array to store the fetched data
       $animalsData = [];
-    
+      
       // Fetch each row as an associative array
       while ($row = $result->fetch_assoc()) {
         $animalsData[] = $row;
       }
-    
+      
       return $animalsData;
     }
-  
+    
     public function displayContactsTable()
     {
       $clientsData = $this->getAllContacts(); // Assume you have a method to fetch all animals data
-      $no = 1;
-  
+      $no          = 1;
+      
       // DataTables HTML
       $tableHtml = '
             <table class="table table-sm table-hover table-striped dataTable">
@@ -106,7 +106,7 @@
                     </tr>
                 </thead>
                 <tbody>';
-    
+      
       // Populate table rows with data
       foreach ($clientsData as $clientsData) {
         $tableHtml .= '
@@ -125,67 +125,137 @@
                 </tr>';
         $no++;
       }
-    
+      
       // Close table HTML
       $tableHtml .= '
                 </tbody>
             </table>';
-    
+      
       return $tableHtml;
     }
-  
+    
     public function getContactById($contact_id)
     {
-      $sql = "SELECT * FROM contacts WHERE contact_id = ?";
+      $sql    = "SELECT * FROM contacts WHERE contact_id = ?";
       $params = [$contact_id];
-    
+      
       $result = $this->selectQuery($sql, $params);
-    
+      
       return $result->fetch_assoc();
     }
-  
-    public function displayContactReplyForm($client_id = null)
+    
+    public function viewSingleContact($contactId)
     {
-      if ($client_id !== null) {
-        $data = $this->getContactById($client_id);
-      } else {
-        $data = [
-          'client_id' => '',
-          'name' => '',
-          'contact_number' => '',
-          'address' => ''
-          // Add more fields as needed
-        ];
+      $data = '';
+      $row  = $this->getContactById($contactId);
+      $data = 'Sender : <b>' . $row['full_name'] . '</b><br>
+                Email : <b>' . email($row['email']) . '</b><br><br>
+                Subject : <b>' . $row['subject'] . '</b><br><br>
+                <b>Message :</b><br>' . nl2br($row['message']) . '
+              ';
+      
+      return $data;
+    }
+    
+    public function displayContactReplyForm($contactId)
+    {
+      $row = $this->getContactById($contactId);
+      $data = '<p>Sender : <b>' . $row['full_name'] . '</b></p>
+                <p>Email : <b>' . email($row['email']) . '</b></p>
+                <p>Subject : <b>' . $row['subject'] . '</b></p>
+                <p><b>Message :</b><br>' . $row['message'] . '</p>
+                <form method="post" id="replyForm">
+                  <input type="hidden" name="contactId" id="contactId" value="' . $contactId . '" class="d-none">
+                  <div class="form-group">
+                    <label for="reply">Reply Message</label>
+                    <textarea name="reply" id="reply" class="form-control editor"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" name="replyBtn" class="btn btn-' . COLOR . ' float-right">Send Reply</button>
+                  </div>
+                </form>';
+      
+      return $data;
+    }
+  
+    public function emailReply($contactId, $message)
+    {
+      $sql    = "SELECT * FROM contacts WHERE contact_id=? ";
+      $params = [$contactId];
+      $result = $this->selectQuery($sql, $params);
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          // Show Contact information then send reply
+          $to      = esc($row['email']);
+          $subject = "Reply - ".$row['subject'];
+          $body    = esc($message);
+          $headers = "From: ".esc(COMPANYEMAIL);
+        
+          if (mail($to, $subject, $body, $headers)) {
+            // Update contact as Replied
+            $this->updateQuery("UPDATE contacts SET replied='Yes' WHERE contact_id=? ", [$contactId]);
+            alert('success', 'Email Reply sent successfully.');
+          } else {
+            alert('warning', 'Email Replied Failed. Check your mail server.');
+          }
+        }
+      }
+    }
+  
+    public function formatEmailTemplate($fullName, $title, $content)
+    {
+      // Read the content of the template file
+      $templateFilePath = "mail.php"; // Update with the actual file path
+      $templateContent  = file_get_contents($templateFilePath);
+    
+      if ($templateContent === false) {
+        // Handle the error, e.g., by logging or returning an error message
+        return false;
       }
     
-      $form = '
-            <form class="needs-validation" method="post" id="clientForm" novalidate>
-                <input type="hidden" name="client_id" value="' . $data['client_id'] . '">
-                
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" name="name" value="' . $data['name'] . '" required>
-                    <div class="invalid-feedback">Please enter the name.</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="contact_number">Contact Number:</label>
-                    <input type="text" class="form-control" id="contact_number" name="contact_number" value="' . $data['contact_number'] . '" required>
-                    <div class="invalid-feedback">Please enter the contact number.</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" class="form-control" id="address" name="address" value="' . $data['address'] . '" required>
-                    <div class="invalid-feedback">Please enter the address.</div>
-                </div>
-                
-                <!-- Add more form fields as needed -->
-                
-                <button type="submit" class="btn btn-primary">Save</button>
-            </form>';
+      // Replace placeholders with actual data
+      $templateContent = str_replace("[User]", $fullName, $templateContent);
+      $templateContent = str_replace("[Title]", $title, $templateContent);
+      $templateContent = str_replace("[Content]", $content, $templateContent);
     
-      return $form;
+      return $templateContent;
+    }
+    
+    public function sendEmail($formData)
+    {
+      $to           = $formData['recipient'];
+      $subject      = $formData['subject'];
+      $emailContent = $formData['message'];
+    
+      // Send email to each vendor individually
+      $headers = "MIME-Version: 1.0" . "\r\n";
+      $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+      $headers .= "From: Discount-Ville Team <" . COMPANYEMAIL . ">\r\n"; // Specify the sender name here
+      $headers .= "Reply-To: " . COMPANYEMAIL . "\r\n";
+    
+      // Format email template
+      $emailTemplate = $this->formatEmailTemplate($this->fullName($to), $subject, $emailContent);
+      // Send email
+      mail($to, $subject, $emailTemplate, $headers);
+      // Insert the sent email to the database
+      $this->insertQuery("INSERT INTO bulk_emails (emails, subject, message, recipients, send_date, sender) VALUES (?, ?, ?, ?, ?, ?)", [
+        $to,
+        $subject,
+        $emailContent,
+        'Single Email',
+        date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']),
+        $_SESSION['username']
+      ]);
+      // echo Success Message
+      echo alert('success', 'Email has been sent successfully to ' . $to);
+    
+    }
+    
+    public function markAsRead($contactId)
+    {
+      $sql    = "UPDATE contacts SET viewed='Yes' WHERE contact_id=? ";
+      $params = [$contactId];
+      $this->updateQuery($sql, $params);
     }
     
   }

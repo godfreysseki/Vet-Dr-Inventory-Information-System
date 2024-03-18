@@ -58,6 +58,14 @@
 		      </a>
 	      </li>
 	      <li class="nav-item">
+		      <a href="contacts.php" class="nav-link">
+			      <i class="nav-icon fas fa-phone"></i>
+			      <p>
+				      Contacts
+			      </p>
+		      </a>
+	      </li>
+	      <li class="nav-item">
 		      <a href="appointments.php" class="nav-link">
 			      <i class="nav-icon fas fa-calendar-alt"></i>
 			      <p>

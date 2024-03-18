@@ -1,6 +1,12 @@
 (function($) {
   'use strict';
   
+  $(document).ready(function() {
+    activateMenu();
+    orderTracking();
+    subscribeToNews();
+  });
+  
   /**
    * Easy selector helper function
    */
@@ -114,7 +120,7 @@
   const tooltipList = [...tooltipTriggerList].map(
       tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
   
-  // Load More Button
+  // Load More Events Button
   $(document).ready(function() {
     const productsContainer = $('.events');
     const loadMoreButton = $(
@@ -124,6 +130,45 @@
     
     // Hide all products initially
     $('.post-entry').hide();
+    
+    // Initial load of products
+    showEvents(currentPage);
+    
+    // Append "View More Products" button
+    productsContainer.after(loadMoreButton);
+    
+    // Handle click on "View More Products" button
+    loadMoreButton.on('click', function() {
+      currentPage++;
+      showEvents(currentPage);
+    });
+    
+    function showEvents(page)
+    {
+      const start = (page - 1) * productsPerPage;
+      const end = start + productsPerPage;
+      
+      $('.post-entry').slice(start, end).show();
+      
+      // If no more products to show, hide the "View More Products" button
+      if (end >= $('.post-entry').length) {
+        loadMoreButton.hide();
+      }
+    }
+  });
+  // Load More Products Button
+  $(document).ready(function() {
+    const productsContainer = $('.products');
+    const loadMoreButton = $(
+        '<div class="more-container mb-5 text-center"><button type="button"' +
+        ' class="btn btn-sm btn-success btn-more"><span>Load More' +
+        ' Products...</span><i' +
+        ' class="icon-long-arrow-right"></i></button></div>');
+    const productsPerPage = 6;
+    let currentPage = 1;
+    
+    // Hide all products initially
+    $('.product').hide();
     
     // Initial load of products
     showProducts(currentPage);
@@ -142,14 +187,23 @@
       const start = (page - 1) * productsPerPage;
       const end = start + productsPerPage;
       
-      $('.post-entry').slice(start, end).show();
+      $('.product').slice(start, end).show();
       
       // If no more products to show, hide the "View More Products" button
-      if (end >= $('.post-entry').length) {
+      if (end >= $('.product').length) {
         loadMoreButton.hide();
       }
     }
   });
+  
+  // Activate Active Menu
+  function activateMenu(){
+    // Activate current menu item based on URL
+    var url = window.location.href;
+    $('#navbar ul a').filter(function() {
+      return this.href == url;
+    }).addClass('active');
+  }
   
   // Add to cart and shopping
   $(document).on('click', '.addToCart', function(e) {
@@ -306,5 +360,39 @@
       });
     }
   });
+  
+  // track online order
+  function orderTracking(){
+    $(document).on('keyup', '.online_order_status_number', function(){
+      var order_number = $(this).val();
+      $.ajax({
+        url: 'order_info.php',
+        type: 'POST',
+        data: {order_number: order_number},
+        success: function(response){
+          $('.order-master').html(response);
+        }
+      });
+    });
+  }
+  
+  function subscribeToNews(){
+    $(document).on('submit', '.newsletter_subscription', function(e) {
+      e.preventDefault();
+  
+      let thisForm = this;
+      
+      let action = thisForm.getAttribute('action');
+      let email = $('#email').val();
+      $.ajax({
+        url: action,
+        type: 'post',
+        data: {email: email},
+        success: function(response) {
+          alert(response);
+        }
+      });
+    });
+  }
   
 })(jQuery);

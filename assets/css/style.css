@@ -1299,15 +1299,17 @@ footer {
 }
 
 .product .card-title {
-	font-size: 16px;
-	font-weight: 500;
+	font-size: 14px;
+	font-weight: normal;
 	margin: 0;
+	line-height: 1;
 	text-align: center; /* Center the text */
 }
 
 .product .card-text {
 	font-size: 14px;
-	color: #6C757D;
+	color: #000;
+	font-weight: bold;
 	text-align: center; /* Center the text */
 }
 
@@ -1367,8 +1369,8 @@ footer {
 
 #header .quick-contacts p, #header .quick-contacts p a {
 	margin: 0;
-	padding: 4px 0;
-	font-size: 11px;
+	padding: 3px 0;
+	font-size: 12px;
 	color: #FFF;
 }
 
@@ -1407,4 +1409,38 @@ footer {
 	#header .social-media {
 		transform: translateY(0%); /* Adjust the vertical position */
 	}
+}
+
+
+.accordion-header, .accordion-item {
+	background: transparent;
+	border: none;
+}
+
+.accordion-item {
+	margin-bottom: 5px;
+}
+
+.accordion-button {
+	color: #005E01;
+	border-radius: 10px 10px 10px 10px;
+}
+
+.accordion-item:first-of-type .accordion-button, .quick-contactsaccordion-item:last-of-type .accordion-button.collapsed {
+	border-radius: 10px 10px 10px 10px;
+}
+
+.accordion-button:not(.collapsed) {
+	color: white;
+	background: #005E01;
+	border-radius: 10px 10px 0 0 !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+	fill: white;
+}
+
+.accordion-collapse {
+	background: #FFF;
+	border-radius: 0 0 10px 10px;
 }

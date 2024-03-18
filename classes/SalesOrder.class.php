@@ -364,7 +364,7 @@
         $this->deleteQuery("DELETE FROM cart WHERE order_number=?", [$_SESSION['orderNo']]);
         
         // Get the results and complete the
-        return '<p>Your order number is: <b>'.$_SESSION['orderNo'].'</b></p>
+        return '<p>Your order number is: <b>' . $_SESSION['orderNo'] . '</b></p>
                 <p>Thank you for your order! Your purchase has been successfully completed. We are going to call you back once your order processing has started.
                 If you have any questions or concerns, please feel free to contact us. We appreciate your business and look forward to serving you again soon!</p>';
       }
@@ -404,13 +404,13 @@
         }
       }
     }
-  
+    
     // Admin side for online orders
     public function displayOnlineOrders()
     {
       $clientsData = $this->getAllOnlineOrders();
-      $no = 1;
-  
+      $no          = 1;
+      
       // DataTables HTML
       $tableHtml = '
             <table class="table table-sm table-hover table-striped dataTable">
@@ -431,11 +431,11 @@
                     </tr>
                 </thead>
                 <tbody>';
-  
+      
       // Populate table rows with data
       foreach ($clientsData as $clientsData) {
         $tableHtml .= '
-                <tr data-order-id="'.$clientsData['ooid'].'">
+                <tr data-order-id="' . $clientsData['ooid'] . '">
                     <td>' . $no . '</td>
                     <td>' . dates($clientsData['order_date']) . '</td>
                     <td>' . $clientsData['order_number'] . '</td>
@@ -462,38 +462,38 @@
                 </tr>';
         $no++;
       }
-  
+      
       // Close table HTML
       $tableHtml .= '
                 </tbody>
             </table>';
-  
+      
       return $tableHtml;
     }
-  
+    
     private function getAllOnlineOrders()
     {
       // Sample SQL query to select all events ordered by event_id in descending order
       $sql = "SELECT * FROM online_orders ORDER BY ooid DESC";
-  
+      
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
-  
+      
       // Initialize an array to store the fetched data
       $eventsData = [];
-  
+      
       // Fetch each row as an associative array
       while ($row = $result->fetch_assoc()) {
         $eventsData[] = $row;
       }
-  
+      
       return $eventsData;
-  
+      
     }
-  
+    
     public function updateOnlineOrderStatus($orderId, $newStatus)
     {
-      $sql = "UPDATE online_orders SET status=? WHERE ooid=?";
+      $sql    = "UPDATE online_orders SET status=? WHERE ooid=?";
       $params = [$newStatus, $orderId];
       $this->updateQuery($sql, $params);
     }
@@ -501,26 +501,26 @@
     public function getOnlineOrderById($order_id)
     {
       // Sample SQL query to select all events ordered by event_id in descending order
-      $sql = "SELECT * FROM onlineorderitems WHERE order_id=?";
+      $sql    = "SELECT * FROM onlineorderitems WHERE order_id=?";
       $params = [$order_id];
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql, $params);
-  
+      
       // Initialize an array to store the fetched data
       $eventsData = [];
-  
+      
       // Fetch each row as an associative array
       while ($row = $result->fetch_assoc()) {
         $eventsData[] = $row;
       }
-  
+      
       return $eventsData;
     }
-  
+    
     public function onlineOrderDetails($order_number)
     {
       $items = $this->getOnlineOrderById($order_number);
-  
+      
       $no = 1;
       // DataTables HTML
       $tableHtml = '<div class="table-responsive">
@@ -535,7 +535,7 @@
                     </tr>
                 </thead>
                 <tbody>';
-  
+      
       // Populate table rows with data
       foreach ($items as $item) {
         $tableHtml .= '
@@ -548,13 +548,35 @@
                 </tr>';
         $no++;
       }
-  
+      
       // Close table HTML
       $tableHtml .= '
                 </tbody>
             </table></div>';
-  
+      
       return $tableHtml;
     }
-  
+    
+    public function getOnlineOrderStatus($order_number)
+    {
+      $sql    = "SELECT * FROM online_orders WHERE order_number=?";
+      $params = [$order_number];
+      $result = $this->selectQuery($sql, $params);
+      if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return '<div class="order-header">
+                  <h2>Order Tracking</h2>
+                  <p class="order-status">' . $row['status'] . '</p>
+                </div>
+                
+                <div class="order-details">
+                  <p><strong>Order No.:</strong> ' . strtoupper($order_number) . '</p>
+                  <p><strong>Customer:</strong> <span class="tracking-number">' . $row['full_name'] . ' - ' . phone($row['phone']) . '</span></p>
+                  <p><strong>Delivery Address:</strong> ' . $row['address'] . '</p>
+                  <p><strong>Payment Method:</strong> ' . $row['payment_method'] . '</p>
+                  <p><strong>Order Date:</strong> ' . datel($row['order_date']) . '</p>
+                </div>';
+      }
+    }
+    
   }

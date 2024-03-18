@@ -571,7 +571,7 @@
             }
         </style>
     </head>
-    <body>
+    <body onload="print()">
          <!-- Header section -->
         <div class="header">
             <img src="'. FAVICON .'" alt="Company Logo" class="logo">

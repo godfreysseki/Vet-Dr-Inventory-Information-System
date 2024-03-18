@@ -281,7 +281,7 @@
         $items .= '<!-- Product Card -->
                   <div class="col-lg-2 col-md-4 col-6 mb-4 product" data-name="' . strtolower($product['product_name']) . '">
                     <div class="card">
-                      <img src="assets/img/uploads/'.(isset($product['image']) ? $product['image'] : 'noimage.png').'" class="card-img-top" alt="Product Image">
+                      <img src="assets/img/uploads/'.(!empty($product['image']) ? $product['image'] : 'noimage.png').'" class="card-img-top" alt="Product Image">
                       <div class="card-body">
                         <h5 class="card-title">'.$product['product_name'].'</h5>
                         <p class="card-text">UGX '.number_format($product['selling_price'],).'</p>
@@ -303,7 +303,7 @@
         $items .= '<!-- Product Card -->
                   <div class="col-lg-2 col-md-4 col-6 mb-4 product" data-name="' . strtolower($product['product_name']) . '">
                     <div class="card">
-                      <img src="assets/img/uploads/' . (isset($product['image']) ? $product['image'] : 'noimage.png') . '" class="card-img-top" alt="Product Image">
+                      <img src="assets/img/uploads/' . (!empty($product['image']) ? $product['image'] : 'noimage.png') . '" class="card-img-top" alt="Product Image">
                       <div class="card-body">
                         <h5 class="card-title">' . $product['product_name'] . '</h5>
                         <p class="card-text">UGX ' . number_format($product['selling_price']) . '</p>
