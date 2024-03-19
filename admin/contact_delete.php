@@ -1,9 +1,8 @@
 <?php
   
+  header('Content-type: application/json');
+  
   include_once "../includes/config.inc.php";
   
-  $check = new Users();
-  $check->checkUser(ROLE);
-  
-  $data = new Contacts();
-  $data->deleteContact($_POST['dataId']);
+  $data = new Contact();
+  echo $data->deleteContact($_POST['dataId'], $_SESSION['user_id']);

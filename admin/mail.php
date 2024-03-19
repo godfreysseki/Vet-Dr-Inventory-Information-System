@@ -1,3 +1,8 @@
+<?php
+  
+  include_once "../includes/config.inc.php";
+
+?>
 <!DOCTYPE html>
 
 <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:v="urn:schemas-microsoft-com:vml">
@@ -109,7 +114,7 @@
 										<tr>
 											<td class="pad" style="width:100%;">
 												<div align="center" class="alignment" style="line-height:10px">
-													<div style="max-width: 83.333px;"><a href="https://discount-ville.com/" style="outline:none" tabindex="-1" target="_blank"><img src="https://discount-ville.com/assets/img/logo.png"
+													<div style="max-width: 83.333px;"><a href="https://ugasolutions.co.ug/" style="outline:none" tabindex="-1" target="_blank"><img src="https://ugasolutions.co.ug/assets/img/logo.png"
 													                                                                                                                                style="display: block; height: auto; border: 0; width: 100%;" width="83.333"/></a></div>
 												</div>
 											</td>
@@ -121,15 +126,16 @@
 									<table border="0" cellpadding="5" cellspacing="0" class="heading_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
 										<tr>
 											<td class="pad">
-												<h2 style="margin: 0; color: #ffa500; direction: ltr; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 30px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: right; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 36px;">
-													<span class="tinyMce-placeholder">Discount-Ville</span></h2>
+												<h2 style="margin: 0; color: #00a000; direction: ltr; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; font-size: 18px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: right; margin-top:
+												0; margin-bottom: 0; mso-line-height-alt: 36px;">
+													<span class="tinyMce-placeholder">UgaSolutions Pharmaceuticals Ltd</span></h2>
 											</td>
 										</tr>
 									</table>
 									<table border="0" cellpadding="5" cellspacing="0" class="paragraph_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
 										<tr>
 											<td class="pad">
-												<div style="color:#1478ff;direction:ltr;font-family:Georgia, Times, 'Times New Roman', serif;font-size:18px;font-weight:700;letter-spacing:0px;line-height:120%;text-align:right;mso-line-height-alt:21.599999999999998px;">
+												<div style="color:#1478ff;direction:ltr;font-family:Georgia, Times, 'Times New Roman', serif;font-size:15px;font-weight:700;letter-spacing:0px;line-height:120%;text-align:right;mso-line-height-alt:21.599999999999998px;">
 													<p style="margin: 0;">[Title]</p>
 												</div>
 											</td>
@@ -170,7 +176,7 @@
 									<table border="0" cellpadding="10" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
 										<tr>
 											<td class="pad">
-												<div style="color:#2c2c2c;direction:ltr;font-family:Georgia, Times, 'Times New Roman', serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
+												<div style="color:#2c2c2c;direction:ltr;font-family:Georgia, Times, 'Times New Roman', serif;font-size:14px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
 													<p style="margin: 0; margin-bottom: 12px;">Hello [User],</p>
 													<p style="margin: 0; margin-bottom: 12px;">[Content]</p>
 												</div>
@@ -199,9 +205,9 @@
 									<table border="0" cellpadding="10" cellspacing="0" class="paragraph_block block-1" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;" width="100%">
 										<tr>
 											<td class="pad">
-												<div style="color:#888888;direction:ltr;font-family:Georgia, Times, 'Times New Roman', serif;font-size:11px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:13.2px;">
-													<p style="margin: 0;">Thank you for choosing Discount Ville. If you have any questions, please <a href="https://discount-ville.com/contact.php" rel="noopener" style="text-decoration: underline; color: #7747FF;"
-													                                                                                                  target="_blank">contact our support team</a>.<br/>© 2023 Discount Ville. All rights reserved.</p>
+												<div style="color:#888888;direction:ltr;font-family:Georgia, Times, 'Times New Roman', serif;font-size:10px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:center;mso-line-height-alt:13.2px;">
+													<p style="margin: 0;">Thank you for choosing UgaSolutions Pharmaceuticals Ltd. If you have any questions, please <a href="https://ugasolutions.co.ug/contact.php" rel="noopener" style="text-decoration: underline; color: #7747FF;"
+													                                                                                                  target="_blank">contact our support team</a>.<br/>© 2024 UgaSolutions Pharmaceuticals Ltd. All rights reserved.</p>
 												</div>
 											</td>
 										</tr>

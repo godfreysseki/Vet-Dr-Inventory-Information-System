@@ -63,7 +63,7 @@
         $this->auditTrail->logActivity($user_id, 3, $deletedRows, 'Deleted Contact', 'Contact deleted with ID ' . $deletedRows, 'Contacts', 'Success');
         return json_encode(['status' => 'success', 'message' => 'Contact record deleted successfully.']);
       } else {
-        return json_encode(['status' => 'warning', 'message' => 'Contacct Record already deleted. Reload page to view effect.']);
+        return json_encode(['status' => 'warning', 'message' => 'Contact Record already deleted. Reload page to view effect.']);
       }
     }
     
@@ -159,7 +159,7 @@
     
     public function displayContactReplyForm($contactId)
     {
-      $row = $this->getContactById($contactId);
+      $row  = $this->getContactById($contactId);
       $data = '<p>Sender : <b>' . $row['full_name'] . '</b></p>
                 <p>Email : <b>' . email($row['email']) . '</b></p>
                 <p>Subject : <b>' . $row['subject'] . '</b></p>
@@ -177,7 +177,7 @@
       
       return $data;
     }
-  
+    
     public function emailReply($contactId, $message)
     {
       $sql    = "SELECT * FROM contacts WHERE contact_id=? ";
@@ -186,12 +186,19 @@
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
           // Show Contact information then send reply
-          $to      = esc($row['email']);
-          $subject = "Reply - ".$row['subject'];
-          $body    = esc($message);
-          $headers = "From: ".esc(COMPANYEMAIL);
-        
-          if (mail($to, $subject, $body, $headers)) {
+          $to           = esc($row['email']);
+          $subject = "Reply - " . $row['subject'];
+          // Send email to each vendor individually
+          $headers = "MIME-Version: 1.0" . "\r\n";
+          $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+          $headers .= "From: UgaSolutions Pharmaceuticals Ltd <" . COMPANYEMAIL . ">\r\n"; // Specify the sender name here
+          $headers .= "Reply-To: info@ugasolutions.co.ug\r\n";
+  
+          // Format email template
+          $emailTemplate = $this->formatEmailTemplate($this->fullName($to), $subject, $message);
+          
+          
+          if (mail($to, $subject, $emailTemplate, $headers)) {
             // Update contact as Replied
             $this->updateQuery("UPDATE contacts SET replied='Yes' WHERE contact_id=? ", [$contactId]);
             alert('success', 'Email Reply sent successfully.');
@@ -202,53 +209,31 @@
       }
     }
   
+    private function fullName($email)
+    {
+      $sql    = "SELECT full_name FROM contacts WHERE email=?";
+      $params = [$email];
+      $result = $this->selectQuery($sql, $params)->fetch_assoc();
+      return $result['full_name'];
+    }
+    
     public function formatEmailTemplate($fullName, $title, $content)
     {
       // Read the content of the template file
       $templateFilePath = "mail.php"; // Update with the actual file path
       $templateContent  = file_get_contents($templateFilePath);
-    
+      
       if ($templateContent === false) {
         // Handle the error, e.g., by logging or returning an error message
         return false;
       }
-    
+      
       // Replace placeholders with actual data
       $templateContent = str_replace("[User]", $fullName, $templateContent);
       $templateContent = str_replace("[Title]", $title, $templateContent);
       $templateContent = str_replace("[Content]", $content, $templateContent);
-    
+      
       return $templateContent;
-    }
-    
-    public function sendEmail($formData)
-    {
-      $to           = $formData['recipient'];
-      $subject      = $formData['subject'];
-      $emailContent = $formData['message'];
-    
-      // Send email to each vendor individually
-      $headers = "MIME-Version: 1.0" . "\r\n";
-      $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-      $headers .= "From: Discount-Ville Team <" . COMPANYEMAIL . ">\r\n"; // Specify the sender name here
-      $headers .= "Reply-To: " . COMPANYEMAIL . "\r\n";
-    
-      // Format email template
-      $emailTemplate = $this->formatEmailTemplate($this->fullName($to), $subject, $emailContent);
-      // Send email
-      mail($to, $subject, $emailTemplate, $headers);
-      // Insert the sent email to the database
-      $this->insertQuery("INSERT INTO bulk_emails (emails, subject, message, recipients, send_date, sender) VALUES (?, ?, ?, ?, ?, ?)", [
-        $to,
-        $subject,
-        $emailContent,
-        'Single Email',
-        date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']),
-        $_SESSION['username']
-      ]);
-      // echo Success Message
-      echo alert('success', 'Email has been sent successfully to ' . $to);
-    
     }
     
     public function markAsRead($contactId)

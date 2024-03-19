@@ -22,13 +22,19 @@
     
     private function insertMedicalRecord($data, $user_id)
     {
-      $sql = "INSERT INTO medical_records (animal_id, date_visited, vaccination_status, treatments, prescriptions, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+      $sql    = "INSERT INTO medical_records (animal_id, date_visited, vaccination_status, conditions, diagnosis, treatments, prescriptions, recommendation, next_visit, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       $params = [
+        $data['record_id'],
         $data['animal_id'],
         $data['date_visited'],
         $data['vaccination_status'],
+        $data['conditions'],
+        $data['diagnosis'],
         $data['treatments'],
         $data['prescriptions'],
+        $data['recommendation'],
+        $data['next_visit'],
+        
         $user_id
       ];
       
@@ -44,14 +50,17 @@
     
     private function updateMedicalRecord($data, $user_id)
     {
-      $sql = "UPDATE medical_records SET animal_id = ?, date_visited = ?, vaccination_status = ?, treatments = ?, prescriptions = ?, user_id = ? WHERE record_id = ?";
+      $sql    = "UPDATE medical_records SET animal_id=?, date_visited=?, vaccination_status=?, conditions=?, diagnosis=?, treatments=?, prescriptions=?, recommendation=?, next_visit=? WHERE record_id=?";
       $params = [
         $data['animal_id'],
         $data['date_visited'],
         $data['vaccination_status'],
+        $data['conditions'],
+        $data['diagnosis'],
         $data['treatments'],
         $data['prescriptions'],
-        $user_id,
+        $data['recommendation'],
+        $data['next_visit'],
         $data['record_id']
       ];
       
@@ -67,7 +76,7 @@
     
     public function deleteMedicalRecord($record_id, $user_id)
     {
-      $sql = "DELETE FROM medical_records WHERE record_id = ?";
+      $sql    = "DELETE FROM medical_records WHERE record_id = ?";
       $params = [$record_id];
       
       $deletedRows = $this->deleteQuery($sql, $params);
@@ -79,26 +88,26 @@
         return json_encode(['status' => 'warning', 'message' => 'Medical Record already deleted. Reload Page to see effect.']);
       }
     }
-  
+    
     public function getAllMedicalRecords()
     {
       // Sample SQL query to select all animals
       $sql = "SELECT * FROM medical_records GROUP BY animal_id ORDER BY record_id DESC";
-    
+      
       // Execute the query and fetch the results
       $result = $this->selectQuery($sql);
-    
+      
       // Initialize an array to store the fetched data
       $animalsData = [];
-    
+      
       // Fetch each row as an associative array
       while ($row = $result->fetch_assoc()) {
         $animalsData[] = $row;
       }
-    
+      
       return $animalsData;
     }
-  
+    
     public function displayMedicalRecordsTable()
     {
       $medicalRecordsData = $this->getAllMedicalRecords(); // Assume you have a method to fetch all animals data
@@ -111,12 +120,15 @@
                         <th>ID</th>
                         <th>Animal</th>
                         <th>Date Visited</th>
+                        <th>Vaccinated</th>
+                        <th>Condition</th>
+                        <th>Next Visit</th>
                         <!-- Add more columns as needed -->
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>';
-    
+      
       // Populate table rows with data
       $no = 1;
       foreach ($medicalRecordsData as $medicalRecord) {
@@ -124,7 +136,10 @@
                 <tr>
                     <td>' . $no . '</td>
                     <td>' . $this->getAnimalName($medicalRecord['animal_id']) . '</td>
-                    <td>' . $medicalRecord['date_visited'] . '</td>
+                    <td>' . dates($medicalRecord['date_visited']) . '</td>
+                    <td>' . $medicalRecord['vaccination_status'] . '</td>
+                    <td>' . $medicalRecord['conditions'] . '</td>
+                    <td>' . dates($medicalRecord['next_visit']) . '</td>
                     <!-- Add more columns as needed -->
                     <td>
                         <button class="btn btn-success btn-xs viewMedicalRecord" data-id="' . $medicalRecord['animal_id'] . '">View</button>
@@ -134,30 +149,33 @@
                 </tr>';
         $no++;
       }
-    
+      
       // Close table HTML
       $tableHtml .= '
                 </tbody>
             </table></div>';
-    
+      
       return $tableHtml;
     }
-  
+    
     public function animalMedicalRecords($animal_id)
     {
-      $data = '<p>No previous Medical Records found for the Selected Animal.</p>';
-      $sql = "SELECT * FROM medical_records WHERE animal_id=?";
+      $data   = '<p>No previous Medical Records found for the Selected Animal.</p>';
+      $sql    = "SELECT * FROM medical_records WHERE animal_id=? ORDER BY record_id DESC";
       $params = [$animal_id];
       $result = $this->selectQuery($sql, $params);
-  
+      
       if ($result->num_rows > 0) {
         $data = '';
         while ($row = $result->fetch_assoc()) {
           $data .= '<div class="card shadow-none">
                       <div class="card-body border-bottom px-1">
                         <p><b>Vaccination Status: </b><br>' . $row['vaccination_status'] . '</p>
+                        <p><b>Condition: </b><br>' . $row['conditions'] . '</p>
+                        <p><b>Diagnosis: </b><br>' . $row['diagnosis'] . '</p>
                         <p><b>Treatment: </b><br>' . $row['treatments'] . '</p>
                         <p><b>Prescription: </b><br>' . $row['prescriptions'] . '</p>
+                        <p><b>Recommendation: </b><br>' . $row['recommendation'] . '</p>
                       </div>
                     </div>';
         }
@@ -168,7 +186,7 @@
     
     public function getMedicalRecordById($record_id)
     {
-      $sql = "SELECT * FROM medical_records WHERE record_id = ?";
+      $sql    = "SELECT * FROM medical_records WHERE record_id = ?";
       $params = [$record_id];
       
       $result = $this->selectQuery($sql, $params);
@@ -186,9 +204,12 @@
           'animal_id' => '',
           'date_visited' => '',
           'vaccination_status' => '',
+          'conditions' => '',
+          'diagnosis' => '',
           'treatments' => '',
-          'prescriptions' => ''
-          // Add more fields as needed
+          'prescriptions' => '',
+          'recommendation' => '',
+          'next_visit' => ''
         ];
       }
       
@@ -217,6 +238,18 @@
             </div>
             
             <div class="form-group">
+                <label for="conditions">Condition:</label>
+                <textarea class="form-control" id="conditions" name="conditions" required>' . $data['conditions'] . '</textarea>
+                <div class="invalid-feedback">Please enter the animal conditions.</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="diagnosis">Diagnosis:</label>
+                <textarea class="form-control" id="diagnosis" name="diagnosis" required>' . $data['diagnosis'] . '</textarea>
+                <div class="invalid-feedback">Please enter the diagnosis done.</div>
+            </div>
+            
+            <div class="form-group">
                 <label for="treatments">Treatments:</label>
                 <textarea class="form-control" id="treatments" name="treatments" required>' . $data['treatments'] . '</textarea>
                 <div class="invalid-feedback">Please enter the treatments.</div>
@@ -228,6 +261,17 @@
                 <div class="invalid-feedback">Please enter the prescriptions.</div>
             </div>
             
+            <div class="form-group">
+                <label for="recommendation">Other Recommendations:</label>
+                <textarea class="form-control" id="recommendation" name="recommendation">' . $data['recommendation'] . '</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="next_visit">Next Visit:</label>
+                <input type="date" class="form-control" id="next_visit" name="next_visit" value="' . $data['next_visit'] . '" required>
+                <div class="invalid-feedback">Please enter the next visit date.</div>
+            </div>
+            
             <!-- Add more form fields as needed -->
             
             <button type="submit" class="btn btn-primary">Save</button>
@@ -235,5 +279,5 @@
       
       return $form;
     }
-  
+    
   }

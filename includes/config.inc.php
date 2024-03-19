@@ -437,12 +437,18 @@
   // Make Short Date
   function dates($date)
   {
+    if (is_null($date)) {
+      return false;
+    }
     return date('d M, Y', strtotime($date));
   }
   
   // Male long Date
   function datel($date)
   {
+    if (is_null($date)) {
+      return false;
+    }
     return date('h:i A d M, Y', strtotime($date));
   }
   

@@ -70,7 +70,7 @@
     public function displayLowStockProducts()
     {
       // Define the SQL query to select products with quantities equal to or below the reorder level
-      $sql = "SELECT * FROM products WHERE quantity_in_stock <= reorder_level";
+      $sql = "SELECT * FROM products WHERE quantity_in_stock < reorder_level";
     
       // Execute the query
       $result = $this->selectQuery($sql);
