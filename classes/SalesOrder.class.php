@@ -578,5 +578,43 @@
                 </div>';
       }
     }
+  
+    public function getProductExpiryAndBatchNumber($product_id)
+    {
+      // SQL query to retrieve expiry date and batch number based on specified conditions
+      $sql = "SELECT
+                CASE
+                    WHEN p.quantity_in_stock < i.quantity THEN i.expiry_date
+                    ELSE (
+                        SELECT i2.expiry_date
+                        FROM inventory i2
+                        WHERE i2.item_id = i.item_id AND i2.created_at < i.created_at
+                        ORDER BY i2.created_at DESC
+                        LIMIT 1
+                    )
+                END AS expiry_date,
+                CASE
+                    WHEN p.quantity_in_stock < i.quantity THEN i.batch_number
+                    ELSE (
+                        SELECT i2.batch_number
+                        FROM inventory i2
+                        WHERE i2.item_id = i.item_id AND i2.created_at < i.created_at
+                        ORDER BY i2.created_at DESC
+                        LIMIT 1
+                    )
+                END AS batch_number
+            FROM products p
+            INNER JOIN inventory i ON p.product_id = i.item_id
+            WHERE p.product_id = ?";
+    
+      // Parameters for the SQL query
+      $params = [$product_id];
+    
+      // Execute the SQL statement using $this->selectQuery() method
+      $results = $this->selectQuery($sql, $params)->fetch_assoc();
+    
+      // Return the results
+      return $results;
+    }
     
   }
