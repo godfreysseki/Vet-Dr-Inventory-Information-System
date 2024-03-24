@@ -114,6 +114,14 @@
 		      </a>
 	      </li>
 	      <li class="nav-item">
+		      <a href="resources.php" class="nav-link">
+			      <i class="nav-icon fas fa-tree"></i>
+			      <p>
+				      Resources
+			      </p>
+		      </a>
+	      </li>
+	      <li class="nav-item">
 		      <a href="sales_orders.php" class="nav-link">
 			      <i class="nav-icon fas fa-shopping-cart"></i>
 			      <p>

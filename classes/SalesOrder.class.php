@@ -197,7 +197,7 @@
     
     public function getOrderItems($orderId)
     {
-      $sql    = "SELECT salesorderitems.*, products.*, salesorderitems.unit_price AS price FROM salesorderitems INNER JOIN products ON salesorderitems.product_id=products.product_id WHERE order_id = ?";
+      $sql    = "SELECT salesorderitems.*, products.*, products.product_id AS prod, salesorderitems.unit_price AS price FROM salesorderitems INNER JOIN products ON salesorderitems.product_id=products.product_id WHERE order_id = ?";
       $params = [$orderId];
       $result = $this->selectQuery($sql, $params);
       $items  = [];
@@ -578,43 +578,38 @@
                 </div>';
       }
     }
-  
+    
     public function getProductExpiryAndBatchNumber($product_id)
     {
-      // SQL query to retrieve expiry date and batch number based on specified conditions
-      $sql = "SELECT
-                CASE
-                    WHEN p.quantity_in_stock < i.quantity THEN i.expiry_date
-                    ELSE (
-                        SELECT i2.expiry_date
-                        FROM inventory i2
-                        WHERE i2.item_id = i.item_id AND i2.created_at < i.created_at
-                        ORDER BY i2.created_at DESC
-                        LIMIT 1
-                    )
-                END AS expiry_date,
-                CASE
-                    WHEN p.quantity_in_stock < i.quantity THEN i.batch_number
-                    ELSE (
-                        SELECT i2.batch_number
-                        FROM inventory i2
-                        WHERE i2.item_id = i.item_id AND i2.created_at < i.created_at
-                        ORDER BY i2.created_at DESC
-                        LIMIT 1
-                    )
-                END AS batch_number
-            FROM products p
-            INNER JOIN inventory i ON p.product_id = i.item_id
-            WHERE p.product_id = ?";
-    
-      // Parameters for the SQL query
+      // Get quantity in stock
+      $qtyStocked = $this->selectQuery("SELECT quantity_in_stock FROM products WHERE product_id=?", [$product_id])->fetch_assoc();
+      $qtyInvented = $this->selectQuery("SELECT quantity FROM inventory WHERE item_name=? ORDER BY item_id DESC LIMIT 1", [$product_id])->fetch_assoc();
+      
+      // Check old stock
+      if ((!empty($qtyStocked['quantity_in_stock']) && !empty($qtyInvented['quantity'])) && ($qtyStocked['quantity_in_stock'] > $qtyInvented['quantity'])) {
+        // Get old inventory details
+        $sql = "SELECT expiry_date, batch_number FROM inventory WHERE item_name=? ORDER BY item_id DESC LIMIT 2";
+      } else {
+        $sql = "SELECT expiry_date, batch_number FROM inventory WHERE item_name=? ORDER BY item_id DESC LIMIT 1";
+      }
       $params = [$product_id];
-    
       // Execute the SQL statement using $this->selectQuery() method
-      $results = $this->selectQuery($sql, $params)->fetch_assoc();
-    
+      $results = $this->selectQuery($sql, $params);
+      
       // Return the results
-      return $results;
+      $productData = [];
+  
+      // Fetch each row as an associative array
+      if ($results->num_rows > 0) {
+        while ($row = $results->fetch_assoc()) {
+          $productData[] = $row;
+        }
+      } else {
+        $productData[0]['expiry_date'] = "";
+        $productData[0]['batch_number'] = "";
+      }
+  
+      return $productData;
     }
     
   }

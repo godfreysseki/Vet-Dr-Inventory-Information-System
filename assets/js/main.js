@@ -2190,6 +2190,54 @@
   }
   
   /**********************************************************************
+   * Resources
+   **********************************************************************/
+  $(document).on('click', '.newResource', function() {
+    $.ajax({
+      url: 'resources_form.php',
+      type: 'post',
+      success: function(response) {
+        $('#system-modal .modal-dialog').removeClass('modal-lg');
+        $('#system-modal .modal-title').html('New Resource');
+        $('#system-modal .modal-body').html(response);
+        $('#system-modal').modal('show');
+      },
+    });
+  });
+  
+  $(document).on('click', '.editResource', function() {
+    var dataId = $(this).data('id');
+    $.ajax({
+      url: 'resources_form.php',
+      type: 'POST',
+      data: {dataId: dataId},
+      success: function(response) {
+        $('#system-modal .modal-dialog').removeClass('modal-lg');
+        $('#system-modal .modal-title').html('Update Resource');
+        $('#system-modal .modal-body').html(response);
+        $('#system-modal').modal('show');
+      },
+    });
+  });
+  
+  $(document).on('click', '.deleteResource', function() {
+    var dataId = $(this).data('id');
+    $.ajax({
+      url: 'resources_delete.php',
+      type: 'POST',
+      data: {dataId: dataId},
+      success: function(response) {
+        if (response.status === 'success') {
+          toastr.success(response.message);
+        }
+        else {
+          toastr.warning(response.message);
+        }
+      },
+    });
+  });
+  
+  /**********************************************************************
    * Sales
    **********************************************************************/
   $(document).on('click', '.newSales', function() {

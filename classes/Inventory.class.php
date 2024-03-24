@@ -36,6 +36,7 @@
       $insertedId = $this->insertQuery($sql, $params);
       
       if ($insertedId) {
+        $this->updateQuery("UPDATE products SET quantity_in_stock=quantity_in_stock+? WHERE product_id=?", [$data['quantity'], $data['item_name']]);
         $this->auditTrail->logActivity($user_id, 1, $insertedId, 'Added inventory item', 'Inventory item inserted with ID ' . $insertedId, 'Inventory', 'Success');
         return json_encode(['status' => 'success', 'message' => 'Inventory item inserted successfully.']);
       } else {
@@ -515,7 +516,7 @@
     public function generateStockMovementPrintout($track_number)
     {
       // Fetch stock movement data for the specified track number
-      $sql    = "SELECT sm.*, p.selling_price AS price, p.product_name
+      $sql    = "SELECT sm.*, p.product_id AS prod, p.selling_price AS price, p.product_name
             FROM stock_movement sm
             INNER JOIN products p ON sm.product_id = p.product_id
             WHERE sm.track_number = ?";
@@ -569,6 +570,12 @@
             th {
                 background-color: #f2f2f2;
             }
+            .mb-0 {
+            margin-bottom: 0 !important;
+            }
+            .mt-0 {
+            margin-top: 0 !important;
+            }
         </style>
     </head>
     <body onload="print()">
@@ -581,11 +588,14 @@
             <p>Email: '. COMPANYEMAIL .'</p>
             <p>Phone: '. str_replace(", ", " / ", COMPANYPHONE) .' / '. str_replace(", ", " / ", COMPANYPHONE2) .'</p>
         </div>
-        <h3>Track #: ' . $track_number . '<small> - By '.$_SESSION['user'].'</small></h3>
+        <h3 class="mb-0">Stock Movement</h3>
+        <h3 class="mt-0">Track #: ' . $track_number . '<small> - By '.$_SESSION['user'].'</small></h3>
         <table>
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Batch No.</th>
+                    <th>Expiry</th>
                     <th>Product</th>
                     <th>Qty</th>
                     <th>Price</th>
@@ -598,9 +608,22 @@
       
       // Iterate over each stock movement record and add it to the printout
       while ($row = $result->fetch_assoc()) {
+        // Get expiry date and batch number
+        $checker = new SalesOrder();
+        $daters = $checker->getProductExpiryAndBatchNumber((int)$row['prod']);
+        if (count($checker->getProductExpiryAndBatchNumber((int)$row['prod'])) === 2){
+          $dates = $daters[1]['expiry_date'];
+          $batch = $daters[1]['batch_number'];
+        } else {
+          $dates = $daters[0]['expiry_date'];
+          $batch = $daters[0]['batch_number'];
+        }
+        
         $printout .= '
             <tr>
                 <td>' . $no . '</td>
+                <td>' . $dates . '</td>
+                <td>' . $batch . '</td>
                 <td>' . $row['product_name'] . '</td>
                 <td>' . $row['quantity'] . '</td>
                 <td>' . number_format($row['price']) . '</td>

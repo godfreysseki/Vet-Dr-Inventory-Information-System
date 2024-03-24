@@ -32,7 +32,7 @@
 							<p data-aos="fade-right" data-aos-delay="200" data-aos-offset="-500"><a href="shop.php" class="btn btn-outline-white">Make Your order</a></p>
 						</div>
 						<div class="col-lg-4 iphone-wrap">
-							<img src="assets/img/logo.png" alt="Image" class="phone-2" data-aos="fade-right">
+							<img src="assets/img/logo.png" alt="Logo" class="phone-2" data-aos="fade-right">
 							<!--<img src="assets/img/phone_2.png" alt="Image" class="phone-2" data-aos="fade-right" data-aos-delay="200">-->
 						</div>
 					</div>
@@ -144,7 +144,7 @@
 							happiness, and longevity of our beloved domestic companions.</p>
 					</div>
 					<div class="col-md-6" data-aos="fade-left">
-						<img src="assets/img/animals.png" alt="Image" class="img-fluid">
+						<img src="assets/img/animals.png" alt="animals" class="img-fluid">
 					</div>
 				</div>
 			</div>
@@ -160,7 +160,7 @@
 							expertise needed to ensure the optimal health and happiness of their avian companions.</p>
 					</div>
 					<div class="col-md-6" data-aos="fade-right">
-						<img src="assets/img/birds.png" alt="Image" class="img-fluid">
+						<img src="assets/img/birds.png" alt="birds" class="img-fluid">
 					</div>
 				</div>
 			</div>
@@ -197,7 +197,7 @@
 										</blockquote>
 										
 										<p class="review-user">
-											<img src="assets/img/person_1.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
+											<img src="assets/img/person_1.jpg" alt="Person 1" class="img-fluid rounded-circle mb-3">
 											<span class="d-block">
                         <span class="text-black">Jean Doe</span>, &mdash; App User
                       </span>
@@ -223,7 +223,7 @@
 										</blockquote>
 										
 										<p class="review-user">
-											<img src="assets/img/person_2.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
+											<img src="assets/img/person_2.jpg" alt="Person 2" class="img-fluid rounded-circle mb-3">
 											<span class="d-block">
                         <span class="text-black">Johan Smith</span>, &mdash; App User
                       </span>
@@ -249,7 +249,7 @@
 										</blockquote>
 										
 										<p class="review-user">
-											<img src="assets/img/person_3.jpg" alt="Image" class="img-fluid rounded-circle mb-3">
+											<img src="assets/img/person_3.jpg" alt="Person 3" class="img-fluid rounded-circle mb-3">
 											<span class="d-block">
                         <span class="text-black">Jean Thunberg</span>, &mdash; App User
                       </span>

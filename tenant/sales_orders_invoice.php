@@ -18,6 +18,11 @@
 			color: #000 !important;
 		}
 		
+		h1, h2, h3, h4, h5, h6 {
+			font-weight: bold;
+			font-size: 45px;
+		}
+		
 		.receipt {
 			width: 100%;
 			margin: 0 auto;
@@ -82,10 +87,30 @@
       $data  = new SalesOrder();
       $items = $data->getOrderItems($_GET['id']);
       
-      $no       = 1;
-      $list     = "";
-      $subtotal = 0;
+      $no        = 1;
+      $listDates = "";
+      $list      = "";
+      $subtotal  = 0;
       foreach ($items as $item) {
+        
+        // Get expiry date and batch number
+        $checkers = new SalesOrder();
+        $daters   = $checkers->getProductExpiryAndBatchNumber((int)$item['prod']);
+        if (count($checkers->getProductExpiryAndBatchNumber((int)$item['prod'])) === 2) {
+          $dates = $daters[1]['expiry_date'];
+          $batch = $daters[1]['batch_number'];
+        } else {
+          $dates = $daters[0]['expiry_date'];
+          $batch = $daters[0]['batch_number'];
+        }
+        
+        $listDates .= "<tr>
+												<td>" . $item['product_name'] . "</td>
+												<td class='text-right'>" . $dates . "</td>
+												<td class='text-right'>" . $batch . "</td>
+											</tr>";
+        
+        
         $list     .= "<tr>
 												<td>" . $no . "</td>
 												<td>" . $item['product_name'] . "</td>
@@ -117,16 +142,31 @@
 			<p>Total: <?= CURRENCY ?> <?= number_format($subtotal, 2) ?></p>
 		</div>
 		
+		<h3>Batches</h3>
+		
+		<?php
+      
+      
+      echo "<table class='table table-sm table-striped table-bordered receipt-table'>
+							    <thead>
+							    <tr>
+								    <th>Item</th>
+								    <th>Expiry</th>
+								    <th>Batch</th>
+							    </tr>
+							    </thead>
+							    <tbody>
+							    " . $listDates . "
+							    </tbody>
+						    </table>";
+		
+		?>
+		
 		<div class="receipt-footer">
 			<p>Thank you for choosing <?= COMPANY ?>. Your recent purchase is greatly appreciated. This receipt confirms your transaction details. If you have any questions or need further assistance, please don't hesitate to contact us. We value your
 				trust and look forward to serving you again soon.</p>
 		</div>
 	</div>
 </div>
-
-<script>
-	window.alert('Reload the sales order page after finishing with tasks here.');
-	window.print();
-</script>
 </body>
 </html>

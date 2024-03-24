@@ -9,29 +9,27 @@
 <head>
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
-	
-	<title><?= PAGE . ' | ' . COMPANY ?></title>
-	
+		
 	<!-- SEO META Tags -->
-	<title>Veterinary Supplies and Products | Your Website Name</title>
+	<title><?= PAGE ?> | <?= COMPANY ?></title>
 	<meta name="description" content="Explore a wide range of veterinary supplies, drugs, equipment, vaccines, hormones, and anesthetics at our one-stop shopping center.">
-	<meta name="keywords" content="veterinary supplies, veterinary drugs, equipment, vaccines, hormones, anesthetics">
+	<meta name="keywords" content="animal medicine, birds medicine, veterinary doctor, veterinary supplies, veterinary drugs, equipment, vaccines, hormones, anesthetics, UgaSolution, UgaSolutions Pharmaceuticals, UgaSolutions Pharmaceuticals Ltd, Uga Solutions, Uga solutions Pharmaceuticals, Uga Solutions Pharmaceuticals Ltd, Gramaxic">
 	<meta name="author" content="Gramaxic">
 	<meta name="robots" content="index, follow">
 	
 	<!-- Open Graph Protocol (OGP) for Social Media -->
-	<meta property="og:title" content="Veterinary Supplies and Products | Your Website Name">
+	<meta property="og:title" content="<?= PAGE ?> | <?= COMPANY ?>">
 	<meta property="og:description" content="Explore a wide range of veterinary supplies, drugs, equipment, vaccines, hormones, and anesthetics at our one-stop shopping center.">
-	<meta property="og:image" content="https://example.com/image.jpg">
-	<meta property="og:url" content="https://example.com">
+	<meta property="og:image" content="https://ugasolutions.co.ug/assets/img/logo.png">
+	<meta property="og:url" content="https://ugasolutions.co.ug">
 	<meta property="og:type" content="website">
 	<meta property="og:site_name" content="<?= COMPANY ?>">
 	
 	<!-- Twitter Card for Twitter Sharing -->
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content="Veterinary Supplies and Products | Your Website Name">
+	<meta name="twitter:card" content="Welcome to our veterinary supply center, where quality meets care. With a wide array of pharmaceuticals, equipment, and vaccines, we cater to the needs of veterinary professionals and animal caregivers. Trust us for reliable products and exceptional service, ensuring the health and well-being of animals everywhere.">
+	<meta name="twitter:title" content="<?= PAGE ?> | <?= COMPANY ?>">
 	<meta name="twitter:description" content="Explore a wide range of veterinary supplies, drugs, equipment, vaccines, hormones, and anesthetics at our one-stop shopping center.">
-	<meta name="twitter:image" content="https://example.com/image.jpg">
+	<meta name="twitter:image" content="https://ugasolutions.co.ug/assets/img/logo.png">
 	
 	<!-- Website Icon -->
 	<link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
@@ -40,7 +38,7 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
 	
 	<!-- Canonical URL -->
-	<link rel="canonical" href="https://example.com">
+	<link rel="canonical" href="https://ugasolutions.co.ug">
 	
 	<!-- Microsoft Tile for Windows 8 / Windows 10 -->
 	<meta name="msapplication-TileImage" content="assets/img/apple-touch-icon.png">
@@ -60,6 +58,7 @@
 	<link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
 	<link href="assets/vendor/mdi/css/materialdesignicons.min.css" rel="stylesheet">
 	<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+	<link href="assets/vendor/venobox/venobox.min.css" rel="stylesheet">
 	
 	<!-- Template Main CSS File -->
 	<link href="assets/css/style.css" rel="stylesheet">

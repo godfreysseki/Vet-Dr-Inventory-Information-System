@@ -27,32 +27,32 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+	      <div class="systemMsg"></div>
+        <?php
+    
+          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $addProduct = new Resources();
+            $id = $addProduct->addResource($_POST);
+      
+            echo alert('success', 'Resource Added Successfully. Id: '.$id);
+          }
+  
+        ?>
         <div class="row">
           <div class="col-12">
             <div class="card card-primary card-outline">
               <div class="card-header">
                 <h3 class="card-title m-0"><?= PAGE ?></h3>
                 <div class="card-tools">
-                  <button class="newStockMovement btn btn-sm btn-primary m-0">New Stock Movement</button>
+                  <button class="newResource btn btn-sm btn-primary m-0">New Resource</button>
                 </div>
               </div>
               <div class="card-body">
                 
                 <?php
-	                $check = new SalesOrder();
-                  $dates = $check->getProductExpiryAndBatchNumber(1);
-                  if (count($check->getProductExpiryAndBatchNumber(1)) === 2){
-                    echo "Return Previous Inventory Details<br>";
-                    echo "<b>Expiry Date:</b>".$dates[1]['expiry_date']."<br>";
-                    echo "<b>Batch:</b>".$dates[1]['batch_number']."<br>";
-                  } else {
-                    echo "Return Current Inventory Details<br>";
-                    echo "<b>Expiry Date:</b>".$dates[0]['expiry_date']."<br>";
-                    echo "<b>Batch:</b>".$dates[0]['batch_number']."<br>";
-                  }
                   
-                  $data = new Inventory();
-                  echo $data->displayStockMovementTable();
+                  $data = new Resources();
+                  echo $data->displayResourcesTable();
                 
                 ?>
               

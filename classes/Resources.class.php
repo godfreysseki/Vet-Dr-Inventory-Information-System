@@ -58,12 +58,11 @@
     
       if (isset($resourceData['resource_id']) && !empty($resourceData['resource_id'])) {
         // Update Resource
-        $sql    = 'update resources set title=?, description=?, link=?, type=?, image=? where resource_id=?';
+        $sql    = 'update resources set title=?, description=?, link=?, image=? where resource_id=?';
         $params = [
           $resourceData['title'],
           $resourceData['description'],
           $resourceData['link'],
-          $resourceData['type'],
           $resourceImage,
           $resourceData['resource_id']
         ];
@@ -75,13 +74,12 @@
       
         return $resourceId;
       } else {
-        $sql    = 'insert into resources (image, title, description, link, type) values (?, ?, ?, ?, ?)';
+        $sql    = 'insert into resources (image, title, description, link) values (?, ?, ?, ?)';
         $params = [
           $resourceImage,
           $resourceData['title'],
           $resourceData['description'],
-          $resourceData['link'],
-          $resourceData['type']
+          $resourceData['link']
         ];
       
         $resourceId = $this->insertQuery($sql, $params);
@@ -102,7 +100,6 @@
         'title' => '',
         'description' => '',
         'link' => '',
-        'type' => '',
         'image' => '' // Assuming the image filename/path is provided in the resource data
       ];
     
@@ -114,13 +111,17 @@
       }
     
       // Start building the HTML form
-      $form = '<form method="post" enctype="multipart/form-data">
+      $form = '<form method="post" enctype="multipart/form-data" class="resource_form">
                   <input type="hidden" name="resource_id" value="' . $resourceId . '">
                   <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                       <div class="form-group">
                         <label for="image">Resource Image <small>(' . htmlspecialchars($resourceData['image']) . ')</small></label>
                         <input type="file" class="form-control-file" id="image" name="image">
+                      </div>
+                      <div class="form-group">
+                        <label for="link">Resource Link<small>(Youtube Share Link)</small></label>
+                        <input type="url" class="form-control" id="link" name="link" value="' . htmlspecialchars($resourceData['link']) . '" required>
                       </div>
                       <div class="form-group">
                         <label for="title">Resource Title</label>
@@ -131,23 +132,7 @@
                         <textarea class="form-control" id="description" name="description" rows="4">' . htmlspecialchars($resourceData['description']) . '</textarea>
                       </div>
                     </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="unit_price">Link (for videos only)</label>
-                        <input type="number" step="0.01" class="form-control" id="unit_price" name="unit_price" value="' . htmlspecialchars($resourceData['unit_price']) . '" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="selling_price">Selling Price</label>
-                        <input type="number" step="0.01" class="form-control" id="selling_price" name="selling_price" value="' . htmlspecialchars($resourceData['selling_price']) . '" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="quantity_in_stock">Initial Quantity</label>
-                        <input type="number" class="form-control" id="quantity_in_stock" value="' . htmlspecialchars($resourceData['quantity_in_stock']) . '" name="quantity_in_stock" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="reorder_level">Reorder Level</label>
-                        <input type="number" class="form-control" value="' . htmlspecialchars($resourceData['reorder_level']) . '" id="reorder_level" name="reorder_level">
-                      </div>
+                    <div class="col-sm-12">
                       <div class="form-group mt-4">
                         <button type="submit" class="btn btn-primary float-right">' . ($resourceId !== null ? 'Update' : 'Add') . ' Resource</button>
                       </div>
@@ -214,9 +199,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Contact</th>
-                        <th>Address</th>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Link</th>
                         <!-- Add more columns as needed -->
                         <th>Actions</th>
                     </tr>
@@ -224,17 +210,18 @@
                 <tbody>';
     
       // Populate table rows with data
-      foreach ($clientsData as $clientsData) {
+      foreach ($clientsData as $clientData) {
         $tableHtml .= '
                 <tr>
                     <td>' . $no . '</td>
-                    <td>' . $clientsData['name'] . '</td>
-                    <td>' . phone($clientsData['contact_number']) . '</td>
-                    <td>' . $clientsData['address'] . '</td>
+                    <td><img src="../assets/img/resources/' . $clientData['image'] . '" alt="Resource image"></td>
+                    <td>' . $clientData['title'] . '</td>
+                    <td>' . $clientData['description'] . '</td>
+                    <td><a href="' . $clientData['link'] . '" target="_blank">' . $clientData['link'] . '</a></td>
                     <!-- Add more columns as needed -->
                     <td>
-                        <button class="btn btn-info btn-sm editClient" data-id="' . $clientsData['client_id'] . '">Edit</button>
-                        <button class="btn btn-danger btn-sm deleteClient" data-id="' . $clientsData['client_id'] . '">Delete</button>
+                        <button class="btn btn-info btn-sm editResource" data-id="' . $clientData['resource_id'] . '">Edit</button>
+                        <button class="btn btn-danger btn-sm deleteResource" data-id="' . $clientData['resource_id'] . '">Delete</button>
                     </td>
                 </tr>';
         $no++;
@@ -254,5 +241,30 @@
       $data = $this->selectQuery($sql, [$product_id])->fetch_assoc();
       return $data['image'];
     }
-    
+  
+    public function displayResourcesUser()
+    {
+      $data = '';
+      $rows = $this->getResources();
+      foreach ($rows as $row) {
+        $data .= '<div class="col-6 col-md-3">
+                    <div class="video-item">
+                      <div class="video-thumbnail">
+                        <a href="'.$row['link'].'" class="venobox" data-vbtype="video" data-autoplay="true">
+                          <!-- Embed video thumbnail image -->
+                          <img src="assets/img/resources/'.$row['image'].'" alt="Video Thumbnail" class="img-fluid">
+                          <!-- Play button overlay -->
+                          <div class="play-button"></div>
+                        </a>
+                      </div>
+                      <div class="video-details">
+                        <h3 class="video-title">'.$row['title'].'</h3>
+                        <p class="video-description">'.$row['description'].'</p>
+                      </div>
+                    </div>
+                  </div>';
+      }
+      return $data;
+    }
+  
   }
