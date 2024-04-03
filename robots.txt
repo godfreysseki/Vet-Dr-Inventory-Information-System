@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /tenant/
+Disallow: /.htaccess
+Disallow: /README.md
+Disallow: /googleeea1138576db833e.html
